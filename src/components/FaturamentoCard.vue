@@ -149,8 +149,8 @@ const drawChart = () => {
   const chartWidth = width - paddingLeft - paddingRight
   const chartHeight = height - paddingTop - paddingBottom
   const barWidth = chartWidth / 31
+  const barStrokeWidth = 8
 
-  // fundo com colunas verticais claras (como na imagem)
   const columnWidth = barWidth
   ctx.save()
   ctx.globalAlpha = 0.35
@@ -166,7 +166,6 @@ const drawChart = () => {
   }
   ctx.restore()
 
-  // linhas horizontais (0, 50K, 100K, 200K)
   ctx.strokeStyle = '#E5E7EB'
   ctx.lineWidth = 1
   const yLabels = [0, 50000, 100000, 200000]
@@ -186,20 +185,18 @@ const drawChart = () => {
   ctx.lineTo(width - paddingRight, xAxisY)
   ctx.stroke()
 
-  // barras com topo arredondado usando linhas com lineCap round
   ctx.lineCap = 'round'
   dados.forEach((valor, index) => {
     const barHeight = (valor / maxValue) * chartHeight
     const x = paddingLeft + index * barWidth
     const y = paddingTop + chartHeight - barHeight
 
-    const barSpacing = 4
-    const strokeWidth = barWidth - barSpacing * 2
+    const strokeWidth = barStrokeWidth
+    const barSpacing = Math.max((barWidth - strokeWidth) / 2, 0)
     const centerX = x + barWidth / 2
 
     if (strokeWidth <= 0) return
 
-    // cor/gradiente da barra
     if (valor > 70000) {
       const gradient = ctx.createLinearGradient(
         centerX,
