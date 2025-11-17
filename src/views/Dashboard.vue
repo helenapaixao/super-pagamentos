@@ -31,7 +31,6 @@
             :valor="estatisticas.chargebacks.valor"
             :cobrancas="estatisticas.chargebacks.cobrancas"
             :percentual="estatisticas.chargebacks.percentual"
-            :show-info="true"
           />
           <EstatisticasCard
             titulo="Cancelados"
@@ -78,7 +77,6 @@ import ConversaoModalidadeCard from '../components/ConversaoModalidadeCard.vue'
 import BandeirasCard from '../components/BandeirasCard.vue'
 import { dashboardService } from '../services/dashboardService'
 
-// Dados reativos
 const faturamentoData = ref({
   total: 1060551.14,
   crescimento: 123.9,
@@ -134,10 +132,8 @@ const bandeirasUtilizadas = ref([
   { nome: 'Google Pay', valor: 5000 }
 ])
 
-// Métodos
 const handleNovaCobranca = () => {
   console.log('Nova cobrança')
-  // Implementar navegação ou modal
 }
 
 const handlePeriodoChange = (periodo) => {
@@ -182,7 +178,6 @@ const loadDashboardData = async () => {
     // transferenciaPendente.value = transferencias[0] || null
   } catch (error) {
     console.error('Erro ao carregar dados do dashboard:', error)
-    // Em caso de erro, manter dados mockados
   }
 }
 
@@ -215,7 +210,7 @@ onMounted(() => {
 
 .estatisticas-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(305px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
 }

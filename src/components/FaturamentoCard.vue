@@ -2,13 +2,7 @@
   <div class="faturamento-card">
     <div class="card-header">
       <h2 class="card-title">Faturamento</h2>
-      <button class="info-btn" title="Informações">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="16" x2="12" y2="12"></line>
-          <line x1="12" y1="8" x2="12.01" y2="8"></line>
-        </svg>
-      </button>
+      <Eye :size="16" class="eye-icon" />
     </div>
 
     <div class="faturamento-value">
@@ -35,8 +29,8 @@
       <div class="metric-item">
         <span class="metric-dot purple"></span>
         <div class="metric-content">
-          <span class="metric-label">Faturamento previsto D-2</span>
-          <span class="metric-value">R$ {{ formatCurrency(faturamento.previsto) }}</span>
+          <span class="metric-label">Faturamento previsto</span>
+          <span class="metric-value">D+2 R$ {{ formatCurrency(faturamento.previsto) }}</span>
         </div>
       </div>
       <div class="metric-item">
@@ -66,6 +60,7 @@
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
+import { Eye } from '@solar-icons/vue'
 
 const props = defineProps({
   faturamento: {
@@ -174,7 +169,7 @@ const drawChart = () => {
     const x = paddingLeft + (index * barWidth)
     const y = paddingTop + chartHeight - barHeight
 
-    ctx.fillStyle = valor > 70000 ? '#10b981' : '#2563eb'
+    ctx.fillStyle = valor > 70000 ? '#10b981' : '#0641FC'
     
     const barSpacing = 1.5
     ctx.fillRect(x + barSpacing, y, barWidth - (barSpacing * 2), barHeight)
@@ -229,32 +224,28 @@ watch(() => props.faturamento, () => {
 }
 
 .card-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #111827;
-}
-
-.info-btn {
-  background: none;
-  border: none;
-  color: #6b7280;
-  cursor: pointer;
-  padding: 0.25rem;
+  margin: 0;
   display: flex;
   align-items: center;
-  border-radius: 4px;
-  transition: color 0.2s;
+  gap: 0.5rem;
 }
 
-.info-btn:hover {
-  color: #2563eb;
+.eye-icon {
+  color: #9CA3AF;
+  flex-shrink: 0;
 }
 
 .faturamento-value {
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 2.5rem;
   font-weight: 700;
-  color: #2563eb;
+  color: #0641FC;
   margin-bottom: 0.5rem;
+  line-height: 1;
 }
 
 .faturamento-growth {
@@ -291,8 +282,8 @@ watch(() => props.faturamento, () => {
 }
 
 .faturamento-metrics {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
 }
 
@@ -300,6 +291,7 @@ watch(() => props.faturamento, () => {
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
+  white-space: nowrap;
 }
 
 .metric-dot {
@@ -330,6 +322,7 @@ watch(() => props.faturamento, () => {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  white-space: nowrap;
 }
 
 .metric-label {

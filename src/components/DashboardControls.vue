@@ -7,60 +7,58 @@
       </div>
     </button>
 
-    <div class="controls-group">
-      <div class="select-wrapper">
-        <Calendar :size="20" class="select-icon" />
-        <select v-model="periodo" class="select-control" @change="emit('periodo-change', periodo)">
-          <option value="especifico">Período: Específico</option>
-          <option value="hoje">Hoje</option>
-          <option value="semana">Esta semana</option>
-          <option value="mes">Este mês</option>
-          <option value="ano">Este ano</option>
-        </select>
-        <AltArrowDown :size="16" class="select-chevron" />
-      </div>
-
-      <div class="date-range-wrapper">
-        <div class="date-field date-field-start">
-          <Calendar :size="20" class="date-icon" />
-          <span class="date-display">{{ formatDate(dataInicio) }}</span>
-          <AltArrowDown :size="16" class="date-chevron" />
-          <input
-            type="date"
-            v-model="dataInicio"
-            class="date-range-input"
-            @change="formatDateAndEmit"
-          />
-        </div>
-        <div class="date-divider"></div>
-        <div class="date-field date-field-end">
-          <span class="date-display">{{ formatDate(dataFim) }}</span>
-          <AltArrowDown :size="16" class="date-chevron" />
-          <input
-            type="date"
-            v-model="dataFim"
-            class="date-range-input"
-            @change="formatDateAndEmit"
-          />
-        </div>
-      </div>
-
-      <div class="select-wrapper">
-        <CardTransfer :size="20" class="select-icon" />
-        <select v-model="tipoCobranca" class="select-control" @change="emit('tipo-change', tipoCobranca)">
-          <option value="">Tipo de cobrança</option>
-          <option value="credito">Crédito</option>
-          <option value="debito">Débito</option>
-          <option value="boleto">Boleto</option>
-          <option value="pix">Pix</option>
-        </select>
-        <AltArrowDown :size="16" class="select-chevron" />
-      </div>
-
-      <button class="download-btn" title="Download">
-        <DownloadMinimalistic :size="20" class="download-icon" />
-      </button>
+    <div class="select-wrapper">
+      <Calendar :size="20" class="select-icon" />
+      <select v-model="periodo" class="select-control" @change="emit('periodo-change', periodo)">
+        <option value="especifico">Período: Específico</option>
+        <option value="hoje">Hoje</option>
+        <option value="semana">Esta semana</option>
+        <option value="mes">Este mês</option>
+        <option value="ano">Este ano</option>
+      </select>
+      <AltArrowDown :size="16" class="select-chevron" />
     </div>
+
+    <div class="date-range-wrapper">
+      <div class="date-field date-field-start">
+        <Calendar :size="20" class="date-icon" />
+        <span class="date-display">{{ formatDate(dataInicio) }}</span>
+        <AltArrowDown :size="16" class="date-chevron" />
+        <input
+          type="date"
+          v-model="dataInicio"
+          class="date-range-input"
+          @change="formatDateAndEmit"
+        />
+      </div>
+      <div class="date-divider"></div>
+      <div class="date-field date-field-end">
+        <span class="date-display">{{ formatDate(dataFim) }}</span>
+        <AltArrowDown :size="16" class="date-chevron" />
+        <input
+          type="date"
+          v-model="dataFim"
+          class="date-range-input"
+          @change="formatDateAndEmit"
+        />
+      </div>
+    </div>
+
+    <div class="select-wrapper">
+      <CardTransfer :size="20" class="select-icon" />
+      <select v-model="tipoCobranca" class="select-control" @change="emit('tipo-change', tipoCobranca)">
+        <option value="">Tipo de cobrança</option>
+        <option value="credito">Crédito</option>
+        <option value="debito">Débito</option>
+        <option value="boleto">Boleto</option>
+        <option value="pix">Pix</option>
+      </select>
+      <AltArrowDown :size="16" class="select-chevron" />
+    </div>
+
+    <button class="download-btn" title="Download">
+      <DownloadMinimalistic :size="20" class="download-icon" />
+    </button>
   </div>
 </template>
 
@@ -92,7 +90,6 @@ const formatDateAndEmit = () => {
 <style scoped>
 .dashboard-controls {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
   flex-wrap: wrap;

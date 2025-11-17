@@ -2,18 +2,15 @@
   <div class="estatisticas-card">
     <div class="card-header">
       <h3 class="card-title">{{ titulo }}</h3>
-      <button v-if="showInfo" class="info-btn" title="Informações">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="16" x2="12" y2="12"></line>
-          <line x1="12" y1="8" x2="12.01" y2="8"></line>
-        </svg>
-      </button>
+      <div class="percent-icon">
+        <span class="percent-symbol">%</span>
+      </div>
     </div>
     <div class="estatistica-value">R$ {{ formatCurrency(valor) }}</div>
+    <div class="divider"></div>
     <div class="estatistica-details">
       <span class="cobrancas">{{ cobrancas }} cobranças</span>
-      <span class="percentual">{{ percentual }}%</span>
+      <span class="percentual">{{ formatPercentual(percentual) }}%</span>
     </div>
   </div>
 </template>
@@ -35,10 +32,6 @@ defineProps({
   percentual: {
     type: Number,
     required: true
-  },
-  showInfo: {
-    type: Boolean,
-    default: false
   }
 })
 
@@ -48,14 +41,28 @@ const formatCurrency = (value) => {
     maximumFractionDigits: 2
   }).format(value)
 }
+
+const formatPercentual = (value) => {
+  return new Intl.NumberFormat('pt-BR', {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1
+  }).format(value)
+}
 </script>
 
 <style scoped>
 .estatisticas-card {
   background: white;
+  width: 100%;
+  max-width: 420px;
   border-radius: 12px;
+  border: 1px solid #E5E7EB;
   padding: 1.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .card-header {
@@ -63,47 +70,89 @@ const formatCurrency = (value) => {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+  flex-shrink: 0;
 }
 
 .card-title {
-  font-size: 0.9rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
   font-weight: 600;
-  color: #6b7280;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #2A2E33;
+  margin: 0;
 }
 
-.info-btn {
-  background: none;
-  border: none;
-  color: #6b7280;
-  cursor: pointer;
-  padding: 0.25rem;
+.percent-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 250px;
+  border: 1px solid #E5E7EB;
+  background-color: white;
   display: flex;
   align-items: center;
-  border-radius: 4px;
-  transition: color 0.2s;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 6px;
+  box-sizing: border-box;
 }
 
-.info-btn:hover {
-  color: #2563eb;
+.percent-symbol {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #2A2E33;
 }
 
 .estatistica-value {
-  font-size: 1.75rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 28px;
   font-weight: 700;
-  color: #111827;
-  margin-bottom: 0.5rem;
+  color: #2A2E33;
+  margin-bottom: 1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.divider {
+  width: calc(100% + 3rem);
+  height: 1px;
+  background-color: #EEEEEE;
+  margin-bottom: 1rem;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  border: none;
+  flex-shrink: 0;
 }
 
 .estatistica-details {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.85rem;
-  color: #6b7280;
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+.cobrancas {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 140%;
+  letter-spacing: 0%;
+  color: #2A2E33;
 }
 
 .percentual {
-  font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 140%;
+  letter-spacing: 0%;
+  text-align: right;
+  color: #2A2E33;
 }
 </style>
 
