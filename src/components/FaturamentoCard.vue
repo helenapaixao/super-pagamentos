@@ -3,7 +3,7 @@
     <div class="card-header">
       <h2 class="card-title">Faturamento</h2>
       <div class="title-icon">
-        <Eye :size="24" class="eye-icon" />
+        <img :src="eyeDashboardIcon" alt="Visibilidade" class="eye-svg" />
       </div>
     </div>
 
@@ -21,11 +21,16 @@
     </div>
 
     <div class="faturamento-metrics">
-      <div class="metric-item">
-        <span class="metric-dot blue"></span>
-        <div class="metric-content">
-          <span class="metric-label">Faturamento recebido</span>
-          <span class="metric-value">R$ {{ formatCurrency(faturamento.recebido) }}</span>
+      <div class="metric-item metric-item-primary">
+        <div class="metric-content-primary">
+          <span class="metric-label metric-label-primary">Faturamento recebido</span>
+          <div class="metric-value-row">
+            <div class="metric-dot-group">
+              <span class="metric-dot metric-dot-shadow"></span>
+              <span class="metric-dot metric-dot-blue-front"></span>
+            </div>
+            <span class="metric-value metric-value-primary">R$ {{ formatCurrency(faturamento.recebido) }}</span>
+          </div>
         </div>
       </div>
       <div class="metric-item">
@@ -62,7 +67,7 @@
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
-import { Eye } from '@solar-icons/vue'
+import eyeDashboardIcon from '@/assets/icons/eye-dashboard.svg'
 
 const props = defineProps({
   faturamento: {
@@ -295,6 +300,12 @@ watch(() => props.faturamento, () => {
   color: #86898B;
 }
 
+.eye-svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
 .value-row {
   display: flex;
   align-items: flex-end;
@@ -379,7 +390,12 @@ watch(() => props.faturamento, () => {
 }
 
 .metric-dot.blue {
-  background-color: #2563eb;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+  background-color: #0641FC;
 }
 
 .metric-dot.purple {
@@ -392,6 +408,70 @@ watch(() => props.faturamento, () => {
 
 .metric-dot.black {
   background-color: #111827;
+}
+
+.metric-item-primary {
+  border-radius: 12px;
+  background-color: #F5F5F5;
+  padding: 1rem 1.25rem;
+}
+
+.metric-content-primary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.metric-value-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.metric-dot-group {
+  position: relative;
+  width: 24px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+}
+
+.metric-dot-shadow {
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #A0BFFF;
+}
+
+.metric-dot-blue-front {
+  position: absolute;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #0641FC;
+  z-index: 1;
+}
+
+.metric-label-primary {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #86898B;
+  line-height: 140%;
+}
+
+.metric-value-primary {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1;
 }
 
 .metric-content {
