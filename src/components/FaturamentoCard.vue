@@ -33,32 +33,50 @@
           </div>
         </div>
       </div>
-      <div class="metric-item">
-        <span class="metric-dot purple"></span>
-        <div class="metric-content">
+      <div class="metric-item metric-item-secondary">
+        <div class="metric-header">
           <span class="metric-label">Faturamento previsto</span>
-          <span class="metric-value">D+2 R$ {{ formatCurrency(faturamento.previsto) }}</span>
+          <span class="metric-tag">D+2</span>
+        </div>
+        <div class="metric-value-row">
+          <div class="metric-dot-group metric-dot-group-purple">
+            <span class="metric-dot metric-dot-shadow-purple"></span>
+            <span class="metric-dot metric-dot-purple-front"></span>
+          </div>
+          <span class="metric-value metric-value-secondary">R$ {{ formatCurrency(faturamento.previsto) }}</span>
         </div>
       </div>
-      <div class="metric-item">
-        <span class="metric-dot orange"></span>
-        <div class="metric-content">
+      <div class="metric-item metric-item-secondary">
+        <div class="metric-content-secondary">
           <span class="metric-label">Vendas pendentes</span>
-          <span class="metric-value">R$ {{ formatCurrency(faturamento.pendentes) }}</span>
+          <div class="metric-value-row">
+            <div class="metric-dot-group metric-dot-group-orange">
+              <span class="metric-dot metric-dot-shadow-orange"></span>
+              <span class="metric-dot metric-dot-orange-front"></span>
+            </div>
+            <span class="metric-value metric-value-secondary">R$ {{ formatCurrency(faturamento.pendentes) }}</span>
+          </div>
         </div>
       </div>
-      <div class="metric-item">
-        <span class="metric-dot purple"></span>
-        <div class="metric-content">
+      <div class="metric-item metric-item-secondary">
+        <div class="metric-content-secondary">
           <span class="metric-label">Ticket médio</span>
-          <span class="metric-value">R$ {{ formatCurrency(faturamento.ticketMedio) }}</span>
+          <div class="metric-value-row">
+            <div class="metric-dot-group metric-dot-group-purple">
+              <span class="metric-dot metric-dot-shadow-purple"></span>
+              <span class="metric-dot metric-dot-purple-front"></span>
+            </div>
+            <span class="metric-value metric-value-secondary">R$ {{ formatCurrency(faturamento.ticketMedio) }}</span>
+          </div>
         </div>
       </div>
-      <div class="metric-item">
-        <span class="metric-dot black"></span>
-        <div class="metric-content">
+      <div class="metric-item metric-item-secondary">
+        <div class="metric-content-secondary">
           <span class="metric-label">Número de cobranças</span>
-          <span class="metric-value">{{ formatNumber(faturamento.numeroCobrancas) }}</span>
+          <div class="metric-value-row">
+            <span class="metric-dot metric-dot-black"></span>
+            <span class="metric-value metric-value-secondary">{{ formatNumber(faturamento.numeroCobrancas) }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -474,6 +492,105 @@ watch(() => props.faturamento, () => {
   line-height: 1;
 }
 
+.metric-item-secondary {
+  border-radius: 12px;
+  background-color: #F5F5F5;
+  padding: 1rem 1.25rem;
+}
+
+.metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.metric-tag {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #86898B;
+  background-color: #E5E7EB;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  line-height: 1;
+}
+
+.metric-content-secondary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.metric-value-secondary {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1;
+}
+
+.metric-dot-group-purple {
+  position: relative;
+  width: 24px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+}
+
+.metric-dot-shadow-purple {
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #E9D5FF;
+  border: 1px solid #8b5cf6;
+}
+
+.metric-dot-purple-front {
+  position: absolute;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #8b5cf6;
+  z-index: 1;
+}
+
+.metric-dot-group-orange {
+  position: relative;
+  width: 24px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+}
+
+.metric-dot-shadow-orange {
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #FED7AA;
+  border: 1px solid #f59e0b;
+}
+
+.metric-dot-orange-front {
+  position: absolute;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #f59e0b;
+  z-index: 1;
+}
+
 .metric-content {
   display: flex;
   flex-direction: column;
@@ -483,8 +600,10 @@ watch(() => props.faturamento, () => {
 
 .metric-label {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.85rem;
-  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+  color: #86898B;
+  line-height: 140%;
 }
 
 .metric-value {
