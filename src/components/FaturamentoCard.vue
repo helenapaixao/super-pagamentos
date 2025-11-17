@@ -7,13 +7,13 @@
       </div>
     </div>
 
-    <div class="faturamento-value">
-      R$ {{ formatCurrency(faturamento.total) }}
-    </div>
-
-    <div class="faturamento-growth">
-      <span class="growth-indicator positive">↑ {{ faturamento.crescimento }}%</span>
-      <span class="growth-text">Em crescimento</span>
+    <div class="value-row">
+      <span class="currency-label">R$</span>
+      <span class="faturamento-value">{{ formatCurrency(faturamento.total) }}</span>
+      <div class="growth-group">
+        <span class="growth-indicator positive">↑ {{ faturamento.crescimento }}%</span>
+        <span class="growth-text">Em crescimento</span>
+      </div>
     </div>
 
     <div class="chart-container">
@@ -137,7 +137,10 @@ const drawChart = () => {
     18000  
   ]
 
-  const dados = props.faturamento.dadosGrafico || dadosEspecificos
+  const dados =
+    props.faturamento.dadosGrafico && props.faturamento.dadosGrafico.length
+      ? props.faturamento.dadosGrafico
+      : dadosEspecificos
   const maxValue = 200000 
   const paddingLeft = 50 
   const paddingRight = 20
@@ -292,21 +295,33 @@ watch(() => props.faturamento, () => {
   color: #9CA3AF;
 }
 
+.value-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.currency-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #86898B;
+}
+
 .faturamento-value {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 2.5rem;
   font-weight: 700;
   color: #0641FC;
-  margin-bottom: 0.5rem;
   line-height: 1;
 }
 
-.faturamento-growth {
-   font-family: 'Plus Jakarta Sans', sans-serif;
+.growth-group {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1.5rem;
 }
 
 .growth-indicator {
@@ -315,11 +330,13 @@ watch(() => props.faturamento, () => {
 }
 
 .growth-indicator.positive {
+   font-family: 'Plus Jakarta Sans', sans-serif;
   color: #10b981;
+  font-weight: 600;
 }
 
 .growth-text {
-  color: #6b7280;
+  color: #86898B;
   font-size: 0.9rem;
 }
 
