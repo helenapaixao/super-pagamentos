@@ -1,0 +1,283 @@
+<template>
+  <div class="dashboard-layout">
+    <Header />
+    <div class="dashboard-content">
+      <Sidebar />
+      <main class="dashboard-main">
+        <DashboardControls
+          @nova-cobranca="handleNovaCobranca"
+          @periodo-change="handlePeriodoChange"
+          @data-change="handleDataChange"
+          @tipo-change="handleTipoChange"
+        />
+
+        <FaturamentoCard :faturamento="faturamentoData" />
+
+        <TransferenciaPendenteCard
+          v-if="transferenciaPendente"
+          :transferencia="transferenciaPendente"
+          @autorizar="handleAutorizarTransferencia"
+        />
+
+        <div class="estatisticas-grid">
+          <EstatisticasCard
+            titulo="Reembolsos"
+            :valor="estatisticas.reembolsos.valor"
+            :cobrancas="estatisticas.reembolsos.cobrancas"
+            :percentual="estatisticas.reembolsos.percentual"
+          />
+          <EstatisticasCard
+            titulo="Chargebacks"
+            :valor="estatisticas.chargebacks.valor"
+            :cobrancas="estatisticas.chargebacks.cobrancas"
+            :percentual="estatisticas.chargebacks.percentual"
+            :show-info="true"
+          />
+          <EstatisticasCard
+            titulo="Cancelados"
+            :valor="estatisticas.cancelados.valor"
+            :cobrancas="estatisticas.cancelados.cobrancas"
+            :percentual="estatisticas.cancelados.percentual"
+          />
+          <EstatisticasCard
+            titulo="Não autorizado"
+            :valor="estatisticas.naoAutorizado.valor"
+            :cobrancas="estatisticas.naoAutorizado.cobrancas"
+            :percentual="estatisticas.naoAutorizado.percentual"
+          />
+        </div>
+
+        <div class="charts-grid">
+          <ConversaoModalidadeCard :modalidades="conversaoModalidades" />
+          <BandeirasCard :bandeiras="bandeirasUtilizadas" />
+        </div>
+
+        <div class="help-button">
+          <button class="help-btn" title="Ajuda">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </button>
+        </div>
+      </main>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import Header from '../components/Header.vue'
+import Sidebar from '../components/Sidebar.vue'
+import DashboardControls from '../components/DashboardControls.vue'
+import FaturamentoCard from '../components/FaturamentoCard.vue'
+import TransferenciaPendenteCard from '../components/TransferenciaPendenteCard.vue'
+import EstatisticasCard from '../components/EstatisticasCard.vue'
+import ConversaoModalidadeCard from '../components/ConversaoModalidadeCard.vue'
+import BandeirasCard from '../components/BandeirasCard.vue'
+import { dashboardService } from '../services/dashboardService'
+
+// Dados reativos
+const faturamentoData = ref({
+  total: 1060551.14,
+  crescimento: 123.9,
+  recebido: 245340.90,
+  previsto: 815210.24,
+  pendentes: 15332.18,
+  ticketMedio: 192.30,
+  numeroCobrancas: 12349,
+  dadosGrafico: Array.from({ length: 31 }, () => Math.random() * 200000)
+})
+
+const transferenciaPendente = ref({
+  id: 1,
+  valor: 29119.15
+})
+
+const estatisticas = ref({
+  reembolsos: {
+    valor: 8260.10,
+    cobrancas: 233,
+    percentual: 4.5
+  },
+  chargebacks: {
+    valor: 1260.10,
+    cobrancas: 5,
+    percentual: 0.3
+  },
+  cancelados: {
+    valor: 3120.60,
+    cobrancas: 32,
+    percentual: 1.5
+  },
+  naoAutorizado: {
+    valor: 6120.60,
+    cobrancas: 122,
+    percentual: 3.1
+  }
+})
+
+const conversaoModalidades = ref([
+  { nome: 'Crédito', percentual: 92, cor: 'blue' },
+  { nome: 'Débito', percentual: 95, cor: 'purple' },
+  { nome: 'Boleto', percentual: 42, cor: 'orange' },
+  { nome: 'Pix', percentual: 98, cor: 'blue' }
+])
+
+const bandeirasUtilizadas = ref([
+  { nome: 'VISA', valor: 450000 },
+  { nome: 'ELO', valor: 320000 },
+  { nome: 'Mastercard', valor: 280000 },
+  { nome: 'Pix', valor: 12000 },
+  { nome: 'Apple Pay', valor: 8000 },
+  { nome: 'Google Pay', valor: 5000 }
+])
+
+// Métodos
+const handleNovaCobranca = () => {
+  console.log('Nova cobrança')
+  // Implementar navegação ou modal
+}
+
+const handlePeriodoChange = (periodo) => {
+  console.log('Período alterado:', periodo)
+  loadDashboardData()
+}
+
+const handleDataChange = ({ inicio, fim }) => {
+  console.log('Datas alteradas:', inicio, fim)
+  loadDashboardData()
+}
+
+const handleTipoChange = (tipo) => {
+  console.log('Tipo alterado:', tipo)
+  loadDashboardData()
+}
+
+const handleAutorizarTransferencia = async (transferenciaId) => {
+  try {
+    await dashboardService.autorizarTransferencia(transferenciaId)
+    transferenciaPendente.value = null
+    alert('Transferência autorizada com sucesso!')
+  } catch (error) {
+    console.error('Erro ao autorizar transferência:', error)
+    alert('Erro ao autorizar transferência')
+  }
+}
+
+const loadDashboardData = async () => {
+  try {
+    // Carregar dados do dashboard
+    // const faturamento = await dashboardService.getFaturamento()
+    // const estatisticasData = await dashboardService.getEstatisticas()
+    // const conversao = await dashboardService.getConversaoModalidade()
+    // const bandeiras = await dashboardService.getBandeirasUtilizadas()
+    // const transferencias = await dashboardService.getTransferenciasPendentes()
+
+    // faturamentoData.value = faturamento
+    // estatisticas.value = estatisticasData
+    // conversaoModalidades.value = conversao
+    // bandeirasUtilizadas.value = bandeiras
+    // transferenciaPendente.value = transferencias[0] || null
+  } catch (error) {
+    console.error('Erro ao carregar dados do dashboard:', error)
+    // Em caso de erro, manter dados mockados
+  }
+}
+
+onMounted(() => {
+  loadDashboardData()
+})
+</script>
+
+<style scoped>
+.dashboard-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-content {
+  display: flex;
+  flex: 1;
+  margin-top: 60px;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  overflow-y: auto;
+  min-height: calc(100vh - 60px);
+  margin-left: 280px;
+}
+
+.estatisticas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.help-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 50;
+}
+
+.help-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.help-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.5);
+}
+
+@media (max-width: 1024px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-main {
+    padding: 1rem;
+  }
+
+  .estatisticas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .help-button {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .help-btn {
+    width: 48px;
+    height: 48px;
+  }
+}
+</style>
+
