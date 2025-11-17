@@ -107,55 +107,49 @@ const drawChart = () => {
   const width = canvas.width = containerWidth
   const height = canvas.height = containerHeight
 
-  // Limpar canvas
   ctx.clearRect(0, 0, width, height)
 
-  // Dados específicos baseados na imagem: picos em 5-8, 15-17, 28; baixos em 9-14, 18-19, 21, 26, 29-30
   const dadosEspecificos = [
-    5000,   // dia 1
-    8000,   // dia 2
-    12000,  // dia 3
-    15000,  // dia 4
-    85000,  // dia 5 - pico verde
-    95000,  // dia 6 - pico verde
-    105000, // dia 7 - pico verde
-    88000,  // dia 8 - pico verde
-    3000,   // dia 9 - baixo
-    2000,   // dia 10 - baixo
-    4000,   // dia 11 - baixo
-    2500,   // dia 12 - baixo
-    3500,   // dia 13 - baixo
-    2800,   // dia 14 - baixo
-    92000,  // dia 15 - pico verde
-    98000,  // dia 16 - pico verde
-    87000,  // dia 17 - pico verde
-    5000,   // dia 18 - baixo
-    3500,   // dia 19 - baixo
-    15000,  // dia 20
-    2000,   // dia 21 - baixo
-    18000,  // dia 22
-    22000,  // dia 23
-    25000,  // dia 24
-    3000,   // dia 25
-    1500,   // dia 26 - baixo
-    12000,  // dia 27
-    102000, // dia 28 - pico verde
-    4000,   // dia 29 - baixo
-    2500,   // dia 30 - baixo
-    18000   // dia 31
+    5000,  
+    8000,   
+    12000,  
+    15000,  
+    85000,  
+    95000,  
+    105000, 
+    88000,  
+    3000,   
+    2000,   
+    4000,   
+    2500,   
+    3500,   
+    2800,   
+    92000,  
+    3500,   
+    15000,  
+    2000,   
+    18000,  
+    22000,  
+    25000,  
+    3000,  
+    1500,   
+    12000,  
+    102000, 
+    4000,   
+    2500,   
+    18000  
   ]
 
   const dados = props.faturamento.dadosGrafico || dadosEspecificos
-  const maxValue = 200000 // Valor máximo fixo para corresponder ao eixo Y
-  const paddingLeft = 50 // Espaço para labels do eixo Y
+  const maxValue = 200000 
+  const paddingLeft = 50 
   const paddingRight = 20
   const paddingTop = 10
-  const paddingBottom = 50 // Espaço para labels do eixo X
+  const paddingBottom = 50 
   const chartWidth = width - paddingLeft - paddingRight
   const chartHeight = height - paddingTop - paddingBottom
   const barWidth = chartWidth / 31
 
-  // Desenhar linhas de grade do eixo Y
   ctx.strokeStyle = '#f3f4f6'
   ctx.lineWidth = 1
   const yLabels = [0, 50000, 100000, 200000]
@@ -167,7 +161,6 @@ const drawChart = () => {
     ctx.stroke()
   })
 
-  // Desenhar linha do eixo X
   ctx.strokeStyle = '#e5e7eb'
   ctx.lineWidth = 1.5
   const xAxisY = paddingTop + chartHeight
@@ -176,21 +169,17 @@ const drawChart = () => {
   ctx.lineTo(width - paddingRight, xAxisY)
   ctx.stroke()
 
-  // Desenhar barras
   dados.forEach((valor, index) => {
     const barHeight = (valor / maxValue) * chartHeight
     const x = paddingLeft + (index * barWidth)
     const y = paddingTop + chartHeight - barHeight
 
-    // Cor verde para valores acima de 70K, azul para menores
     ctx.fillStyle = valor > 70000 ? '#10b981' : '#2563eb'
     
-    // Desenhar barra com espaçamento
     const barSpacing = 1.5
     ctx.fillRect(x + barSpacing, y, barWidth - (barSpacing * 2), barHeight)
   })
 
-  // Labels do eixo Y (0, 50K, 100K, 200K)
   ctx.fillStyle = '#6b7280'
   ctx.font = '12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
   ctx.textAlign = 'right'
@@ -203,7 +192,6 @@ const drawChart = () => {
     ctx.fillText(labelText, paddingLeft - 10, yPos + 4)
   })
 
-  // Labels do eixo X (números 1-31)
   ctx.textAlign = 'center'
   ctx.font = '11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
   ctx.fillStyle = '#6b7280'

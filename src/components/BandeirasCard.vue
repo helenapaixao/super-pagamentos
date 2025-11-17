@@ -53,17 +53,14 @@ const drawChart = () => {
     const barWidth = (bandeira.valor / maxValue) * chartWidth
     const y = index * barHeight + 30
 
-    // Barra
     ctx.fillStyle = '#2563eb'
     ctx.fillRect(0, y, barWidth, barHeight - 10)
 
-    // Label da bandeira
     ctx.fillStyle = '#374151'
     ctx.font = '14px sans-serif'
     ctx.textAlign = 'left'
     ctx.fillText(bandeira.nome, 0, y + barHeight / 2 + 5)
 
-    // Valor
     ctx.fillStyle = '#6b7280'
     ctx.font = '12px sans-serif'
     ctx.textAlign = 'right'

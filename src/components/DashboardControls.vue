@@ -45,20 +45,20 @@
         </div>
       </div>
 
-      <select v-model="tipoCobranca" class="select-control" @change="emit('tipo-change', tipoCobranca)">
-        <option value="">Tipo de cobrança</option>
-        <option value="credito">Crédito</option>
-        <option value="debito">Débito</option>
-        <option value="boleto">Boleto</option>
-        <option value="pix">Pix</option>
-      </select>
+      <div class="select-wrapper">
+        <CardTransfer :size="20" class="select-icon" />
+        <select v-model="tipoCobranca" class="select-control" @change="emit('tipo-change', tipoCobranca)">
+          <option value="">Tipo de cobrança</option>
+          <option value="credito">Crédito</option>
+          <option value="debito">Débito</option>
+          <option value="boleto">Boleto</option>
+          <option value="pix">Pix</option>
+        </select>
+        <AltArrowDown :size="16" class="select-chevron" />
+      </div>
 
-      <button class="icon-btn" title="Download">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-          <polyline points="7 10 12 15 17 10"></polyline>
-          <line x1="12" y1="15" x2="12" y2="3"></line>
-        </svg>
+      <button class="download-btn" title="Download">
+        <DownloadMinimalistic :size="20" class="download-icon" />
       </button>
     </div>
   </div>
@@ -66,7 +66,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { AddCircle, Calendar, AltArrowDown } from '@solar-icons/vue'
+import { AddCircle, Calendar, AltArrowDown, CardTransfer, DownloadMinimalistic } from '@solar-icons/vue'
 
 const periodo = ref('especifico')
 const dataInicio = ref('2020-06-10')
@@ -190,6 +190,29 @@ const formatDateAndEmit = () => {
   flex-shrink: 0;
 }
 
+.download-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.download-btn:hover {
+  border-color: #2563eb;
+  background-color: #f3f4f6;
+}
+
+.download-icon {
+  color: #2A2E33;
+}
+
 .select-control {
   border: none;
   background: transparent;
@@ -203,6 +226,16 @@ const formatDateAndEmit = () => {
   flex: 1;
   appearance: none;
   outline: none;
+}
+
+.select-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: auto;
+  letter-spacing: 0%;
+  color: #2A2E33;
+  flex: 1;
 }
 
 .select-control:focus {
