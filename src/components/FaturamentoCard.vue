@@ -3,7 +3,7 @@
     <div class="card-header">
       <h2 class="card-title">Faturamento</h2>
       <div class="title-icon">
-        <Eye :size="16" class="eye-icon" />
+        <Eye :size="24" class="eye-icon" />
       </div>
     </div>
 
@@ -263,9 +263,10 @@ watch(() => props.faturamento, () => {
 
 .card-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  margin-bottom: 1.5rem;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .card-title {
