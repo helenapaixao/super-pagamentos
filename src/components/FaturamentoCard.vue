@@ -2,7 +2,13 @@
   <div class="faturamento-card">
     <div class="card-header">
       <h2 class="card-title">Faturamento</h2>
-      <Eye :size="16" class="eye-icon" />
+      <button class="info-btn" title="Informações">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+      </button>
     </div>
 
     <div class="faturamento-value">
@@ -60,7 +66,6 @@
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
-import { Eye } from '@solar-icons/vue'
 
 const props = defineProps({
   faturamento: {
@@ -145,7 +150,24 @@ const drawChart = () => {
   const chartHeight = height - paddingTop - paddingBottom
   const barWidth = chartWidth / 31
 
-  ctx.strokeStyle = '#f3f4f6'
+  // fundo com colunas verticais claras (como na imagem)
+  const columnWidth = barWidth
+  ctx.save()
+  ctx.globalAlpha = 0.35
+  ctx.fillStyle = '#F5F5F5'
+  for (let i = 0; i < 31; i++) {
+    const xPos = paddingLeft + i * columnWidth
+    ctx.fillRect(
+      xPos + columnWidth * 0.2,
+      paddingTop,
+      columnWidth * 0.6,
+      chartHeight
+    )
+  }
+  ctx.restore()
+
+  // linhas horizontais (0, 50K, 100K, 200K)
+  ctx.strokeStyle = '#E5E7EB'
   ctx.lineWidth = 1
   const yLabels = [0, 50000, 100000, 200000]
   yLabels.forEach(label => {
@@ -156,7 +178,7 @@ const drawChart = () => {
     ctx.stroke()
   })
 
-  ctx.strokeStyle = '#e5e7eb'
+  ctx.strokeStyle = '#E5E7EB'
   ctx.lineWidth = 1.5
   const xAxisY = paddingTop + chartHeight
   ctx.beginPath()
@@ -164,15 +186,39 @@ const drawChart = () => {
   ctx.lineTo(width - paddingRight, xAxisY)
   ctx.stroke()
 
+  // barras com topo arredondado usando linhas com lineCap round
+  ctx.lineCap = 'round'
   dados.forEach((valor, index) => {
     const barHeight = (valor / maxValue) * chartHeight
-    const x = paddingLeft + (index * barWidth)
+    const x = paddingLeft + index * barWidth
     const y = paddingTop + chartHeight - barHeight
 
-    ctx.fillStyle = valor > 70000 ? '#10b981' : '#0641FC'
-    
-    const barSpacing = 1.5
-    ctx.fillRect(x + barSpacing, y, barWidth - (barSpacing * 2), barHeight)
+    const barSpacing = 4
+    const strokeWidth = barWidth - barSpacing * 2
+    const centerX = x + barWidth / 2
+
+    if (strokeWidth <= 0) return
+
+    // cor/gradiente da barra
+    if (valor > 70000) {
+      const gradient = ctx.createLinearGradient(
+        centerX,
+        y,
+        centerX,
+        paddingTop + chartHeight
+      )
+      gradient.addColorStop(0, '#22C55E')
+      gradient.addColorStop(1, '#0641FC')
+      ctx.strokeStyle = gradient
+    } else {
+      ctx.strokeStyle = '#0641FC'
+    }
+
+    ctx.lineWidth = strokeWidth
+    ctx.beginPath()
+    ctx.moveTo(centerX, paddingTop + chartHeight)
+    ctx.lineTo(centerX, y)
+    ctx.stroke()
   })
 
   ctx.fillStyle = '#6b7280'
@@ -210,10 +256,12 @@ watch(() => props.faturamento, () => {
 <style scoped>
 .faturamento-card {
   background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  border-radius: 20px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
   margin-bottom: 2rem;
+  box-sizing: border-box;
 }
 
 .card-header {
@@ -225,18 +273,27 @@ watch(() => props.faturamento, () => {
 
 .card-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #111827;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2A2E33;
   margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
-.eye-icon {
+.info-btn {
+  background: none;
+  border: none;
   color: #9CA3AF;
-  flex-shrink: 0;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  border-radius: 999px;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.info-btn:hover {
+  color: #0641FC;
+  background-color: #F3F4F6;
 }
 
 .faturamento-value {
@@ -282,16 +339,21 @@ watch(() => props.faturamento, () => {
 }
 
 .faturamento-metrics {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
+  margin-top: 1rem;
 }
 
 .metric-item {
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
-  white-space: nowrap;
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+  border: 1px solid #E5E7EB;
+  background-color: #FFFFFF;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
 }
 
 .metric-dot {
@@ -326,11 +388,13 @@ watch(() => props.faturamento, () => {
 }
 
 .metric-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.85rem;
   color: #6b7280;
 }
 
 .metric-value {
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   color: #111827;
