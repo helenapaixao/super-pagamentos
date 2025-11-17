@@ -283,17 +283,16 @@ watch(() => props.faturamento, () => {
 .title-icon {
   width: 24px;
   height: 24px;
-  border-radius: 999px;
-  border: 1px solid #D1D5DB;
-  background-color: #F9FAFB;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  background-color: transparent;
+  border: none;
 }
 
 .eye-icon {
-  color: #9CA3AF;
+  color: #86898B;
 }
 
 .value-row {
