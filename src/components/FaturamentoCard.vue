@@ -2,13 +2,9 @@
   <div class="faturamento-card">
     <div class="card-header">
       <h2 class="card-title">Faturamento</h2>
-      <button class="info-btn" title="Informações">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="16" x2="12" y2="12"></line>
-          <line x1="12" y1="8" x2="12.01" y2="8"></line>
-        </svg>
-      </button>
+      <div class="title-icon">
+        <Eye :size="16" class="eye-icon" />
+      </div>
     </div>
 
     <div class="faturamento-value">
@@ -66,6 +62,7 @@
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
+import { Eye } from '@solar-icons/vue'
 
 const props = defineProps({
   faturamento: {
@@ -271,26 +268,28 @@ watch(() => props.faturamento, () => {
 .card-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: 0%;
   color: #2A2E33;
   margin: 0;
 }
 
-.info-btn {
-  background: none;
-  border: none;
-  color: #9CA3AF;
-  cursor: pointer;
-  padding: 0.25rem;
+.title-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  border: 1px solid #D1D5DB;
+  background-color: #F9FAFB;
   display: flex;
   align-items: center;
-  border-radius: 999px;
-  transition: color 0.2s, background-color 0.2s;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.info-btn:hover {
-  color: #0641FC;
-  background-color: #F3F4F6;
+.eye-icon {
+  color: #9CA3AF;
 }
 
 .faturamento-value {
@@ -303,6 +302,7 @@ watch(() => props.faturamento, () => {
 }
 
 .faturamento-growth {
+   font-family: 'Plus Jakarta Sans', sans-serif;
   display: flex;
   align-items: center;
   gap: 0.5rem;
