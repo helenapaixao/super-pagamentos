@@ -203,7 +203,7 @@ onMounted(() => {
 
 .dashboard-main {
   flex: 1;
-  padding: 2rem;
+  padding: 52px 2rem 2rem 2rem;
   background-color: #f5f5f5;
   overflow-y: auto;
   min-height: calc(100vh - 60px);
