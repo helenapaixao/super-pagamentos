@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <BarChart :data="faturamento.dadosGrafico" :max-value="200000" :height="172" />
+    <BarChart :data="faturamento.dadosGrafico" :max-value="200000" :height="172" class="faturamento-chart" />
 
     <div class="faturamento-metrics">
       <MetricCard
@@ -177,6 +177,10 @@ const formatNumber = (value) => {
 .growth-text {
   color: #86898B;
   font-size: 0.9rem;
+}
+
+.faturamento-chart {
+  margin-top: 51px;
 }
 
 .faturamento-metrics {
