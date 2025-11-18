@@ -166,8 +166,9 @@ import userIcon from '@/assets/icons/user-icon.svg'
 .section-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.75rem;
-  font-weight: 600;
-  color: #6B7280;
+  font-weight: 700;
+  color: #86898B;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 0.75rem;
