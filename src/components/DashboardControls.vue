@@ -27,7 +27,7 @@
         <input
           type="date"
           v-model="dataInicio"
-          class="date-range-input"
+          class="date-range-input date-input-start"
           @change="formatDateAndEmit"
         />
       </div>
@@ -38,7 +38,7 @@
         <input
           type="date"
           v-model="dataFim"
-          class="date-range-input"
+          class="date-range-input date-input-end"
           @change="formatDateAndEmit"
         />
       </div>
@@ -298,6 +298,18 @@ const formatDateAndEmit = () => {
   z-index: 2;
   border: none;
   background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.date-input-start {
+  right: 0;
+  left: auto;
+}
+
+.date-input-end {
+  left: 0;
+  right: auto;
 }
 
 .date-display {
