@@ -1,7 +1,10 @@
 <template>
   <div class="bandeiras-card">
     <div class="card-header">
-      <h2 class="card-title">Bandeiras mais utilizadas</h2>
+      <div class="title-group">
+        <h2 class="card-title">Bandeiras mais utilizadas</h2>
+        <InfoCircleLinear :size="20" class="info-icon" />
+      </div>
       <button class="info-btn" title="Informações">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <circle cx="12" cy="12" r="10"></circle>
@@ -29,6 +32,7 @@
 </template>
 
 <script setup>
+import { InfoCircleLinear } from '@solar-icons/vue'
 import visaIcon from '@/assets/icons/bandeiras/visa.svg'
 import mastercardIcon from '@/assets/icons/bandeiras/mastercard.svg'
 import eloIcon from '@/assets/icons/bandeiras/elo.svg'
@@ -92,6 +96,12 @@ const getLogo = (nome) => {
   margin-bottom: 2rem;
 }
 
+.title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .card-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 16px;
@@ -100,6 +110,11 @@ const getLogo = (nome) => {
   margin: 0;
   line-height: 100%;
   letter-spacing: 0%;
+}
+
+.info-icon {
+  color: #86898B;
+  flex-shrink: 0;
 }
 
 .info-btn {

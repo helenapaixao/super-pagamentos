@@ -77,12 +77,9 @@ const getCor = (cor) => {
 .card-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 16px;
-  font-weight: semibold;
+  font-weight: 600;
   color: #2A2E33;
   margin-bottom: 1rem;
-  line-height: 100%;
-  letter-spacing: 0%;
-  margin-top: 0;
 }
 
 .conversao-grid {
