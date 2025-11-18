@@ -12,19 +12,21 @@
     <div class="transferencia-content">
       <h3 class="transferencia-title">Solicitação de transferência pendente</h3>
       <p class="transferencia-description">
-        A transação no valor de <strong>R$ {{ formatCurrency(transferencia.valor) }}</strong> está aguardando a sua aprovação.
+        A transação no valor de R$ {{ formatCurrency(transferencia.valor) }} está aguardando a sua aprovação.
       </p>
     </div>
     
-    <button class="autorizar-btn" @click="autorizarTransferencia">
-      <span class="btn-text">Autorizar transferência</span>
-      <WalletMoney :size="20" class="wallet-icon" />
-    </button>
+    <BaseButton
+      text="Autorizar transferência"
+      :icon="WalletMoney"
+      @click="autorizarTransferencia"
+    />
   </div>
 </template>
 
 <script setup>
 import { AltArrowUp, WalletMoney } from '@solar-icons/vue'
+import BaseButton from './BaseButton.vue'
 
 const props = defineProps({
   transferencia: {
@@ -63,6 +65,7 @@ const autorizarTransferencia = () => {
   gap: 1.5rem;
   width: 100%;
   box-sizing: border-box;
+  height: 105px;
 }
 
 .icon-group {
@@ -125,7 +128,7 @@ const autorizarTransferencia = () => {
 
 .transferencia-description {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   color: #86898B;
   margin: 0;
@@ -137,36 +140,6 @@ const autorizarTransferencia = () => {
   font-weight: 600;
 }
 
-.autorizar-btn {
-  background-color: #0641FC;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 250px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: background-color 0.2s;
-  flex-shrink: 0;
-  white-space: nowrap;
-}
-
-.autorizar-btn:hover {
-  background-color: #0530d4;
-}
-
-.btn-text {
-  color: white;
-}
-
-.wallet-icon {
-  color: white;
-  flex-shrink: 0;
-}
 
 @media (max-width: 768px) {
   .transferencia-card {
@@ -180,9 +153,5 @@ const autorizarTransferencia = () => {
     align-self: flex-start;
   }
 
-  .autorizar-btn {
-    width: 100%;
-    justify-content: center;
-  }
 }
 </style>
