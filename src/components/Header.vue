@@ -27,7 +27,7 @@
             <span class="user-name-bottom">Astra Pagamentos</span>
           </div>
           <button class="dropdown-btn">
-            <AltArrowDown :size="16" />
+            <img :src="roundAltArrowDownIcon" alt="" class="dropdown-icon" width="16" height="16" />
           </button>
         </div>
       </div>
@@ -36,9 +36,10 @@
 </template>
 
 <script setup>
-import { CalculatorMinimalistic, Settings, BellBing, AltArrowDown } from '@solar-icons/vue'
+import { CalculatorMinimalistic, Settings, BellBing } from '@solar-icons/vue'
 import superLogo from '@/assets/icons/super-logo.svg'
 import chartIcon from '@/assets/icons/chart-icon.svg'
+import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.svg'
 </script>
 
 <style scoped>
@@ -154,6 +155,7 @@ import chartIcon from '@/assets/icons/chart-icon.svg'
 .user-info {
   display: flex;
   flex-direction: column;
+  gap: 4px;
 }
 
 .user-name-top {

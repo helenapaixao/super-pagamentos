@@ -27,7 +27,7 @@
         <input
           type="date"
           v-model="dataInicio"
-          class="date-range-input date-input-start"
+          class="date-range-input"
           @change="formatDateAndEmit"
         />
       </div>
@@ -38,7 +38,7 @@
         <input
           type="date"
           v-model="dataFim"
-          class="date-range-input date-input-end"
+          class="date-range-input"
           @change="formatDateAndEmit"
         />
       </div>
@@ -285,6 +285,8 @@ const formatDateAndEmit = () => {
 .date-icon {
   color: #2A2E33;
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .date-range-input {
@@ -295,21 +297,12 @@ const formatDateAndEmit = () => {
   height: 100%;
   opacity: 0;
   cursor: pointer;
-  z-index: 2;
+  z-index: 3;
   border: none;
   background: transparent;
   padding: 0;
   margin: 0;
-}
-
-.date-input-start {
-  right: 0;
-  left: auto;
-}
-
-.date-input-end {
-  left: 0;
-  right: auto;
+  font-size: 16px;
 }
 
 .date-display {
@@ -322,12 +315,16 @@ const formatDateAndEmit = () => {
   pointer-events: none;
   white-space: nowrap;
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .date-chevron {
   color: #2A2E33;
   flex-shrink: 0;
   pointer-events: none;
+  position: relative;
+  z-index: 1;
 }
 
 .date-divider {
