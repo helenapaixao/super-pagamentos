@@ -52,11 +52,7 @@
           <BandeirasCard :bandeiras="bandeirasUtilizadas" />
         </div>
 
-        <div class="help-button">
-          <button class="help-btn" title="Ajuda">
-            <img :src="helpIcon" alt="Ajuda" class="help-icon" />
-          </button>
-        </div>
+        <HelpButton :fixed="true" @click="handleHelpClick" />
       </main>
     </div>
   </div>
@@ -72,8 +68,8 @@ import TransferenciaPendenteCard from '../components/TransferenciaPendenteCard.v
 import EstatisticasCard from '../components/EstatisticasCard.vue'
 import ConversaoModalidadeCard from '../components/ConversaoModalidadeCard.vue'
 import BandeirasCard from '../components/BandeirasCard.vue'
+import HelpButton from '../components/HelpButton.vue'
 import { dashboardService } from '../services/dashboardService'
-import helpIcon from '@/assets/icons/help-icon.svg'
 
 const faturamentoData = ref({
   total: 1060551.14,
@@ -163,6 +159,11 @@ const handleAutorizarTransferencia = async (transferenciaId) => {
   }
 }
 
+const handleHelpClick = () => {
+  // Lógica para abrir ajuda ou modal de ajuda
+  console.log('Ajuda clicada')
+}
+
 const loadDashboardData = async () => {
   try {
     // Carregar dados do dashboard
@@ -223,40 +224,6 @@ onMounted(() => {
   margin-bottom: 2rem;
 }
 
-.help-button {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 50;
-}
-
-.help-btn {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background-color: #0641FC;
-  color: white;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(6, 65, 252, 0.3);
-  transition: opacity 0.2s, box-shadow 0.2s;
-  padding: 0;
-}
-
-.help-btn:hover {
-  opacity: 0.9;
-  box-shadow: 0 4px 12px rgba(6, 65, 252, 0.4);
-}
-
-.help-icon {
-  width: 14px;
-  height: 21px;
-  display: block;
-}
-
 @media (max-width: 1024px) {
   .charts-grid {
     grid-template-columns: 1fr;
@@ -270,16 +237,6 @@ onMounted(() => {
 
   .estatisticas-grid {
     grid-template-columns: 1fr;
-  }
-
-  .help-button {
-    bottom: 1rem;
-    right: 1rem;
-  }
-
-  .help-btn {
-    width: 48px;
-    height: 48px;
   }
 }
 </style>
