@@ -50,7 +50,7 @@ defineEmits(['click'])
 
 <style scoped>
 .base-button {
-  border: none;
+  border: 1px solid;
   padding: 12px 24px;
   border-radius: 250px;
   font-family: 'Plus Jakarta Sans', sans-serif;

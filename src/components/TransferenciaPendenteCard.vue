@@ -76,7 +76,7 @@ const autorizarTransferencia = () => {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: #F5F5F5;
+  background-color: #E6E3DC;
   display: flex;
   align-items: center;
   justify-content: center;
