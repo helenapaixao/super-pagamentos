@@ -49,14 +49,44 @@
       </div>
     </div>
 
-    <EstatisticasPeriodoCard
-      class="faturamento-mobile-view"
-      :valor="faturamento.total"
-      :crescimento="faturamento.crescimento"
-      :dados-grafico="faturamento.dadosGrafico"
-      :periodo="mobilePeriodo"
-      @periodo-change="handlePeriodoChange"
-    />
+    <div class="faturamento-mobile-view">
+      <EstatisticasPeriodoCard
+        :valor="faturamento.total"
+        :crescimento="faturamento.crescimento"
+        :dados-grafico="faturamento.dadosGrafico"
+        :periodo="mobilePeriodo"
+        @periodo-change="handlePeriodoChange"
+      />
+      
+      <div class="faturamento-metrics-mobile">
+        <MetricCard
+          label="Faturamento recebido"
+          :value="`R$ ${formatCurrency(faturamento.recebido)}`"
+          dot-type="blue"
+        />
+        <MetricCard
+          label="Faturamento previsto"
+          :value="`R$ ${formatCurrency(faturamento.previsto)}`"
+          dot-type="purple"
+          tag="D+2"
+        />
+        <MetricCard
+          label="Vendas pendentes"
+          :value="`R$ ${formatCurrency(faturamento.pendentes)}`"
+          dot-type="orange"
+        />
+        <MetricCard
+          label="Ticket médio"
+          :value="`R$ ${formatCurrency(faturamento.ticketMedio)}`"
+          dot-type="purple"
+        />
+        <MetricCard
+          label="Número de cobranças"
+          :value="formatNumber(faturamento.numeroCobrancas)"
+          dot-type="black"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -118,7 +148,6 @@ const formatNumber = (value) => {
   width: 100%;
   border-radius: 20px;
   padding: 2rem 2.5rem;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
   margin-bottom: 2rem;
   box-sizing: border-box;
 }
@@ -236,6 +265,71 @@ const formatNumber = (value) => {
 
   .faturamento-mobile-view {
     display: block;
+  }
+
+  .faturamento-metrics {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #D1D5DB transparent;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.5rem;
+  }
+
+  .faturamento-metrics::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .faturamento-metrics::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .faturamento-metrics::-webkit-scrollbar-thumb {
+    background-color: #D1D5DB;
+    border-radius: 2px;
+  }
+
+  .faturamento-metrics :deep(.metric-item-base) {
+    flex-shrink: 0;
+    min-width: 220px;
+    width: 220px;
+  }
+
+  .faturamento-metrics-mobile {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #D1D5DB transparent;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 0;
+  }
+
+  .faturamento-metrics-mobile::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .faturamento-metrics-mobile::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .faturamento-metrics-mobile::-webkit-scrollbar-thumb {
+    background-color: #D1D5DB;
+    border-radius: 2px;
+  }
+
+  .faturamento-metrics-mobile :deep(.metric-item-base) {
+    flex-shrink: 0;
+    min-width: 220px;
+    width: 220px;
+    padding: 10px;
   }
 }
 </style>

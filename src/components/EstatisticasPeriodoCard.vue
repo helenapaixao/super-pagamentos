@@ -87,7 +87,6 @@ const formatPercentual = (value) => {
   border-radius: 28px;
   padding: 1.75rem 1.75rem 1.35rem;
   border: 1px solid #E6EBF5;
-  box-shadow: 0 18px 35px rgba(12, 24, 52, 0.12);
   display: flex;
   flex-direction: column;
   gap: 1.35rem;

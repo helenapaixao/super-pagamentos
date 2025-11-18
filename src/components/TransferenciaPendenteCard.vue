@@ -57,7 +57,6 @@ const autorizarTransferencia = () => {
   background: white;
   border-radius: 250px;
   padding: 1rem 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   margin-bottom: 2rem;
   display: flex;
   align-items: center;
@@ -146,7 +145,6 @@ const autorizarTransferencia = () => {
 @media (max-width: 768px) {
   .transferencia-card {
     border-radius: 28px;
-    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
     flex-direction: column;
     align-items: stretch;
     padding: 1.25rem 1.75rem 0;
