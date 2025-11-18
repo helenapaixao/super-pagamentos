@@ -46,7 +46,7 @@ const formatPercentual = (value) =>
 
 <style scoped>
 .estatisticas-mobile-card {
-  width: 392px;
+  width: 310px;
   background: #ffffff;
   border-radius: 24px;
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);

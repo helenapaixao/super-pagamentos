@@ -166,11 +166,11 @@ const formatPercentual = (value) => {
   align-self: center;
   padding: 0.55rem 1.35rem;
   border-radius: 999px;
-  background: #EEF1F6;
+  background: #F5F5F5;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
-  color: #6B7280;
+  color: #86898B;
 }
 </style>
 
