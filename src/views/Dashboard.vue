@@ -54,11 +54,7 @@
 
         <div class="help-button">
           <button class="help-btn" title="Ajuda">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-              <line x1="12" y1="17" x2="12.01" y2="17"></line>
-            </svg>
+            <img :src="helpIcon" alt="Ajuda" class="help-icon" />
           </button>
         </div>
       </main>
@@ -77,6 +73,7 @@ import EstatisticasCard from '../components/EstatisticasCard.vue'
 import ConversaoModalidadeCard from '../components/ConversaoModalidadeCard.vue'
 import BandeirasCard from '../components/BandeirasCard.vue'
 import { dashboardService } from '../services/dashboardService'
+import helpIcon from '@/assets/icons/help-icon.svg'
 
 const faturamentoData = ref({
   total: 1060551.14,
@@ -237,20 +234,27 @@ onMounted(() => {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background-color: #2563eb;
+  background-color: #0641FC;
   color: white;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(6, 65, 252, 0.3);
+  transition: opacity 0.2s, box-shadow 0.2s;
+  padding: 0;
 }
 
 .help-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.5);
+  opacity: 0.9;
+  box-shadow: 0 4px 12px rgba(6, 65, 252, 0.4);
+}
+
+.help-icon {
+  width: 14px;
+  height: 21px;
+  display: block;
 }
 
 @media (max-width: 1024px) {
