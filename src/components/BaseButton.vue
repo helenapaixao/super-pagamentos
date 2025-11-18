@@ -1,6 +1,7 @@
 <template>
   <button 
     :class="['base-button', `base-button-${variant}`, { 'base-button-full-width': fullWidth }]"
+    :style="{ gap: `${gap}px` }"
     @click="$emit('click')"
     :type="type"
   >
@@ -37,6 +38,10 @@ const props = defineProps({
   type: {
     type: String,
     default: 'button'
+  },
+  gap: {
+    type: Number,
+    default: 8
   }
 })
 
@@ -55,7 +60,6 @@ defineEmits(['click'])
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
   transition: background-color 0.2s;
   flex-shrink: 0;
   white-space: nowrap;

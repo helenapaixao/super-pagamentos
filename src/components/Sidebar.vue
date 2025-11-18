@@ -107,6 +107,7 @@
           text="Deslogar da conta"
           :icon="DownloadMinimalistic"
           :icon-size="18"
+          :gap="65"
           variant="outline"
           :full-width="true"
           @click="handleLogout"
