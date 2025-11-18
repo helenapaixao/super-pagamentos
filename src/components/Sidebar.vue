@@ -96,29 +96,29 @@
       </nav>
 
       <div class="ad-card">
-        <div class="ad-cards-background">
-          <div class="credit-card card-1"></div>
-          <div class="credit-card card-2"></div>
-          <div class="credit-card card-3"></div>
-        </div>
         <div class="ad-content">
-          <div class="ad-text">Solicite agora o seu cartão físico e crie quantos cartões virtuais quiser.</div>
-          <button class="ad-button">Super Cartão Pré-Pago</button>
+          <img :src="superCartaoImage" alt="Super Cartão Pré-Pago" class="ad-image" />
         </div>
       </div>
 
-      <button class="logout-btn">
-        <span>Deslogar da conta</span>
-        <ArrowRightIcon :size="16" weight="regular" />
-      </button>
+      <div class="logout-section">
+        <div class="divider"></div>
+        <BaseButton
+          text="Deslogar da conta"
+          :icon="DownloadMinimalistic"
+          :icon-size="18"
+          variant="outline"
+          :full-width="true"
+          @click="handleLogout"
+        />
+      </div>
     </div>
   </aside>
 </template>
 
 <script setup>
-import { 
-  PhArrowRight as ArrowRightIcon
-} from '@phosphor-icons/vue'
+import { DownloadMinimalistic } from '@solar-icons/vue'
+import BaseButton from './BaseButton.vue'
 import dashboardIcon from '@/assets/icons/dashboard-icon.svg'
 import usersIcon from '@/assets/icons/users-icon.svg'
 import cobrancasIcon from '@/assets/icons/cobrancas-icon.svg'
@@ -130,6 +130,11 @@ import codeIcon from '@/assets/icons/code-icon.svg'
 import settingsIcon from '@/assets/icons/settings-icon.svg'
 import userIcon from '@/assets/icons/user-icon.svg'
 import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.svg'
+import superCartaoImage from '@/assets/images/super-cartao-pre-pago.jpg'
+
+const handleLogout = () => {
+  console.log('Deslogar da conta')
+}
 </script>
 
 <style scoped>
@@ -150,8 +155,8 @@ import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.sv
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  height: 100%;
   padding-top: 0;
+  min-height: 100%;
 }
 
 .menu-section {
@@ -253,9 +258,9 @@ import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.sv
 }
 
 .ad-card {
-  background: linear-gradient(180deg, #000000 0%, #1a1a1a 100%);
+  background: transparent;
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 0;
   margin-bottom: 1.5rem;
   position: relative;
   overflow: hidden;
@@ -328,18 +333,17 @@ import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.sv
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   align-items: center;
+  width: 100%;
 }
 
-.ad-text {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 140%;
-  letter-spacing: 0%;
-  color: #FFFFFF;
-  text-align: center;
+.ad-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 12px;
 }
 
 .ad-button {
@@ -366,31 +370,35 @@ import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.sv
   background-color: #0530C7;
 }
 
-.logout-btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  background: white;
-  border: 1px solid #E5E7EB;
-  color: #374151;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: all 0.2s;
+.logout-section {
   margin-top: auto;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  width: 100%;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #E5E7EB;
+  margin-bottom: 1rem;
+}
+
+.logout-section :deep(.base-button-outline) {
+  background-color: white;
+  border: 1px solid #E5E7EB;
+  color: #2A2E33;
+  border-radius: 250px;
+  padding: 0.75rem 1rem;
   font-size: 0.875rem;
   font-weight: 400;
 }
 
-.logout-btn:hover {
-  background-color: #F9FAFB;
-  border-color: #D1D5DB;
+.logout-section :deep(.button-icon) {
+  transform: rotate(-90deg);
 }
 
-.logout-btn :deep(svg) {
-  color: #6B7280;
+.logout-section :deep(.base-button-outline:hover) {
+  background-color: #F9FAFB;
+  border-color: #D1D5DB;
 }
 
 @media (max-width: 1024px) {
