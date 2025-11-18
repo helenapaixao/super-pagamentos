@@ -31,6 +31,7 @@
             :valor="estatisticas.chargebacks.valor"
             :cobrancas="estatisticas.chargebacks.cobrancas"
             :percentual="estatisticas.chargebacks.percentual"
+            :show-badge="true"
           />
           <EstatisticasCard
             titulo="Cancelados"

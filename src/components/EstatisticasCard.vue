@@ -1,7 +1,10 @@
 <template>
   <div class="estatisticas-card">
     <div class="card-header">
-      <h3 class="card-title">{{ titulo }}</h3>
+      <div class="title-group">
+        <h3 class="card-title">{{ titulo }}</h3>
+        <BadgeOrange v-if="showBadge" />
+      </div>
       <div class="percent-icon">
         <span class="percent-symbol">%</span>
       </div>
@@ -16,6 +19,8 @@
 </template>
 
 <script setup>
+import BadgeOrange from './BadgeOrange.vue'
+
 defineProps({
   titulo: {
     type: String,
@@ -32,6 +37,10 @@ defineProps({
   percentual: {
     type: Number,
     required: true
+  },
+  showBadge: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -71,6 +80,13 @@ const formatPercentual = (value) => {
   align-items: center;
   margin-bottom: 1rem;
   flex-shrink: 0;
+}
+
+.title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
 }
 
 .card-title {
