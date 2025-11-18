@@ -16,9 +16,7 @@
       </div>
     </div>
 
-    <div class="chart-container">
-      <canvas ref="chartCanvas" class="chart"></canvas>
-    </div>
+    <BarChart :data="faturamento.dadosGrafico" :max-value="200000" :height="172" />
 
     <div class="faturamento-metrics">
       <MetricCard
@@ -52,9 +50,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
 import eyeDashboardIcon from '@/assets/icons/eye-dashboard.svg'
 import MetricCard from './MetricCard.vue'
+import BarChart from './BarChart.vue'
 
 const props = defineProps({
   faturamento: {
@@ -73,8 +71,6 @@ const props = defineProps({
   }
 })
 
-const chartCanvas = ref(null)
-
 const formatCurrency = (value) => {
   return new Intl.NumberFormat('pt-BR', {
     minimumFractionDigits: 2,
@@ -85,161 +81,6 @@ const formatCurrency = (value) => {
 const formatNumber = (value) => {
   return new Intl.NumberFormat('pt-BR').format(value)
 }
-
-const drawChart = () => {
-  if (!chartCanvas.value) return
-
-  const canvas = chartCanvas.value
-  const ctx = canvas.getContext('2d')
-  const containerWidth = canvas.offsetWidth
-  const containerHeight = canvas.offsetHeight
-  const width = canvas.width = containerWidth
-  const height = canvas.height = containerHeight
-
-  ctx.clearRect(0, 0, width, height)
-
-  const dadosEspecificos = [
-    5000,  
-    8000,   
-    12000,  
-    15000,  
-    85000,  
-    95000,  
-    105000, 
-    88000,  
-    3000,   
-    2000,   
-    4000,   
-    2500,   
-    3500,   
-    2800,   
-    92000,  
-    3500,   
-    15000,  
-    2000,   
-    18000,  
-    22000,  
-    25000,  
-    3000,  
-    1500,   
-    12000,  
-    102000, 
-    4000,   
-    2500,   
-    18000  
-  ]
-
-  const dados =
-    props.faturamento.dadosGrafico && props.faturamento.dadosGrafico.length
-      ? props.faturamento.dadosGrafico
-      : dadosEspecificos
-  const maxValue = 200000 
-  const paddingLeft = 50 
-  const paddingRight = 20
-  const paddingTop = 10
-  const paddingBottom = 50 
-  const chartWidth = width - paddingLeft - paddingRight
-  const chartHeight = height - paddingTop - paddingBottom
-  const barWidth = chartWidth / 31
-  const barStrokeWidth = 8
-
-  const columnWidth = barWidth
-  ctx.save()
-  ctx.globalAlpha = 0.35
-  ctx.fillStyle = '#F5F5F5'
-  for (let i = 0; i < 31; i++) {
-    const xPos = paddingLeft + i * columnWidth
-    ctx.fillRect(
-      xPos + columnWidth * 0.2,
-      paddingTop,
-      columnWidth * 0.6,
-      chartHeight
-    )
-  }
-  ctx.restore()
-
-  ctx.strokeStyle = '#E5E7EB'
-  ctx.lineWidth = 1
-  const yLabels = [0, 50000, 100000, 200000]
-  yLabels.forEach(label => {
-    const yPos = paddingTop + chartHeight - (label / maxValue) * chartHeight
-    ctx.beginPath()
-    ctx.moveTo(paddingLeft, yPos)
-    ctx.lineTo(width - paddingRight, yPos)
-    ctx.stroke()
-  })
-
-  ctx.strokeStyle = '#E5E7EB'
-  ctx.lineWidth = 1.5
-  const xAxisY = paddingTop + chartHeight
-  ctx.beginPath()
-  ctx.moveTo(paddingLeft, xAxisY)
-  ctx.lineTo(width - paddingRight, xAxisY)
-  ctx.stroke()
-
-  ctx.lineCap = 'round'
-  dados.forEach((valor, index) => {
-    const barHeight = (valor / maxValue) * chartHeight
-    const x = paddingLeft + index * barWidth
-    const y = paddingTop + chartHeight - barHeight
-
-    const strokeWidth = barStrokeWidth
-    const barSpacing = Math.max((barWidth - strokeWidth) / 2, 0)
-    const centerX = x + barWidth / 2
-
-    if (strokeWidth <= 0) return
-
-    if (valor > 70000) {
-      const gradient = ctx.createLinearGradient(
-        centerX,
-        y,
-        centerX,
-        paddingTop + chartHeight
-      )
-      gradient.addColorStop(0, '#22C55E')
-      gradient.addColorStop(1, '#0641FC')
-      ctx.strokeStyle = gradient
-    } else {
-      ctx.strokeStyle = '#0641FC'
-    }
-
-    ctx.lineWidth = strokeWidth
-    ctx.beginPath()
-    ctx.moveTo(centerX, paddingTop + chartHeight)
-    ctx.lineTo(centerX, y)
-    ctx.stroke()
-  })
-
-  ctx.fillStyle = '#6b7280'
-  ctx.font = '12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-  ctx.textAlign = 'right'
-  yLabels.forEach(label => {
-    const yPos = paddingTop + chartHeight - (label / maxValue) * chartHeight
-    let labelText = '0'
-    if (label === 50000) labelText = '50K'
-    else if (label === 100000) labelText = '100K'
-    else if (label === 200000) labelText = '200K'
-    ctx.fillText(labelText, paddingLeft - 10, yPos + 4)
-  })
-
-  ctx.textAlign = 'center'
-  ctx.font = '11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-  ctx.fillStyle = '#6b7280'
-  for (let i = 0; i < 31; i++) {
-    const xPos = paddingLeft + (i * barWidth) + barWidth / 2
-    const yPos = paddingTop + chartHeight + 20
-    ctx.fillText((i + 1).toString(), xPos, yPos)
-  }
-}
-
-onMounted(() => {
-  drawChart()
-  window.addEventListener('resize', drawChart)
-})
-
-watch(() => props.faturamento, () => {
-  drawChart()
-}, { deep: true })
 </script>
 
 <style scoped>
@@ -336,18 +177,6 @@ watch(() => props.faturamento, () => {
 .growth-text {
   color: #86898B;
   font-size: 0.9rem;
-}
-
-.chart-container {
-  width: 100%;
-  height: 250px;
-  margin-bottom: 2rem;
-  position: relative;
-}
-
-.chart {
-  width: 100%;
-  height: 100%;
 }
 
 .faturamento-metrics {
