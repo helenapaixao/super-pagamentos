@@ -11,18 +11,7 @@
           @tipo-change="handleTipoChange"
         />
 
-        <div class="desktop-faturamento-card">
-          <FaturamentoCard :faturamento="faturamentoData" />
-        </div>
-
-        <div class="mobile-estatisticas-wrapper">
-          <EstatisticasPeriodoCard
-            :valor="estatisticasPeriodo.valor"
-            :crescimento="estatisticasPeriodo.crescimento"
-            :barras="estatisticasPeriodo.barras"
-            :periodo="estatisticasPeriodo.periodo"
-          />
-        </div>
+        <FaturamentoCard :faturamento="faturamentoData" />
 
         <TransferenciaPendenteCard
           v-if="transferenciaPendente"
@@ -70,14 +59,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import Header from '../components/Header.vue'
 import Sidebar from '../components/Sidebar.vue'
 import DashboardControls from '../components/DashboardControls.vue'
 import FaturamentoCard from '../components/FaturamentoCard.vue'
 import TransferenciaPendenteCard from '../components/TransferenciaPendenteCard.vue'
 import EstatisticasCard from '../components/EstatisticasCard.vue'
-import EstatisticasPeriodoCard from '../components/EstatisticasPeriodoCard.vue'
 import ConversaoModalidadeCard from '../components/ConversaoModalidadeCard.vue'
 import BandeirasCard from '../components/BandeirasCard.vue'
 import HelpButton from '../components/HelpButton.vue'
@@ -175,22 +163,6 @@ const handleHelpClick = () => {
   console.log('Ajuda clicada')
 }
 
-const estatisticasPeriodo = computed(() => {
-  const dados = Array.isArray(faturamentoData.value?.dadosGrafico)
-    ? faturamentoData.value.dadosGrafico
-    : []
-
-  return {
-    valor: faturamentoData.value?.total || 0,
-    crescimento: faturamentoData.value?.crescimento || 0,
-    barras: dados.slice(0, 14),
-    periodo: {
-      inicio: '2024-12-15',
-      fim: '2025-02-07'
-    }
-  }
-})
-
 const loadDashboardData = async () => {
   try {
     // Carregar dados do dashboard
@@ -237,21 +209,11 @@ onMounted(() => {
   margin-left: 315px;
 }
 
-.desktop-faturamento-card {
-  width: 100%;
-}
-
 .estatisticas-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(305px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
-}
-
-.mobile-estatisticas-wrapper {
-  display: block;
-  width: 100%;
-  margin: 1.5rem 0 0;
 }
 
 .charts-grid {
@@ -284,17 +246,7 @@ onMounted(() => {
   .estatisticas-grid {
     display: none;
   }
-
-  .desktop-faturamento-card {
-    display: none;
-  }
-
 }
 
-@media (min-width: 769px) {
-  .mobile-estatisticas-wrapper {
-    display: none;
-  }
-}
 </style>
 

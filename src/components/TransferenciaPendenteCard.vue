@@ -17,6 +17,7 @@
     <BaseButton
       text="Autorizar transferência"
       :icon="WalletMoney"
+      :full-width="true"
       @click="autorizarTransferencia"
     />
   </div>
@@ -127,13 +128,41 @@ const autorizarTransferencia = () => {
 @media (max-width: 768px) {
   .transferencia-card {
     flex-direction: column;
-    align-items: flex-start;
-    border-radius: 12px;
-    padding: 1.5rem;
+    align-items: stretch;
+    border-radius: 28px;
+    padding: 1.5rem 1.5rem 0;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    height: auto;
+    overflow: hidden;
   }
 
   .icon-group {
     align-self: flex-start;
+  }
+
+  .transferencia-content {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .transferencia-title {
+    font-size: 18px;
+  }
+
+  .transferencia-description {
+    font-size: 14px;
+  }
+
+  .transferencia-card :deep(.base-button) {
+    border-radius: 0;
+    border: none;
+    padding: 1rem 1.75rem;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .transferencia-card :deep(.base-button-primary) {
+    background-color: #0641FC;
   }
 
 }
