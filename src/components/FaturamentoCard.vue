@@ -89,8 +89,8 @@ const mobilePeriodo = computed(() => {
     return props.faturamento.periodo
   }
   return {
-    inicio: '2024-12-15',
-    fim: '2025-02-07'
+    inicio: '2024-12-14',
+    fim: '2025-02-06'
   }
 })
 

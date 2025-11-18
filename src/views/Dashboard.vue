@@ -76,6 +76,11 @@ import BandeirasCard from '../components/BandeirasCard.vue'
 import HelpButton from '../components/HelpButton.vue'
 import { dashboardService } from '../services/dashboardService'
 
+const periodoSelecionado = ref({
+  inicio: '2024-12-14',
+  fim: '2025-02-06'
+})
+
 const faturamentoData = ref({
   total: 1060551.14,
   crescimento: 123.9,
@@ -84,7 +89,8 @@ const faturamentoData = ref({
   pendentes: 15332.18,
   ticketMedio: 192.30,
   numeroCobrancas: 12349,
-  dadosGrafico: Array.from({ length: 31 }, () => Math.random() * 200000)
+  dadosGrafico: Array.from({ length: 31 }, () => Math.random() * 200000),
+  periodo: periodoSelecionado
 })
 
 const transferenciaPendente = ref({
@@ -145,6 +151,8 @@ const handlePeriodoChange = (periodo) => {
 
 const handleDataChange = ({ inicio, fim }) => {
   console.log('Datas alteradas:', inicio, fim)
+  periodoSelecionado.value = { inicio, fim }
+  faturamentoData.value.periodo = periodoSelecionado.value
   loadDashboardData()
 }
 
