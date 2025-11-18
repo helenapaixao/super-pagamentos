@@ -49,13 +49,12 @@ const drawChart = () => {
 
   const dados = (props.data && props.data.length > 0) ? props.data : defaultData
   
-  // Garantir que temos pelo menos 31 valores
   const finalData = dados.length >= 31 ? dados.slice(0, 31) : [
     ...dados,
     ...Array(31 - dados.length).fill(0)
   ]
   const maxValue = props.maxValue
-  const paddingLeft = 50
+  const paddingLeft = 39
   const paddingRight = 20
   const paddingTop = 10
   const paddingBottom = 50
@@ -131,8 +130,8 @@ const drawChart = () => {
     ctx.stroke()
   })
 
-  ctx.fillStyle = '#6b7280'
-  ctx.font = '12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+  ctx.fillStyle = '#86898B'
+  ctx.font = '12px "Plus Jakarta Sans", sans-serif'
   ctx.textAlign = 'right'
   yLabels.forEach(label => {
     const yPos = paddingTop + chartHeight - (label / maxValue) * chartHeight
@@ -140,11 +139,11 @@ const drawChart = () => {
     if (label === 50000) labelText = '50K'
     else if (label === 100000) labelText = '100K'
     else if (label === 200000) labelText = '200K'
-    ctx.fillText(labelText, paddingLeft - 10, yPos + 4)
+    ctx.fillText(labelText, paddingLeft - 8, yPos + 4)
   })
 
   ctx.textAlign = 'center'
-  ctx.font = '11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+  ctx.font = '12px "Plus Jakarta Sans", sans-serif'
   ctx.fillStyle = '#6b7280'
   for (let i = 0; i < 31; i++) {
     const xPos = paddingLeft + (i * barWidth) + barWidth / 2
