@@ -159,8 +159,12 @@ const getCor = (cor) => {
 
 @media (max-width: 768px) {
   .conversao-card {
+    width: calc(100% - 2rem);
+    max-width: 392px;
+    min-height: 397px;
     padding: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin: 0 auto 1.5rem;
+    box-sizing: border-box;
   }
 
   .card-title {
