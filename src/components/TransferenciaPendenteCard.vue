@@ -2,7 +2,7 @@
   <div class="transferencia-card">
     <div class="icon-group">
       <div class="icon-circle">
-        <AltArrowUp :size="20" class="arrow-icon" />
+        <ArrowUp :size="24" class="arrow-icon" />
       </div>
       <div class="badge-orange">
         <span class="exclamation-icon">!</span>
@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { AltArrowUp, WalletMoney } from '@solar-icons/vue'
+import { ArrowUp, WalletMoney } from '@solar-icons/vue'
 import BaseButton from './BaseButton.vue'
 
 const props = defineProps({
@@ -92,18 +92,19 @@ const autorizarTransferencia = () => {
   position: absolute;
   bottom: -2px;
   right: -2px;
-  width: 20px;
-  height: 20px;
+  width: 19px;
+  height: 19px;
   border-radius: 50%;
-  background-color: #f59e0b;
+  background-color: #FF9D3A;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid white;
+  border: 1.5px solid rgba(255, 232, 209, 0.45);
+  box-sizing: border-box;
 }
 
 .exclamation-icon {
-  color: white;
+  color: #111827;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 700;
