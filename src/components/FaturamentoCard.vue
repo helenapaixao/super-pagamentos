@@ -21,64 +21,32 @@
     </div>
 
     <div class="faturamento-metrics">
-      <div class="metric-item metric-item-primary">
-        <div class="metric-content-primary">
-          <span class="metric-label metric-label-primary">Faturamento recebido</span>
-          <div class="metric-value-row">
-            <div class="metric-dot-group">
-              <span class="metric-dot metric-dot-shadow"></span>
-              <span class="metric-dot metric-dot-blue-front"></span>
-            </div>
-            <span class="metric-value metric-value-primary">R$ {{ formatCurrency(faturamento.recebido) }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="metric-item metric-item-secondary">
-        <div class="metric-header">
-          <span class="metric-label">Faturamento previsto</span>
-          <span class="metric-tag">D+2</span>
-        </div>
-        <div class="metric-value-row">
-          <div class="metric-dot-group metric-dot-group-purple">
-            <span class="metric-dot metric-dot-shadow-purple"></span>
-            <span class="metric-dot metric-dot-purple-front"></span>
-          </div>
-          <span class="metric-value metric-value-secondary">R$ {{ formatCurrency(faturamento.previsto) }}</span>
-        </div>
-      </div>
-      <div class="metric-item metric-item-secondary">
-        <div class="metric-content-secondary">
-          <span class="metric-label">Vendas pendentes</span>
-          <div class="metric-value-row">
-            <div class="metric-dot-group metric-dot-group-orange">
-              <span class="metric-dot metric-dot-shadow-orange"></span>
-              <span class="metric-dot metric-dot-orange-front"></span>
-            </div>
-            <span class="metric-value metric-value-secondary">R$ {{ formatCurrency(faturamento.pendentes) }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="metric-item metric-item-secondary">
-        <div class="metric-content-secondary">
-          <span class="metric-label">Ticket médio</span>
-          <div class="metric-value-row">
-            <div class="metric-dot-group metric-dot-group-purple">
-              <span class="metric-dot metric-dot-shadow-purple"></span>
-              <span class="metric-dot metric-dot-purple-front"></span>
-            </div>
-            <span class="metric-value metric-value-secondary">R$ {{ formatCurrency(faturamento.ticketMedio) }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="metric-item metric-item-secondary">
-        <div class="metric-content-secondary">
-          <span class="metric-label">Número de cobranças</span>
-          <div class="metric-value-row">
-            <span class="metric-dot metric-dot-black"></span>
-            <span class="metric-value metric-value-secondary">{{ formatNumber(faturamento.numeroCobrancas) }}</span>
-          </div>
-        </div>
-      </div>
+      <MetricCard
+        label="Faturamento recebido"
+        :value="`R$ ${formatCurrency(faturamento.recebido)}`"
+        dot-type="blue"
+      />
+      <MetricCard
+        label="Faturamento previsto"
+        :value="`R$ ${formatCurrency(faturamento.previsto)}`"
+        dot-type="purple"
+        tag="D+2"
+      />
+      <MetricCard
+        label="Vendas pendentes"
+        :value="`R$ ${formatCurrency(faturamento.pendentes)}`"
+        dot-type="orange"
+      />
+      <MetricCard
+        label="Ticket médio"
+        :value="`R$ ${formatCurrency(faturamento.ticketMedio)}`"
+        dot-type="purple"
+      />
+      <MetricCard
+        label="Número de cobranças"
+        :value="formatNumber(faturamento.numeroCobrancas)"
+        dot-type="black"
+      />
     </div>
   </div>
 </template>
@@ -86,6 +54,7 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import eyeDashboardIcon from '@/assets/icons/eye-dashboard.svg'
+import MetricCard from './MetricCard.vue'
 
 const props = defineProps({
   faturamento: {
@@ -388,230 +357,6 @@ watch(() => props.faturamento, () => {
   margin-top: 1rem;
 }
 
-.metric-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 1rem 1.25rem;
-  border-radius: 14px;
-  border: 1px solid #E5E7EB;
-  background-color: #FFFFFF;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
-}
-
-.metric-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-top: 0.25rem;
-}
-
-.metric-dot.blue {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-top: 0.25rem;
-  background-color: #0641FC;
-}
-
-.metric-dot.purple {
-  background-color: #8b5cf6;
-}
-
-.metric-dot.orange {
-  background-color: #f59e0b;
-}
-
-.metric-dot.black {
-  background-color: #111827;
-}
-
-.metric-item-primary {
-  border-radius: 12px;
-  background-color: #F5F5F5;
-  padding: 1rem 1.25rem;
-}
-
-.metric-content-primary {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-}
-
-.metric-value-row {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.metric-dot-group {
-  position: relative;
-  width: 24px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-}
-
-.metric-dot-shadow {
-  position: absolute;
-  left: 8px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: #A0BFFF;
-}
-
-.metric-dot-blue-front {
-  position: absolute;
-  left: 0;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #0641FC;
-  z-index: 1;
-}
-
-.metric-label-primary {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #86898B;
-  line-height: 140%;
-}
-
-.metric-value-primary {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: #111827;
-  line-height: 1;
-}
-
-.metric-item-secondary {
-  border-radius: 12px;
-  background-color: #F5F5F5;
-  padding: 1rem 1.25rem;
-}
-
-.metric-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.5rem;
-}
-
-.metric-tag {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  color: #86898B;
-  background-color: #E5E7EB;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-  line-height: 1;
-}
-
-.metric-content-secondary {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-}
-
-.metric-value-secondary {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: #111827;
-  line-height: 1;
-}
-
-.metric-dot-group-purple {
-  position: relative;
-  width: 24px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-}
-
-.metric-dot-shadow-purple {
-  position: absolute;
-  left: 8px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: #E9D5FF;
-  border: 1px solid #8b5cf6;
-}
-
-.metric-dot-purple-front {
-  position: absolute;
-  left: 0;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #8b5cf6;
-  z-index: 1;
-}
-
-.metric-dot-group-orange {
-  position: relative;
-  width: 24px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-}
-
-.metric-dot-shadow-orange {
-  position: absolute;
-  left: 8px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: #FED7AA;
-  border: 1px solid #f59e0b;
-}
-
-.metric-dot-orange-front {
-  position: absolute;
-  left: 0;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #f59e0b;
-  z-index: 1;
-}
-
-.metric-content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  white-space: nowrap;
-}
-
-.metric-label {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #86898B;
-  line-height: 140%;
-}
-
-.metric-value {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #111827;
-}
 
 @media (max-width: 768px) {
   .faturamento-card {
