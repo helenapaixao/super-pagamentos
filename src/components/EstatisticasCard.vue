@@ -104,7 +104,7 @@ const formatPercentual = (value) => {
   width: 46px;
   height: 46px;
   border-radius: 250px;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #D9D9D9;
   background-color: white;
   display: flex;
   align-items: center;
@@ -116,7 +116,7 @@ const formatPercentual = (value) => {
 
 .percent-symbol {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: #2A2E33;
 }
