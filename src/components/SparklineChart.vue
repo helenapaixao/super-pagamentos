@@ -37,7 +37,7 @@ const props = defineProps({
   },
   strokeWidth: {
     type: Number,
-    default: 4
+    default: 1.5
   }
 })
 
