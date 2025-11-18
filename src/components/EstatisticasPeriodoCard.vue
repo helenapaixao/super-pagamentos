@@ -15,7 +15,13 @@
       </button>
     </div>
 
-    <BarChart :data="dadosGrafico" :max-value="200000" :height="172" class="periodo-chart" />
+    <BarChart
+      :data="dadosGrafico"
+      :max-value="200000"
+      :height="172"
+      :show-labels="false"
+      class="periodo-chart"
+    />
 
     <div class="periodo-date-pill">
       De {{ formatPeriodoDate(periodo.inicio) }} à {{ formatPeriodoDate(periodo.fim) }}

@@ -19,6 +19,10 @@ const props = defineProps({
   height: {
     type: Number,
     default: 172
+  },
+  showLabels: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -130,26 +134,29 @@ const drawChart = () => {
     ctx.stroke()
   })
 
-  ctx.fillStyle = '#86898B'
-  ctx.font = '12px "Plus Jakarta Sans", sans-serif'
-  ctx.textAlign = 'right'
-  yLabels.forEach(label => {
-    const yPos = paddingTop + chartHeight - (label / maxValue) * chartHeight
-    let labelText = '0'
-    if (label === 50000) labelText = '50K'
-    else if (label === 100000) labelText = '100K'
-    else if (label === 200000) labelText = '200K'
-    ctx.fillText(labelText, paddingLeft - 8, yPos + 4)
-  })
+  if (props.showLabels) {
+    ctx.fillStyle = '#86898B'
+    ctx.font = '12px "Plus Jakarta Sans", sans-serif'
+    ctx.textAlign = 'right'
+    yLabels.forEach(label => {
+      const yPos = paddingTop + chartHeight - (label / maxValue) * chartHeight
+      let labelText = '0'
+      if (label === 50000) labelText = '50K'
+      else if (label === 100000) labelText = '100K'
+      else if (label === 200000) labelText = '200K'
+      ctx.fillText(labelText, paddingLeft - 8, yPos + 4)
+    })
 
-  ctx.textAlign = 'center'
-  ctx.font = '12px "Plus Jakarta Sans", sans-serif'
-  ctx.fillStyle = '#6b7280'
-  for (let i = 0; i < 31; i++) {
-    const xPos = paddingLeft + (i * barWidth) + barWidth / 2
-    const yPos = paddingTop + chartHeight + 20
-    ctx.fillText((i + 1).toString(), xPos, yPos)
+    ctx.textAlign = 'center'
+    ctx.font = '12px "Plus Jakarta Sans", sans-serif'
+    ctx.fillStyle = '#6b7280'
+    for (let i = 0; i < 31; i++) {
+      const xPos = paddingLeft + (i * barWidth) + barWidth / 2
+      const yPos = paddingTop + chartHeight + 20
+      ctx.fillText((i + 1).toString(), xPos, yPos)
+    }
   }
+
 }
 
 onMounted(() => {
