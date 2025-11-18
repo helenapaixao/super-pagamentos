@@ -140,7 +140,7 @@ import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.sv
   width: 36px;
   height: 36px;
   border-radius: 18px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #0641FC;
   display: flex;
   align-items: center;
   justify-content: center;
