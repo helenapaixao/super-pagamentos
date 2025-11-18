@@ -10,89 +10,79 @@
         </svg>
       </button>
     </div>
-    <div class="chart-container">
-      <canvas ref="chartCanvas" class="chart"></canvas>
+    <div class="bandeiras-grid">
+      <div v-for="bandeira in bandeiras" :key="bandeira.nome" class="bandeira-item">
+        <div class="bar-container">
+          <div class="bar-track">
+            <div 
+              class="bar-fill" 
+              :style="{ height: `${(bandeira.percentual || 0)}%` }"
+            ></div>
+          </div>
+        </div>
+        <div class="bandeira-logo">
+          <img :src="getLogo(bandeira.nome)" :alt="bandeira.nome" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import visaIcon from '@/assets/icons/bandeiras/visa.svg'
+import mastercardIcon from '@/assets/icons/bandeiras/mastercard.svg'
+import eloIcon from '@/assets/icons/bandeiras/elo.svg'
+import hipercardIcon from '@/assets/icons/bandeiras/hipercard.svg'
+import amexIcon from '@/assets/icons/bandeiras/amex.svg'
+import gpayIcon from '@/assets/icons/bandeiras/gpay.svg'
+import samsungPayIcon from '@/assets/icons/bandeiras/samsung-pay.svg'
+import applePayIcon from '@/assets/icons/bandeiras/apple-pay.svg'
+import hiperIcon from '@/assets/icons/bandeiras/hiper.svg'
 
 const props = defineProps({
   bandeiras: {
     type: Array,
     default: () => [
-      { nome: 'VISA', valor: 450000 },
-      { nome: 'ELO', valor: 320000 },
-      { nome: 'Mastercard', valor: 280000 },
-      { nome: 'Pix', valor: 12000 },
-      { nome: 'Apple Pay', valor: 8000 },
-      { nome: 'Google Pay', valor: 5000 }
+      { nome: 'VISA', percentual: 70 },
+      { nome: 'Mastercard', percentual: 65 },
+      { nome: 'ELO', percentual: 55 },
+      { nome: 'Hipercard', percentual: 25 },
+      { nome: 'AM EX', percentual: 15 },
+      { nome: 'G Pay', percentual: 15 },
+      { nome: 'Samsung Pay', percentual: 65 },
+      { nome: 'Apple Pay', percentual: 70 },
+      { nome: 'Hiper', percentual: 8 }
     ]
   }
 })
 
-const chartCanvas = ref(null)
-
-const drawChart = () => {
-  if (!chartCanvas.value) return
-
-  const canvas = chartCanvas.value
-  const ctx = canvas.getContext('2d')
-  const width = canvas.width = canvas.offsetWidth
-  const height = canvas.height = canvas.offsetHeight
-
-  ctx.clearRect(0, 0, width, height)
-
-  const maxValue = Math.max(...props.bandeiras.map(b => b.valor))
-  const barHeight = (height - 60) / props.bandeiras.length
-  const chartWidth = width - 120
-
-  props.bandeiras.forEach((bandeira, index) => {
-    const barWidth = (bandeira.valor / maxValue) * chartWidth
-    const y = index * barHeight + 30
-
-    ctx.fillStyle = '#2563eb'
-    ctx.fillRect(0, y, barWidth, barHeight - 10)
-
-    ctx.fillStyle = '#374151'
-    ctx.font = '14px sans-serif'
-    ctx.textAlign = 'left'
-    ctx.fillText(bandeira.nome, 0, y + barHeight / 2 + 5)
-
-    ctx.fillStyle = '#6b7280'
-    ctx.font = '12px sans-serif'
-    ctx.textAlign = 'right'
-    ctx.fillText(formatCurrency(bandeira.valor), chartWidth + 100, y + barHeight / 2 + 5)
-  })
+const getLogo = (nome) => {
+  const logos = {
+    'VISA': visaIcon,
+    'Mastercard': mastercardIcon,
+    'ELO': eloIcon,
+    'Hipercard': hipercardIcon,
+    'AM EX': amexIcon,
+    'American Express': amexIcon,
+    'G Pay': gpayIcon,
+    'Google Pay': gpayIcon,
+    'Samsung Pay': samsungPayIcon,
+    'Apple Pay': applePayIcon,
+    'Hiper': hiperIcon
+  }
+  return logos[nome] || visaIcon
 }
-
-const formatCurrency = (value) => {
-  if (value < 1000) return value.toString()
-  return new Intl.NumberFormat('pt-BR', {
-    notation: 'compact',
-    maximumFractionDigits: 1
-  }).format(value)
-}
-
-onMounted(() => {
-  drawChart()
-  window.addEventListener('resize', drawChart)
-})
-
-watch(() => props.bandeiras, () => {
-  drawChart()
-}, { deep: true })
 </script>
 
 <style scoped>
 .bandeiras-card {
   background: white;
   border-radius: 12px;
+  border: 1px solid #D9D9D9;
   padding: 2rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
+  box-sizing: border-box;
 }
 
 .card-header {
@@ -103,35 +93,105 @@ watch(() => props.bandeiras, () => {
 }
 
 .card-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #111827;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: semibold;
+  color: #2A2E33;
+  margin: 0;
+  line-height: 100%;
+  letter-spacing: 0%;
 }
 
 .info-btn {
   background: none;
   border: none;
-  color: #6b7280;
+  color: #86898B;
   cursor: pointer;
   padding: 0.25rem;
   display: flex;
   align-items: center;
   border-radius: 4px;
   transition: color 0.2s;
+  width: 16px;
+  height: 16px;
 }
 
 .info-btn:hover {
-  color: #2563eb;
+  color: #2A2E33;
 }
 
-.chart-container {
-  width: 100%;
-  height: 300px;
+.bandeiras-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 0.5rem;
+  height: 200px;
 }
 
-.chart {
+.bandeira-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+  max-width: calc((100% - 4rem) / 9);
+}
+
+.bar-container {
   width: 100%;
-  height: 100%;
+  height: 99px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.bar-track {
+  width: 8px;
+  height: 99px;
+  background-color: #F5F5F5;
+  border-radius: 250px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.bar-fill {
+  width: 100%;
+  background-color: #0641FC;
+  border-radius: 250px;
+  transition: height 0.3s ease;
+  min-height: 2px;
+  align-self: flex-end;
+}
+
+.bandeira-logo {
+  width: 100%;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bandeira-logo img {
+  height: 24px;
+  width: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .bandeiras-grid {
+    gap: 0.5rem;
+  }
+  
+  .bandeira-logo {
+    height: 20px;
+  }
+  
+  .bandeira-logo img {
+    max-height: 20px;
+  }
 }
 </style>
-

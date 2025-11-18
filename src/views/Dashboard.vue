@@ -125,12 +125,15 @@ const conversaoModalidades = ref([
 ])
 
 const bandeirasUtilizadas = ref([
-  { nome: 'VISA', valor: 450000 },
-  { nome: 'ELO', valor: 320000 },
-  { nome: 'Mastercard', valor: 280000 },
-  { nome: 'Pix', valor: 12000 },
-  { nome: 'Apple Pay', valor: 8000 },
-  { nome: 'Google Pay', valor: 5000 }
+  { nome: 'VISA', percentual: 70 },
+  { nome: 'Mastercard', percentual: 65 },
+  { nome: 'ELO', percentual: 55 },
+  { nome: 'Hipercard', percentual: 25 },
+  { nome: 'AM EX', percentual: 15 },
+  { nome: 'G Pay', percentual: 15 },
+  { nome: 'Samsung Pay', percentual: 65 },
+  { nome: 'Apple Pay', percentual: 70 },
+  { nome: 'Hiper', percentual: 8 }
 ])
 
 const handleNovaCobranca = () => {
