@@ -58,6 +58,7 @@ import chartIcon from '@/assets/icons/chart-icon.svg'
   justify-content: space-between;
   align-items: center;
   min-height: 60px;
+  border-bottom: 1px solid #EEEEEE;
 }
 
 .header-brand {

@@ -207,7 +207,7 @@ onMounted(() => {
   background-color: #f5f5f5;
   overflow-y: auto;
   min-height: calc(100vh - 60px);
-  margin-left: 280px;
+  margin-left: 315px;
 }
 
 .estatisticas-grid {

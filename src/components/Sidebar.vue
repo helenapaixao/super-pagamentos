@@ -140,7 +140,7 @@ const handleLogout = () => {
 
 <style scoped>
 .sidebar {
-  width: 280px;
+  width: 315px;
   background-color: white;
   height: calc(100vh - 60px);
   display: flex;
@@ -377,10 +377,12 @@ const handleLogout = () => {
 }
 
 .divider {
-  width: 100%;
+  width: 315px;
   height: 1px;
   background-color: #E5E7EB;
   margin-bottom: 1rem;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
 }
 
 .logout-section :deep(.base-button-outline) {
