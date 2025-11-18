@@ -69,20 +69,22 @@ const createPolyline = (values = []) => {
 
 <style scoped>
 .estatisticas-mobile-card {
+  width: 392px;
   background: #ffffff;
-  border-radius: 28px;
+  border-radius: 24px;
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
   padding: 1rem 1.25rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 0.5rem;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.5rem;
+  row-gap: 0.25rem;
 }
 
 .estatistica-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem 0.35rem;
+  align-items: flex-start;
+  padding: 0.4rem 0.35rem;
 }
 
 .estatistica-row-border {
@@ -92,7 +94,7 @@ const createPolyline = (values = []) => {
 .estatistica-info {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.15rem;
 }
 
 .estatistica-title {
@@ -101,26 +103,30 @@ const createPolyline = (values = []) => {
   font-size: 15px;
   font-weight: 600;
   color: #7a7f89;
+  line-height: 1.1;
 }
 
 .estatistica-value {
   margin: 0;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 700;
   color: #151922;
+  line-height: 1.1;
+  white-space: nowrap;
 }
 
 .estatistica-percent {
   margin: 0;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 600;
+  line-height: 1.1;
 }
 
 .estatistica-chart {
-  width: 78px;
-  height: 26px;
+  width: 46px;
+  height: 18px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
