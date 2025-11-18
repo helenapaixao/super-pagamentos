@@ -13,24 +13,7 @@
           <p class="estatistica-percent" :style="{ color: item.percentualColor }">
             {{ formatPercentual(item.percentual) }}%
           </p>
-          <div class="estatistica-chart">
-            <svg width="78" height="26" viewBox="0 0 78 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient :id="`spark-gradient-${index}`" x1="0" y1="0" x2="78" y2="0" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#0641FC" />
-                  <stop offset="1" stop-color="#B882FE" />
-                </linearGradient>
-              </defs>
-              <polyline
-                :points="createPolyline(item.sparkline)"
-                fill="none"
-                :stroke="`url(#spark-gradient-${index})`"
-                stroke-width="4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
+          <SparklineChart :data="item.sparkline" />
         </div>
       </div>
     
@@ -39,6 +22,8 @@
 </template>
 
 <script setup>
+import SparklineChart from './SparklineChart.vue'
+
 const props = defineProps({
   items: {
     type: Array,
@@ -57,23 +42,6 @@ const formatPercentual = (value) =>
     minimumFractionDigits: 1,
     maximumFractionDigits: 1
   }).format(value)
-
-const createPolyline = (values = []) => {
-  const max = Math.max(...values, 1)
-  const min = Math.min(...values, 0)
-  const range = max - min || 1
-  const width = 78
-  const height = 26
-  const step = width / (values.length - 1 || 1)
-  return values
-    .map((value, index) => {
-      const x = index * step
-      const normalized = (value - min) / range
-      const y = height - normalized * height
-      return `${x},${y}`
-    })
-    .join(' ')
-}
 </script>
 
 <style scoped>
@@ -141,14 +109,5 @@ const createPolyline = (values = []) => {
   flex-shrink: 0;
 }
 
-.estatistica-chart {
-  width: 46px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-shrink: 0;
-  margin-left: auto;
-}
 </style>
 
