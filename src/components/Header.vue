@@ -125,7 +125,7 @@ import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.sv
 .user-profile {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 10px;
   padding: 0.5rem;
   border-radius: 8px;
   cursor: pointer;
