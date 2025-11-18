@@ -107,12 +107,10 @@ const getLogo = (nome) => {
 
 .info-icon {
   color: #2A2E33;
-  height: 16px;
-  width: 16px;
+  flex-shrink: 0;
+  display: flex;
   align-items: center;
   justify-content: center;
-  display: flex;
-  flex-shrink: 0;
 }
 
 .info-btn {
