@@ -1,31 +1,30 @@
 <template>
   <div class="transferencia-card">
-    <div class="icon-group">
-      <div class="icon-circle">
-        <ArrowUp :size="24" class="arrow-icon" />
+    <div class="transferencia-body">
+      <div class="icon-group">
+        <div class="icon-circle">
+          <ArrowUp :size="26" class="arrow-icon" />
+        </div>
+        <BadgeOrange class="badge-orange" />
       </div>
-      <BadgeOrange />
+
+      <div class="transferencia-content">
+        <h3 class="transferencia-title">Solicitação de transferência pendente</h3>
+        <p class="transferencia-description">
+          A transação no valor de R$ {{ formatCurrency(transferencia.valor) }} está aguardando a sua aprovação.
+        </p>
+      </div>
     </div>
-    
-    <div class="transferencia-content">
-      <h3 class="transferencia-title">Solicitação de transferência pendente</h3>
-      <p class="transferencia-description">
-        A transação no valor de R$ {{ formatCurrency(transferencia.valor) }} está aguardando a sua aprovação.
-      </p>
-    </div>
-    
-    <BaseButton
-      text="Autorizar transferência"
-      :icon="WalletMoney"
-      :full-width="true"
-      @click="autorizarTransferencia"
-    />
+
+    <button class="transferencia-action" type="button" @click="autorizarTransferencia">
+      <span>Autorizar transferência</span>
+      <ArrowRight :size="20" />
+    </button>
   </div>
 </template>
 
 <script setup>
-import { ArrowUp, WalletMoney } from '@solar-icons/vue'
-import BaseButton from './BaseButton.vue'
+import { ArrowUp, ArrowRight } from '@solar-icons/vue'
 import BadgeOrange from './BadgeOrange.vue'
 
 const props = defineProps({
@@ -58,14 +57,21 @@ const autorizarTransferencia = () => {
   background: white;
   border-radius: 250px;
   padding: 1rem 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   margin-bottom: 2rem;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.25rem;
   width: 100%;
   box-sizing: border-box;
-  height: 105px;
+  min-height: 105px;
+}
+
+.transferencia-body {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex: 1;
 }
 
 .icon-group {
@@ -74,14 +80,13 @@ const autorizarTransferencia = () => {
 }
 
 .icon-circle {
-  width: 48px;
-  height: 48px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
-  background-color: #E6E3DC;
+  background-color: #E7E0D5;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 
 .arrow-icon {
@@ -90,59 +95,79 @@ const autorizarTransferencia = () => {
 
 .badge-orange {
   position: absolute;
-  bottom: -2px;
-  right: -2px;
+  bottom: -4px;
+  right: -6px;
 }
 
 .transferencia-content {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.4rem;
 }
 
 .transferencia-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 16px;
   font-weight: 700;
-  color: #2A2E33;
+  color: #1F2430;
   margin: 0;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 .transferencia-description {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  color: #86898B;
+  font-size: 13px;
+  font-weight: 500;
+  color: #8B8F99;
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
-.transferencia-description strong {
-  color: #2A2E33;
+.transferencia-action {
+  border: none;
+  background: #0641FC;
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
   font-weight: 600;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
 }
 
+.transferencia-action :deep(svg) {
+  color: inherit;
+}
 
 @media (max-width: 768px) {
   .transferencia-card {
+    border-radius: 28px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
     flex-direction: column;
     align-items: stretch;
-    border-radius: 28px;
-    padding: 1.5rem 1.5rem 0;
-    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-    height: auto;
+    padding: 1.25rem 1.75rem 0;
+    max-width: 392px;
+    width: 100%;
+    margin: 0 auto 1.75rem;
     overflow: hidden;
   }
 
-  .icon-group {
-    align-self: flex-start;
+  .transferencia-body {
+    padding-bottom: 1.25rem;
+  }
+
+  .icon-circle {
+    width: 64px;
+    height: 64px;
   }
 
   .transferencia-content {
-    margin-top: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-top: 0.35rem;
+    margin-bottom: 0.75rem;
   }
 
   .transferencia-title {
@@ -150,20 +175,16 @@ const autorizarTransferencia = () => {
   }
 
   .transferencia-description {
-    font-size: 14px;
+    font-size: 15px;
   }
 
-  .transferencia-card :deep(.base-button) {
-    border-radius: 0;
-    border: none;
-    padding: 1rem 1.75rem;
-    justify-content: center;
-    font-size: 16px;
+  .transferencia-action {
+    width: calc(100% + 3.5rem);
+    margin: 0 -1.75rem;
+    border-radius: 0 0 28px 28px;
+    justify-content: space-between;
+    font-size: 17px;
+    padding: 1.1rem 1.75rem;
   }
-
-  .transferencia-card :deep(.base-button-primary) {
-    background-color: #0641FC;
-  }
-
 }
 </style>
