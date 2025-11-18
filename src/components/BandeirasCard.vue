@@ -75,9 +75,8 @@ const getLogo = (nome) => {
 .bandeiras-card {
   background: white;
   border-radius: 12px;
-  border: 1px solid #D9D9D9;
+  border: 1px solid #EEEEEE;
   padding: 2rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
   box-sizing: border-box;
 }

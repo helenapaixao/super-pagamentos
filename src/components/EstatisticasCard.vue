@@ -65,7 +65,7 @@ const formatPercentual = (value) => {
   width: 100%;
   max-width: 420px;
   border-radius: 12px;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #EEEEEE;
   padding: 1.5rem;
   box-sizing: border-box;
   display: flex;

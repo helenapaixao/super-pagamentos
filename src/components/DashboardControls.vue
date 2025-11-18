@@ -179,7 +179,7 @@ const formatDateAndEmit = () => {
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid #D9D9D9;
   border-radius: 250px;
   background-color: white;
   cursor: pointer;

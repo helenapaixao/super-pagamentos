@@ -67,7 +67,7 @@ const getCor = (cor) => {
 .conversao-card {
   background: white;
   border-radius: 12px;
-  border: 1px solid #D9D9D9;
+  border: 1px solid #EEEEEE;
   padding: 2rem;
   margin-bottom: 2rem;
   box-sizing: border-box;
