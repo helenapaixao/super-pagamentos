@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-layout">
-    <Header />
+    <Header :faturamento="faturamentoData" />
     <div class="dashboard-content">
       <Sidebar />
       <main class="dashboard-main">

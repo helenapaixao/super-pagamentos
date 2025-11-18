@@ -1,6 +1,7 @@
 <template>
   <div class="header-wrapper">
-    <nav class="header-nav">
+    <!-- Desktop Header -->
+    <nav class="header-nav desktop-header">
       <div class="header-brand">
         <img :src="superLogo" alt="Super" class="brand-logo" />
         <div class="brand-text-group">
@@ -32,14 +33,106 @@
         </div>
       </div>
     </nav>
+
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+      <!-- Status Bar -->
+      <div class="mobile-status-bar">
+        <span class="mobile-time">{{ currentTime }}</span>
+        <div class="mobile-status-icons">
+          <svg width="17" height="11" viewBox="0 0 17 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L8.5 8.5L16 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.5 0C5.5 0 3.5 1 2 2.5L0.5 1C2.5 -0.5 5 -1 7.5 -1C10 -1 12.5 -0.5 14.5 1L13 2.5C11.5 1 9.5 0 7.5 0Z" fill="white"/>
+            <path d="M7.5 3C6 3 4.5 3.5 3.5 4.5L2 3C3.5 1.5 5.5 1 7.5 1C9.5 1 11.5 1.5 13 3L11.5 4.5C10.5 3.5 9 3 7.5 3Z" fill="white"/>
+            <path d="M7.5 6C6.5 6 5.5 6.5 5 7L3.5 5.5C4.5 4 6 3.5 7.5 3.5C9 3.5 10.5 4 11.5 5.5L10 7C9.5 6.5 8.5 6 7.5 6Z" fill="white"/>
+            <rect x="6" y="8" width="3" height="3" fill="white"/>
+          </svg>
+          <svg width="24" height="12" viewBox="0 0 24 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="1" width="22" height="10" rx="2" stroke="white" stroke-width="1.5"/>
+            <rect x="3" y="3" width="18" height="6" fill="white"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Mobile Card -->
+      <div class="mobile-card">
+        <div class="mobile-card-top">
+          <div class="mobile-profile-pill">
+            <div class="mobile-profile-icon">S</div>
+            <div class="mobile-profile-info">
+              <span class="mobile-profile-top">Empresarial</span>
+              <span class="mobile-profile-bottom">Astra Pagamentos</span>
+            </div>
+            <img :src="roundAltArrowDownIcon" alt="" class="mobile-profile-arrow" width="16" height="16" />
+          </div>
+          <button class="mobile-bell-btn">
+            <BellBing :size="20" class="mobile-bell-icon" />
+          </button>
+        </div>
+
+        <div class="mobile-faturamento-section">
+          <h2 class="mobile-faturamento-title">Faturamento</h2>
+          <div class="mobile-faturamento-value-row">
+            <span class="mobile-faturamento-value">{{ formatCurrency(faturamento?.total || 0) }}</span>
+            <img :src="eyeDashboardIcon" alt="Visibilidade" class="mobile-eye-icon" />
+          </div>
+        </div>
+
+        <a href="#" class="mobile-wallet-link">
+          <span>Ir para a carteira</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 12L10 8L6 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
 import { CalculatorMinimalistic, Settings, BellBing } from '@solar-icons/vue'
 import superLogo from '@/assets/icons/super-logo.svg'
 import chartIcon from '@/assets/icons/chart-icon.svg'
 import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.svg'
+import eyeDashboardIcon from '@/assets/icons/eye-dashboard.svg'
+
+const props = defineProps({
+  faturamento: {
+    type: Object,
+    default: () => ({ total: 0 })
+  }
+})
+
+const currentTime = ref('')
+let timeInterval = null
+
+const updateTime = () => {
+  const now = new Date()
+  const hours = String(now.getHours()).padStart(2, '0')
+  const minutes = String(now.getMinutes()).padStart(2, '0')
+  currentTime.value = `${hours}:${minutes}`
+}
+
+const formatCurrency = (value) => {
+  return new Intl.NumberFormat('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(value)
+}
+
+onMounted(() => {
+  updateTime()
+  timeInterval = setInterval(updateTime, 1000)
+})
+
+onUnmounted(() => {
+  if (timeInterval) {
+    clearInterval(timeInterval)
+  }
+})
 </script>
 
 <style scoped>
@@ -60,6 +153,10 @@ import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.sv
   align-items: center;
   min-height: 60px;
   border-bottom: 1px solid #EEEEEE;
+}
+
+.desktop-header {
+  display: flex;
 }
 
 .header-brand {
@@ -191,21 +288,177 @@ import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.sv
   flex-shrink: 0;
 }
 
+/* Mobile Header */
+.mobile-header {
+  display: none;
+}
+
 @media (max-width: 768px) {
-  .header-nav {
+  .desktop-header {
+    display: none;
+  }
+
+  .mobile-header {
+    display: block;
+    background: #0641FC;
+    width: 100%;
+    min-height: auto;
+  }
+
+  .header-wrapper {
+    background: #0641FC;
+  }
+
+  .mobile-status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background: transparent;
+  }
+
+  .mobile-time {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+  }
+
+  .mobile-status-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .mobile-card {
     padding: 1rem;
+    background: transparent;
   }
 
-  .header-brand {
-    display: none;
+  .mobile-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
   }
 
-  .user-info {
-    display: none;
+  .mobile-profile-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: white;
+    border-radius: 250px;
+    padding: 0.5rem 0.75rem;
+    flex: 1;
+    max-width: calc(100% - 3rem);
   }
 
-  .header-icons {
-    gap: 0.25rem;
+  .mobile-profile-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #111827;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .mobile-profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mobile-profile-top {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #11151B;
+    line-height: 100%;
+  }
+
+  .mobile-profile-bottom {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #86898B;
+    line-height: 100%;
+  }
+
+  .mobile-profile-arrow {
+    flex-shrink: 0;
+    filter: brightness(0);
+  }
+
+  .mobile-bell-btn {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .mobile-bell-icon {
+    color: white;
+  }
+
+  .mobile-faturamento-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .mobile-faturamento-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .mobile-faturamento-value-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .mobile-faturamento-value {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    line-height: 100%;
+  }
+
+  .mobile-eye-icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+    flex-shrink: 0;
+  }
+
+  .mobile-wallet-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    text-decoration: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0.75rem 0;
+  }
+
+  .mobile-wallet-link svg {
+    flex-shrink: 0;
   }
 }
 </style>
