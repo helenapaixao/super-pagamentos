@@ -153,11 +153,9 @@ const handleLogout = () => {
 }
 
 .sidebar-content {
-  padding: 1.5rem;
+  padding: 0 1.5rem 1.5rem 1.5rem;
   display: flex;
   flex-direction: column;
-  padding-top: 0;
-  min-height: 100%;
 }
 
 .menu-section {
@@ -166,7 +164,7 @@ const handleLogout = () => {
 
 .menu-section:first-child {
   margin-top: 0;
-  padding-top: 1.5rem;
+  padding-top: 43px;
 }
 
 .section-title {
@@ -374,6 +372,7 @@ const handleLogout = () => {
 .logout-section {
   margin-top: auto;
   width: 100%;
+  margin-bottom: 18px;
 }
 
 .divider {
