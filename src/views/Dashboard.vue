@@ -11,7 +11,18 @@
           @tipo-change="handleTipoChange"
         />
 
-        <FaturamentoCard :faturamento="faturamentoData" />
+        <div class="desktop-faturamento-card">
+          <FaturamentoCard :faturamento="faturamentoData" />
+        </div>
+
+        <div class="mobile-estatisticas-wrapper">
+          <EstatisticasPeriodoCard
+            :valor="estatisticasPeriodo.valor"
+            :crescimento="estatisticasPeriodo.crescimento"
+            :barras="estatisticasPeriodo.barras"
+            :periodo="estatisticasPeriodo.periodo"
+          />
+        </div>
 
         <TransferenciaPendenteCard
           v-if="transferenciaPendente"
@@ -59,13 +70,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import Header from '../components/Header.vue'
 import Sidebar from '../components/Sidebar.vue'
 import DashboardControls from '../components/DashboardControls.vue'
 import FaturamentoCard from '../components/FaturamentoCard.vue'
 import TransferenciaPendenteCard from '../components/TransferenciaPendenteCard.vue'
 import EstatisticasCard from '../components/EstatisticasCard.vue'
+import EstatisticasPeriodoCard from '../components/EstatisticasPeriodoCard.vue'
 import ConversaoModalidadeCard from '../components/ConversaoModalidadeCard.vue'
 import BandeirasCard from '../components/BandeirasCard.vue'
 import HelpButton from '../components/HelpButton.vue'
@@ -160,9 +172,24 @@ const handleAutorizarTransferencia = async (transferenciaId) => {
 }
 
 const handleHelpClick = () => {
-  // Lógica para abrir ajuda ou modal de ajuda
   console.log('Ajuda clicada')
 }
+
+const estatisticasPeriodo = computed(() => {
+  const dados = Array.isArray(faturamentoData.value?.dadosGrafico)
+    ? faturamentoData.value.dadosGrafico
+    : []
+
+  return {
+    valor: faturamentoData.value?.total || 0,
+    crescimento: faturamentoData.value?.crescimento || 0,
+    barras: dados.slice(0, 14),
+    periodo: {
+      inicio: '2024-12-15',
+      fim: '2025-02-07'
+    }
+  }
+})
 
 const loadDashboardData = async () => {
   try {
@@ -210,11 +237,21 @@ onMounted(() => {
   margin-left: 315px;
 }
 
+.desktop-faturamento-card {
+  width: 100%;
+}
+
 .estatisticas-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(305px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
+}
+
+.mobile-estatisticas-wrapper {
+  display: block;
+  width: 100%;
+  margin: 1.5rem 0 0;
 }
 
 .charts-grid {
@@ -225,6 +262,11 @@ onMounted(() => {
 }
 
 @media (max-width: 1024px) {
+  .dashboard-main {
+    margin-left: 0;
+    padding: 2rem 1.25rem 1.5rem;
+  }
+
   .charts-grid {
     grid-template-columns: 1fr;
   }
@@ -232,11 +274,26 @@ onMounted(() => {
 
 @media (max-width: 768px) {
   .dashboard-main {
-    padding: 1rem;
+    padding: 1.25rem 1rem 1.5rem;
+  }
+
+  .dashboard-content :deep(.sidebar) {
+    display: none;
   }
 
   .estatisticas-grid {
-    grid-template-columns: 1fr;
+    display: none;
+  }
+
+  .desktop-faturamento-card {
+    display: none;
+  }
+
+}
+
+@media (min-width: 769px) {
+  .mobile-estatisticas-wrapper {
+    display: none;
   }
 }
 </style>

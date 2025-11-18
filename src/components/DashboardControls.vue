@@ -112,6 +112,14 @@ const formatDateAndEmit = () => {
   align-items: center;
   gap: 0.75rem;
   transition: background-color 0.2s;
+  position: relative;
+  overflow: visible;
+  z-index: 0;
+}
+
+.btn-primary::before {
+  content: '';
+  display: none;
 }
 
 .btn-text {
@@ -357,20 +365,55 @@ const formatDateAndEmit = () => {
   .dashboard-controls {
     flex-direction: column;
     align-items: stretch;
+    gap: 1.25rem;
   }
 
   .btn-primary {
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 20px 26px;
+    box-shadow: none;
+    background: transparent;
+    color: #f4f6ff;
+    letter-spacing: 0.2px;
   }
 
-  .controls-group {
-    width: 100%;
-    flex-direction: column;
+  .btn-primary::before {
+    display: block;
+    position: absolute;
+    inset: -4px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #a78bfa, #7c5cff);
+    z-index: -2;
+    content: '';
+    filter: drop-shadow(0 14px 28px rgba(122, 102, 255, 0.38));
   }
 
-  .select-control,
-  .date-input {
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 1.5px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #1f2434 0%, #0c1f4c 100%);
+    z-index: -1;
+    box-shadow: inset 0 6px 12px rgba(255, 255, 255, 0.05), inset 0 -6px 20px rgba(4, 9, 24, 0.85);
+  }
+
+  .btn-text {
+    font-size: 18px;
+    color: #f4f6ff;
+  }
+
+  .icon-circle {
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(180deg, #f9fbff 0%, #dae3ff 100%);
+    box-shadow: 0 10px 20px rgba(5, 21, 47, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  .select-wrapper,
+  .date-range-wrapper {
     width: 100%;
   }
 }
