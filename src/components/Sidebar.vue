@@ -115,6 +115,36 @@
       </div>
     </div>
   </aside>
+
+  <nav class="mobile-bottom-nav">
+    <div class="mobile-nav-items">
+      <button class="mobile-nav-item" type="button">
+        <img :src="mobileSimuleIcon" alt="Simule" class="mobile-nav-icon" />
+        <span>Simule</span>
+      </button>
+      <button class="mobile-nav-item" type="button">
+        <img :src="mobileCobrancasIcon" alt="Cobranças" class="mobile-nav-icon" />
+        <span>Cobranças</span>
+      </button>
+      <div class="mobile-nav-spacer" aria-hidden="true"></div>
+      <button class="mobile-nav-item" type="button">
+        <img :src="mobileWalletIcon" alt="Carteira" class="mobile-nav-icon" />
+        <span>Carteira</span>
+      </button>
+      <button class="mobile-nav-item" type="button">
+        <img :src="mobileMenuGridIcon" alt="Menu" class="mobile-nav-icon" />
+        <span>Menu</span>
+      </button>
+    </div>
+    <button class="mobile-nav-center" type="button">
+      <span class="mobile-nav-center-outer">
+        <span class="mobile-nav-center-middle">
+          <span class="mobile-nav-center-inner">+</span>
+        </span>
+      </span>
+    </button>
+    <span class="mobile-nav-indicator" aria-hidden="true"></span>
+  </nav>
 </template>
 
 <script setup>
@@ -132,6 +162,10 @@ import settingsIcon from '@/assets/icons/settings-icon.svg'
 import userIcon from '@/assets/icons/user-icon.svg'
 import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.svg'
 import superCartaoImage from '@/assets/images/super-cartao-pre-pago.jpg'
+import mobileSimuleIcon from '@/assets/icons/mobile-simule.svg'
+import mobileCobrancasIcon from '@/assets/icons/mobile-cobrancas.svg'
+import mobileWalletIcon from '@/assets/icons/mobile-wallet.svg'
+import mobileMenuGridIcon from '@/assets/icons/mobile-menu-grid.svg'
 
 const handleLogout = () => {
   console.log('Deslogar da conta')
@@ -405,6 +439,10 @@ const handleLogout = () => {
   border-color: #D1D5DB;
 }
 
+.mobile-bottom-nav {
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .sidebar {
     width: 240px;
@@ -423,6 +461,117 @@ const handleLogout = () => {
 
   .sidebar.open {
     left: 0;
+  }
+
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-top-left-radius: 28px;
+    border-top-right-radius: 28px;
+    padding: 1.25rem 1.5rem 1.5rem;
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.08);
+    z-index: 1100;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .mobile-nav-items {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+    max-width: 480px;
+  }
+
+  .mobile-nav-item {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #86898B;
+    flex: 1;
+    padding: 0;
+  }
+
+  .mobile-nav-item span {
+    pointer-events: none;
+  }
+
+  .mobile-nav-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  .mobile-nav-spacer {
+    width: 72px;
+  }
+
+  .mobile-nav-center {
+    position: absolute;
+    top: -42px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .mobile-nav-center-outer {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+  }
+
+  .mobile-nav-center-middle {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #0641FC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-nav-center-inner {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0641FC;
+    font-size: 28px;
+    font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .mobile-nav-indicator {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #0641FC;
   }
 }
 </style>
