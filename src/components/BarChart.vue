@@ -187,7 +187,7 @@ watch(() => props.height, () => {
 <style scoped>
 .chart-container {
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
   position: relative;
   min-height: 172px;
 }
