@@ -27,7 +27,7 @@
             <span class="user-name-bottom">Astra Pagamentos</span>
           </div>
           <button class="dropdown-btn">
-            <img :src="roundAltArrowDownIcon" alt="" class="dropdown-icon" width="16" height="16" />
+            <img :src="roundAltArrowDownIcon" alt="" class="dropdown-icon" width="24" height="24" />
           </button>
         </div>
       </div>
@@ -184,6 +184,11 @@ import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.sv
   padding: 0.25rem;
   display: flex;
   align-items: center;
+}
+
+.dropdown-icon {
+  display: block;
+  flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
