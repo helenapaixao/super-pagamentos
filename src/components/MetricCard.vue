@@ -113,7 +113,8 @@ defineProps({
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background-color: #A0BFFF;
+  background-color: #0641FC;
+  opacity: 0.42;
 }
 
 .metric-dot-blue-front {
@@ -142,7 +143,8 @@ defineProps({
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background-color: #E9D5FF;
+  background-color: #852DF6;
+  opacity: 0.42;
 }
 
 .metric-dot-purple-front {
@@ -171,7 +173,8 @@ defineProps({
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background-color: #FED7AA;
+  background-color: #f59e0b;
+  opacity: 0.42;
 }
 
 .metric-dot-orange-front {
@@ -200,7 +203,8 @@ defineProps({
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background-color: #D1D5DB;
+  background-color: #111827;
+  opacity: 0.42;
 }
 
 .metric-dot-black-front {
