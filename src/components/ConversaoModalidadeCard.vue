@@ -4,7 +4,7 @@
     <div class="conversao-grid">
       <div v-for="modalidade in modalidades" :key="modalidade.nome" class="modalidade-item">
         <div class="donut-chart-container">
-          <svg class="donut-chart" :width="120" :height="120">
+          <svg class="donut-chart" viewBox="0 0 120 120">
             <circle
               class="donut-ring"
               cx="60"
@@ -98,6 +98,27 @@ const getCor = (cor) => {
   min-width: 120px;
 }
 
+@media (max-width: 1024px) {
+  .conversao-grid {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .conversao-grid {
+    gap: 1rem;
+  }
+  
+  .modalidade-item {
+    min-width: 100px;
+  }
+  
+  .donut-chart {
+    width: 100px;
+    height: 100px;
+  }
+}
+
 .donut-chart-container {
   position: relative;
   display: flex;
@@ -106,7 +127,9 @@ const getCor = (cor) => {
 }
 
 .donut-chart {
-  transform: rotate(-90deg);
+  width: 120px;
+  height: 120px;
+  display: block;
 }
 
 .donut-label {
@@ -135,9 +158,42 @@ const getCor = (cor) => {
 }
 
 @media (max-width: 768px) {
+  .conversao-card {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
   .conversao-grid {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
+  }
+
+  .modalidade-item {
+    flex: none;
+    min-width: auto;
+    gap: 0.75rem;
+  }
+
+  .donut-chart {
+    width: 100px;
+    height: 100px;
+  }
+
+  .donut-percent {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .modalidade-name {
+    font-size: 14px;
+    font-weight: 500;
   }
 }
 </style>
