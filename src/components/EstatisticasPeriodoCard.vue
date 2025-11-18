@@ -135,19 +135,19 @@ const formatPeriodoDate = (dateString) => {
 
 .periodo-value {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 700;
   margin: 0;
-  color: #111827;
+  color: #2A2E33;
   line-height: 1.15;
 }
 
 .periodo-growth {
   margin: 0.35rem 0 0;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 600;
-  color: #16a34a;
+  color: #34A853;
   display: flex;
   gap: 0.35rem;
   align-items: center;
