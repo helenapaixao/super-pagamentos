@@ -19,6 +19,10 @@
           @autorizar="handleAutorizarTransferencia"
         />
 
+        <div class="estatisticas-mobile-wrapper">
+          <EstatisticasMobileCard :items="estatisticasMobileItems" />
+        </div>
+
         <div class="estatisticas-grid">
           <EstatisticasCard
             titulo="Reembolsos"
@@ -59,13 +63,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import Header from '../components/Header.vue'
 import Sidebar from '../components/Sidebar.vue'
 import DashboardControls from '../components/DashboardControls.vue'
 import FaturamentoCard from '../components/FaturamentoCard.vue'
 import TransferenciaPendenteCard from '../components/TransferenciaPendenteCard.vue'
 import EstatisticasCard from '../components/EstatisticasCard.vue'
+import EstatisticasMobileCard from '../components/EstatisticasMobileCard.vue'
 import ConversaoModalidadeCard from '../components/ConversaoModalidadeCard.vue'
 import BandeirasCard from '../components/BandeirasCard.vue'
 import HelpButton from '../components/HelpButton.vue'
@@ -163,6 +168,37 @@ const handleHelpClick = () => {
   console.log('Ajuda clicada')
 }
 
+const estatisticasMobileItems = computed(() => [
+  {
+    titulo: 'Reembolsos',
+    valor: estatisticas.value.reembolsos.valor,
+    percentual: estatisticas.value.reembolsos.percentual,
+    percentualColor: '#F89A1D',
+    sparkline: [8, 10, 11, 14, 16, 18, 16]
+  },
+  {
+    titulo: 'Chargebacks',
+    valor: estatisticas.value.chargebacks.valor,
+    percentual: estatisticas.value.chargebacks.percentual,
+    percentualColor: '#FF4D6D',
+    sparkline: [16, 15, 14, 13, 14, 15, 16]
+  },
+  {
+    titulo: 'Cancelados',
+    valor: estatisticas.value.cancelados.valor,
+    percentual: estatisticas.value.cancelados.percentual,
+    percentualColor: '#8B8F99',
+    sparkline: [10, 11, 12, 12, 11, 12, 12]
+  },
+  {
+    titulo: 'Não autorizado',
+    valor: estatisticas.value.naoAutorizado.valor,
+    percentual: estatisticas.value.naoAutorizado.percentual,
+    percentualColor: '#FF4D6D',
+    sparkline: [9, 10, 11, 12, 13, 14, 12]
+  }
+])
+
 const loadDashboardData = async () => {
   try {
     // Carregar dados do dashboard
@@ -216,6 +252,11 @@ onMounted(() => {
   margin-bottom: 2rem;
 }
 
+.estatisticas-mobile-wrapper {
+  display: none;
+  margin-bottom: 1.75rem;
+}
+
 .charts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -245,6 +286,13 @@ onMounted(() => {
 
   .estatisticas-grid {
     display: none;
+  }
+
+  .estatisticas-mobile-wrapper {
+    display: block;
+    max-width: 392px;
+    width: 100%;
+    margin: 0 auto 1.75rem;
   }
 }
 
