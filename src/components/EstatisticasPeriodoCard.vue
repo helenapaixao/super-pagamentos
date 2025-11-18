@@ -56,12 +56,27 @@ const props = defineProps({
   }
 })
 
+const DEFAULT_BARS = [6, 12, 18, 32, 48, 65, 38, 24, 18, 22, 28, 40, 20, 14, 26, 34, 18, 12, 28, 42, 30]
+
 const normalizedBars = computed(() => {
-  const maxValue = Math.max(...props.barras, 0.0001)
-  return props.barras.map((value) => {
+  const source = Array.isArray(props.barras) && props.barras.length
+    ? props.barras
+    : DEFAULT_BARS
+
+  const sanitized = source
+    .slice(0, 21)
+    .map((value) => {
+      const numeric = Number(value)
+      return Number.isFinite(numeric) && numeric > 0 ? numeric : 0
+    })
+
+  const maxValue = Math.max(...sanitized, 1)
+
+  return sanitized.map((value) => {
+    const ratio = (value / maxValue) * 100
     return {
-      height: (value / maxValue) * 100,
-      highlight: value >= maxValue * 0.75
+      height: Math.max(ratio, 4),
+      highlight: value >= maxValue * 0.7
     }
   })
 })
@@ -95,13 +110,13 @@ const formatPeriodoDate = (dateString) => {
 <style scoped>
 .periodo-card {
   background: #ffffff;
-  border-radius: 22px;
-  padding: 1.5rem;
-  box-shadow: 0 6px 20px rgba(8, 15, 40, 0.08);
-  border: 1px solid rgba(15, 42, 98, 0.08);
+  border-radius: 28px;
+  padding: 1.75rem 1.5rem 1.5rem;
+  border: 1px solid #E4E7F1;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .periodo-header {
@@ -112,27 +127,30 @@ const formatPeriodoDate = (dateString) => {
 
 .periodo-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   color: #0f172a;
-  margin: 0 0 0.35rem 0;
+  margin: 0 0 0.45rem 0;
 }
 
 .periodo-value {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
   margin: 0;
   color: #111827;
-  line-height: 1.1;
+  line-height: 1.15;
 }
 
 .periodo-growth {
   margin: 0.35rem 0 0;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   color: #16a34a;
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
 }
 
 .periodo-growth.negative {
@@ -140,27 +158,28 @@ const formatPeriodoDate = (dateString) => {
 }
 
 .filter-button {
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
-  border: 2px solid #1f6bff;
-  background: #f8fbff;
+  width: 62px;
+  height: 62px;
+  border-radius: 18px;
+  border: 2px solid #2A74FF;
+  background: #f5f8ff;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
+  box-shadow: 0 8px 18px rgba(26, 96, 255, 0.18);
 }
 
 .filter-inner {
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   border-radius: 999px;
-  border: 1.4px dashed #b5c4ff;
+  border: 1px solid #D4DAE8;
   background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 3px 6px rgba(22, 29, 64, 0.08);
+  box-shadow: inset 0 2px 6px rgba(15, 23, 42, 0.08);
 }
 
 .filter-inner img {
@@ -171,24 +190,30 @@ const formatPeriodoDate = (dateString) => {
 .chart-wrapper {
   position: relative;
   background: #f5f7fd;
-  border-radius: 18px;
-  padding: 0.75rem 1rem 1.25rem;
+  border-radius: 20px;
+  padding: 1rem 1.5rem 1.75rem;
   overflow: hidden;
+  border: 1px solid #e5e8f3;
 }
 
 .chart-grid {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(to top, rgba(15, 23, 42, 0.08) 1px, transparent 1px);
-  background-size: 100% 38px;
+  background-image: repeating-linear-gradient(
+    to top,
+    rgba(99, 110, 140, 0.16),
+    rgba(99, 110, 140, 0.16) 1px,
+    transparent 1px,
+    transparent 34px
+  );
   pointer-events: none;
 }
 
 .chart-bars {
   display: flex;
   align-items: flex-end;
-  gap: 10px;
-  height: 150px;
+  gap: 13px;
+  height: 140px;
   position: relative;
   z-index: 1;
 }
@@ -200,33 +225,27 @@ const formatPeriodoDate = (dateString) => {
 }
 
 .bar {
-  width: 12px;
+  width: 10px;
   border-radius: 999px;
-  background: linear-gradient(180deg, #2a6bff 0%, #0641fc 100%);
+  background: linear-gradient(180deg, #3C7BFF 0%, #0A4FFC 100%);
   display: block;
-  transition: height 0.2s ease;
+  transition: height 0.25s ease;
 }
 
 .bar.highlight {
-  background: linear-gradient(180deg, #00d58c 0%, #0d71ff 100%);
-  box-shadow: 0 6px 18px rgba(10, 95, 255, 0.25);
+  background: linear-gradient(180deg, #00D78C 0%, #0B6DFF 100%);
+  box-shadow: 0 8px 20px rgba(15, 111, 255, 0.3);
 }
 
 .periodo-date-pill {
   align-self: center;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.25rem;
   border-radius: 999px;
-  background: #edf0f7;
+  background: #e6ebf7;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  color: #4a5568;
-}
-
-@media (min-width: 769px) {
-  .periodo-card {
-    display: none;
-  }
+  color: #536079;
 }
 </style>
 
