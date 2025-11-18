@@ -3,15 +3,8 @@
     <div class="card-header">
       <div class="title-group">
         <h2 class="card-title">Bandeiras mais utilizadas</h2>
-        <InfoCircleLinear :size="20" class="info-icon" />
+        <InfoCircle :size="20" class="info-icon" />
       </div>
-      <button class="info-btn" title="Informações">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="16" x2="12" y2="12"></line>
-          <line x1="12" y1="8" x2="12.01" y2="8"></line>
-        </svg>
-      </button>
     </div>
     <div class="bandeiras-grid">
       <div v-for="bandeira in bandeiras" :key="bandeira.nome" class="bandeira-item">
@@ -32,7 +25,7 @@
 </template>
 
 <script setup>
-import { InfoCircleLinear } from '@solar-icons/vue'
+import { InfoCircle } from '@solar-icons/vue'
 import visaIcon from '@/assets/icons/bandeiras/visa.svg'
 import mastercardIcon from '@/assets/icons/bandeiras/mastercard.svg'
 import eloIcon from '@/assets/icons/bandeiras/elo.svg'
@@ -113,14 +106,19 @@ const getLogo = (nome) => {
 }
 
 .info-icon {
-  color: #86898B;
+  color: #2A2E33;
+  height: 16px;
+  width: 16px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
   flex-shrink: 0;
 }
 
 .info-btn {
   background: none;
   border: none;
-  color: #86898B;
+  color: #2A2E33;
   cursor: pointer;
   padding: 0.25rem;
   display: flex;
