@@ -155,6 +155,7 @@ const getLogo = (nome) => {
   display: flex;
   align-items: flex-end;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .bar-fill {
