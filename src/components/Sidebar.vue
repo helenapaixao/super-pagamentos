@@ -215,7 +215,7 @@ const handleLogout = () => {
 }
 
 .menu-item.active .icon-wrapper :deep(svg) {
-  color: #2563EB;
+  color: #0641FC;
 }
 
 .icon-wrapper {
@@ -245,7 +245,7 @@ const handleLogout = () => {
 }
 
 .icon-active :deep(svg) {
-  color: #2563EB;
+  color: #D1DCFF;
 }
 
 .menu-arrow {
