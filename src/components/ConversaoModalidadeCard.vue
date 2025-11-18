@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   modalidades: {
     type: Array,
     default: () => [
@@ -67,10 +67,11 @@ const getCor = (cor) => {
 .conversao-card {
   background: white;
   border-radius: 12px;
-  border: 1px solid #EEEEEE;
   padding: 2rem;
   margin-bottom: 2rem;
   box-sizing: border-box;
+  position: relative;
+  display: block;
 }
 
 .card-title {
@@ -87,6 +88,10 @@ const getCor = (cor) => {
   align-items: center;
   gap: 2rem;
   flex-wrap: wrap;
+  border: 1px solid #EEEEEE;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-sizing: border-box;
 }
 
 .modalidade-item {
@@ -165,6 +170,13 @@ const getCor = (cor) => {
     padding: 1.5rem;
     margin: 0 auto 1.5rem;
     box-sizing: border-box;
+    display: block;
+  }
+
+  .conversao-grid {
+    border: 1px solid #EEEEEE;
+    border-radius: 12px;
+    padding: 1.5rem;
   }
 
   .card-title {

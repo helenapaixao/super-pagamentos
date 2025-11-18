@@ -75,7 +75,6 @@ const getLogo = (nome) => {
 .bandeiras-card {
   background: white;
   border-radius: 12px;
-  border: 1px solid #EEEEEE;
   padding: 2rem;
   margin-bottom: 2rem;
   box-sizing: border-box;
@@ -136,6 +135,10 @@ const getLogo = (nome) => {
   align-items: flex-end;
   gap: 0.5rem;
   height: 200px;
+  border: 1px solid #EEEEEE;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-sizing: border-box;
 }
 
 .bandeira-item {
@@ -195,6 +198,9 @@ const getLogo = (nome) => {
 @media (max-width: 768px) {
   .bandeiras-grid {
     gap: 0.5rem;
+    border: 1px solid #EEEEEE;
+    border-radius: 12px;
+    padding: 1.5rem;
   }
   
   .bandeira-logo {
