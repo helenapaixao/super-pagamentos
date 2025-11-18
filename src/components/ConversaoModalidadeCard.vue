@@ -11,7 +11,7 @@
               cy="60"
               r="50"
               fill="transparent"
-              stroke="#e5e7eb"
+              stroke="#F5F5F5"
               stroke-width="12"
             />
             <circle
@@ -23,9 +23,10 @@
               fill="transparent"
               :stroke="getCor(modalidade.cor)"
               stroke-width="12"
-              :stroke-dasharray="`${modalidade.percentual * 3.14159} ${(100 - modalidade.percentual) * 3.14159}`"
+              :stroke-dasharray="`${(modalidade.percentual / 100) * 314.159} ${((100 - modalidade.percentual) / 100) * 314.159}`"
               stroke-dashoffset="78.54"
               transform="rotate(-90 60 60)"
+              stroke-linecap="round"
             />
           </svg>
           <div class="donut-label">
@@ -45,19 +46,20 @@ const props = defineProps({
     default: () => [
       { nome: 'Crédito', percentual: 92, cor: 'blue' },
       { nome: 'Débito', percentual: 95, cor: 'purple' },
-      { nome: 'Boleto', percentual: 42, cor: 'orange' },
-      { nome: 'Pix', percentual: 98, cor: 'blue' }
+      { nome: 'Boleto', percentual: 42, cor: 'purpleLight' },
+      { nome: 'Pix', percentual: 98, cor: 'blueLight' }
     ]
   }
 })
 
 const getCor = (cor) => {
   const cores = {
-    blue: '#2563eb',
+    blue: '#0641FC',
     purple: '#8b5cf6',
-    orange: '#f59e0b'
+    purpleLight: '#A78BFA',
+    blueLight: '#9DB5FF'
   }
-  return cores[cor] || '#2563eb'
+  return cores[cor] || '#0641FC'
 }
 </script>
 
@@ -71,23 +73,31 @@ const getCor = (cor) => {
 }
 
 .card-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 2rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: semibold;
+  color: #2A2E33;
+  margin-bottom: 1rem;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-top: 0;
 }
 
 .conversao-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .modalidade-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 120px;
 }
 
 .donut-chart-container {
@@ -110,16 +120,20 @@ const getCor = (cor) => {
 }
 
 .donut-percent {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #111827;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: regular;
+  color: #2A2E33;
+  line-height: 1;
 }
 
 .modalidade-name {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #374151;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2A2E33;
   text-align: center;
+  margin-top: 0.5rem;
 }
 
 @media (max-width: 768px) {
