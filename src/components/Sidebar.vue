@@ -50,7 +50,7 @@
                 <img :src="boxIcon" alt="Antecipações" class="menu-icon" />
               </div>
               <span>Antecipações</span>
-              <AltArrowDown :size="16" weight="regular" class="menu-arrow" />
+              <img :src="roundAltArrowDownIcon" alt="" class="menu-arrow" width="24" height="24" />
             </a>
           </li>
           <li>
@@ -59,7 +59,7 @@
                 <img :src="gestaoIcon" alt="Gestão" class="menu-icon" />
               </div>
               <span>Gestão</span>
-              <AltArrowDown :size="16" weight="regular" class="menu-arrow" />
+              <img :src="roundAltArrowDownIcon" alt="" class="menu-arrow" width="24" height="24" />
             </a>
           </li>
           <li>
@@ -117,7 +117,6 @@
 
 <script setup>
 import { 
-  PhCaretDown as AltArrowDown,
   PhArrowRight as ArrowRightIcon
 } from '@phosphor-icons/vue'
 import dashboardIcon from '@/assets/icons/dashboard-icon.svg'
@@ -130,6 +129,7 @@ import gestaoIcon from '@/assets/icons/gestao-icon.svg'
 import codeIcon from '@/assets/icons/code-icon.svg'
 import settingsIcon from '@/assets/icons/settings-icon.svg'
 import userIcon from '@/assets/icons/user-icon.svg'
+import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.svg'
 </script>
 
 <style scoped>
@@ -246,7 +246,10 @@ import userIcon from '@/assets/icons/user-icon.svg'
 
 .menu-arrow {
   margin-left: auto;
-  color: #9CA3AF;
+  width: 24px;
+  height: 24px;
+  display: block;
+  flex-shrink: 0;
 }
 
 .ad-card {
