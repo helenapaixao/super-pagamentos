@@ -46,7 +46,8 @@ const formatPercentual = (value) =>
 
 <style scoped>
 .estatisticas-mobile-card {
-  width: 310px;
+  width: 100%;
+  max-width: 392px;
   background: #ffffff;
   border-radius: 24px;
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
@@ -55,6 +56,8 @@ const formatPercentual = (value) =>
   grid-template-columns: 1fr 1fr;
   column-gap: 0.5rem;
   row-gap: 0.25rem;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .estatistica-row {
