@@ -109,7 +109,7 @@ defineProps({
 
 .metric-dot-shadow {
   position: absolute;
-  left: 8px;
+  left: 5px;
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -119,7 +119,7 @@ defineProps({
 
 .metric-dot-blue-front {
   position: absolute;
-  left: 0;
+  left: -0.15px;
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -139,7 +139,7 @@ defineProps({
 
 .metric-dot-shadow-purple {
   position: absolute;
-  left: 8px;
+  left: 5px;
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -149,7 +149,7 @@ defineProps({
 
 .metric-dot-purple-front {
   position: absolute;
-  left: 0;
+  left: -0.15px;
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -169,7 +169,7 @@ defineProps({
 
 .metric-dot-shadow-orange {
   position: absolute;
-  left: 8px;
+  left: 5px;
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -179,7 +179,7 @@ defineProps({
 
 .metric-dot-orange-front {
   position: absolute;
-  left: 0;
+  left: -0.15px;
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -199,7 +199,7 @@ defineProps({
 
 .metric-dot-shadow-black {
   position: absolute;
-  left: 8px;
+  left:5px;
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -209,7 +209,7 @@ defineProps({
 
 .metric-dot-black-front {
   position: absolute;
-  left: 0;
+  left: -0.15px;
   width: 12px;
   height: 12px;
   border-radius: 50%;
