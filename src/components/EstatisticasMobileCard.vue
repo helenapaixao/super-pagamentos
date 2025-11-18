@@ -15,11 +15,17 @@
           </p>
           <div class="estatistica-chart">
             <svg width="78" height="26" viewBox="0 0 78 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient :id="`spark-gradient-${index}`" x1="0" y1="0" x2="78" y2="0" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#0641FC" />
+                  <stop offset="1" stop-color="#B882FE" />
+                </linearGradient>
+              </defs>
               <polyline
                 :points="createPolyline(item.sparkline)"
                 fill="none"
-                stroke="#6D78FF"
-                stroke-width="2"
+                :stroke="`url(#spark-gradient-${index})`"
+                stroke-width="4"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
