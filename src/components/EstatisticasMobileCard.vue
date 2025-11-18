@@ -9,22 +9,25 @@
       <div class="estatistica-info">
         <p class="estatistica-title">{{ item.titulo }}</p>
         <p class="estatistica-value">R$ {{ formatCurrency(item.valor) }}</p>
-        <p class="estatistica-percent" :style="{ color: item.percentualColor }">
-          {{ formatPercentual(item.percentual) }}%
-        </p>
+        <div class="estatistica-percent-row">
+          <p class="estatistica-percent" :style="{ color: item.percentualColor }">
+            {{ formatPercentual(item.percentual) }}%
+          </p>
+          <div class="estatistica-chart">
+            <svg width="78" height="26" viewBox="0 0 78 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polyline
+                :points="createPolyline(item.sparkline)"
+                fill="none"
+                stroke="#6D78FF"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
-      <div class="estatistica-chart">
-        <svg width="78" height="26" viewBox="0 0 78 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <polyline
-            :points="createPolyline(item.sparkline)"
-            fill="none"
-            stroke="#6D78FF"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </div>
+    
     </div>
   </div>
 </template>
@@ -116,12 +119,20 @@ const createPolyline = (values = []) => {
   white-space: nowrap;
 }
 
+.estatistica-percent-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
 .estatistica-percent {
   margin: 0;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.1;
+  flex-shrink: 0;
 }
 
 .estatistica-chart {
@@ -130,6 +141,8 @@ const createPolyline = (values = []) => {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 </style>
 
