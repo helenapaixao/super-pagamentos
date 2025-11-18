@@ -15,14 +15,7 @@
       </button>
     </div>
 
-    <div class="chart-wrapper">
-      <div class="chart-grid"></div>
-      <div class="chart-bars">
-        <div v-for="(bar, index) in normalizedBars" :key="index" class="bar-item">
-          <span class="bar" :class="{ highlight: bar.highlight }" :style="{ height: `${bar.height}%` }"></span>
-        </div>
-      </div>
-    </div>
+    <BarChart :data="dadosGrafico" :max-value="200000" :height="172" class="periodo-chart" />
 
     <div class="periodo-date-pill">
       De {{ formatPeriodoDate(periodo.inicio) }} à {{ formatPeriodoDate(periodo.fim) }}
@@ -31,8 +24,8 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
 import filterIcon from '@/assets/icons/filter-tunnel.svg'
+import BarChart from './BarChart.vue'
 
 const props = defineProps({
   valor: {
@@ -43,9 +36,9 @@ const props = defineProps({
     type: Number,
     default: 123.9
   },
-  barras: {
+  dadosGrafico: {
     type: Array,
-    default: () => [24, 38, 52, 66, 54, 28, 18, 22, 30, 40, 26, 18, 44, 62]
+    default: () => []
   },
   periodo: {
     type: Object,
@@ -56,30 +49,16 @@ const props = defineProps({
   }
 })
 
-const DEFAULT_BARS = [6, 12, 18, 32, 48, 65, 38, 24, 18, 22, 28, 40, 20, 14, 26, 34, 18, 12, 28, 42, 30]
+const meses = ['Jan.', 'Fev.', 'Mar.', 'Abr.', 'Mai.', 'Jun.', 'Jul.', 'Ago.', 'Set.', 'Out.', 'Nov.', 'Dez.']
 
-const normalizedBars = computed(() => {
-  const source = Array.isArray(props.barras) && props.barras.length
-    ? props.barras
-    : DEFAULT_BARS
-
-  const sanitized = source
-    .slice(0, 21)
-    .map((value) => {
-      const numeric = Number(value)
-      return Number.isFinite(numeric) && numeric > 0 ? numeric : 1
-    })
-
-  const maxValue = Math.max(...sanitized, 1)
-
-  return sanitized.map((value) => {
-    const ratio = (value / maxValue) * 100
-    return {
-      height: Math.max(ratio, 8),
-      highlight: value >= maxValue * 0.7
-    }
-  })
-})
+const formatPeriodoDate = (dateString) => {
+  const date = new Date(dateString)
+  if (isNaN(date)) return dateString
+  const dia = String(date.getDate()).padStart(2, '0')
+  const mes = meses[date.getMonth()] || ''
+  const ano = date.getFullYear()
+  return `${dia} de ${mes} de ${ano}`
+}
 
 const formatCurrency = (value) => {
   return new Intl.NumberFormat('pt-BR', {
@@ -93,17 +72,6 @@ const formatPercentual = (value) => {
     minimumFractionDigits: 1,
     maximumFractionDigits: 1
   }).format(value)
-}
-
-const meses = ['Jan.', 'Fev.', 'Mar.', 'Abr.', 'Mai.', 'Jun.', 'Jul.', 'Ago.', 'Set.', 'Out.', 'Nov.', 'Dez.']
-
-const formatPeriodoDate = (dateString) => {
-  const date = new Date(dateString)
-  if (isNaN(date)) return dateString
-  const dia = String(date.getDate()).padStart(2, '0')
-  const mes = meses[date.getMonth()] || ''
-  const ano = date.getFullYear()
-  return `${dia} de ${mes} de ${ano}`
 }
 </script>
 
@@ -185,52 +153,8 @@ const formatPeriodoDate = (dateString) => {
   height: 20px;
 }
 
-.chart-wrapper {
-  position: relative;
-  background: #F7FAFF;
-  border-radius: 22px;
-  padding: 1rem 1.25rem 1.35rem;
-  overflow: hidden;
-  border: 1px solid #EBEEF5;
-  min-height: 160px;
-}
-
-.chart-grid {
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(to top, rgba(203, 210, 229, 0.5) 1px, transparent 1px);
-  background-size: 100% 36px;
-  pointer-events: none;
-}
-
-.chart-bars {
-  display: flex;
-  align-items: flex-end;
-  gap: 14px;
-  height: 116px;
-  min-height: 116px;
-  position: relative;
-  z-index: 1;
-}
-
-.bar-item {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.bar {
-  width: 10px;
-  min-height: 10px;
-  border-radius: 999px;
-  background: #0641FC;
-  display: block;
-  transition: height 0.25s ease;
-}
-
-.bar.highlight {
-  background: linear-gradient(180deg, #12CF70 0%, #0A55FF 100%);
-  box-shadow: 0 8px 26px rgba(26, 119, 255, 0.25);
+.periodo-chart {
+  width: 100%;
 }
 
 .periodo-date-pill {

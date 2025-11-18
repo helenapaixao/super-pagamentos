@@ -53,8 +53,9 @@
       class="faturamento-mobile-view"
       :valor="faturamento.total"
       :crescimento="faturamento.crescimento"
-      :barras="mobileBarras"
+      :dados-grafico="faturamento.dadosGrafico"
       :periodo="mobilePeriodo"
+      @periodo-change="handlePeriodoChange"
     />
   </div>
 </template>
@@ -83,16 +84,6 @@ const props = defineProps({
   }
 })
 
-const mobileBarras = computed(() => {
-  const dados = Array.isArray(props.faturamento?.dadosGrafico)
-    ? props.faturamento.dadosGrafico
-    : []
-  if (!dados.length) {
-    return [24, 38, 52, 66, 54, 28, 18, 22, 30, 40, 26, 18, 44, 62]
-  }
-  return dados.slice(0, 14)
-})
-
 const mobilePeriodo = computed(() => {
   if (props.faturamento?.periodo) {
     return props.faturamento.periodo
@@ -102,6 +93,12 @@ const mobilePeriodo = computed(() => {
     fim: '2025-02-07'
   }
 })
+
+const emit = defineEmits(['periodo-change'])
+
+const handlePeriodoChange = (novoPeriodo) => {
+  emit('periodo-change', novoPeriodo)
+}
 
 const formatCurrency = (value) => {
   return new Intl.NumberFormat('pt-BR', {
