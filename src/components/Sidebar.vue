@@ -392,6 +392,8 @@ const handleLogout = () => {
   padding: 0.75rem 1rem;
   font-size: 0.875rem;
   font-weight: 400;
+  height: 46px;
+  min-height: 46px;
 }
 
 .logout-section :deep(.button-icon) {
