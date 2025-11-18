@@ -139,7 +139,12 @@
     <button class="mobile-nav-center" type="button">
       <span class="mobile-nav-center-outer">
         <span class="mobile-nav-center-middle">
-          <span class="mobile-nav-center-inner">+</span>
+          <span class="mobile-nav-center-inner">
+            <svg class="mobile-nav-center-plus" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 8H13" stroke="#0641FC" stroke-width="2" stroke-linecap="round"/>
+              <path d="M8 3V13" stroke="#0641FC" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
         </span>
       </span>
     </button>
@@ -470,8 +475,6 @@ const handleLogout = () => {
     left: 0;
     right: 0;
     background: #ffffff;
-    border-top-left-radius: 28px;
-    border-top-right-radius: 28px;
     padding: 1.25rem 1.5rem 1.5rem;
     box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.08);
     z-index: 1100;
@@ -557,10 +560,10 @@ const handleLogout = () => {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #0641FC;
-    font-size: 28px;
-    font-weight: 700;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .mobile-nav-center-plus {
+    display: block;
   }
 
   .mobile-nav-indicator {
