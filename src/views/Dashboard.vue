@@ -284,8 +284,16 @@ onMounted(() => {
 }
 
 @media (max-width: 768px) {
+  .dashboard-content {
+    margin-top: 0;
+  }
+
   .dashboard-main {
-    padding: 1.25rem 1rem 1.5rem;
+    padding: 1rem 1rem 1.5rem;
+    margin-top: 0;
+    margin-left: 0;
+    padding-top: 320px;
+    overflow-x: hidden;
   }
 
   .dashboard-content :deep(.sidebar) {

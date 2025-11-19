@@ -450,6 +450,9 @@ onUnmounted(() => {
     font-weight: 700;
     color: #FFFFFF;
     line-height: 100%;
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
   }
 
   .mobile-faturamento-currency {
@@ -457,7 +460,7 @@ onUnmounted(() => {
     font-size: 16px;
     font-weight: 500;
     color: #D1DCFF;
-    line-height: auto;
+    line-height: 1;
     letter-spacing: 0%;
   }
 

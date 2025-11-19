@@ -3,7 +3,7 @@
     <button class="btn-primary" @click="emit('nova-cobranca')">
       <span class="btn-text">Nova cobrança</span>
       <div class="icon-circle">
-        <AddCircle :size="15" />
+        <img :src="addCircleBoldIcon" alt="Adicionar" width="15" height="15" />
       </div>
     </button>
 
@@ -64,7 +64,8 @@
 
 <script setup>
 import { ref } from 'vue'
-import { AddCircle, Calendar, AltArrowDown, CardTransfer, DownloadMinimalistic } from '@solar-icons/vue'
+import { Calendar, AltArrowDown, CardTransfer, DownloadMinimalistic } from '@solar-icons/vue'
+import addCircleBoldIcon from '@/assets/icons/add-circle-bold.svg'
 
 const periodo = ref('especifico')
 const dataInicio = ref('2020-06-10')
@@ -123,7 +124,12 @@ const formatDateAndEmit = () => {
 }
 
 .btn-text {
-  color: #FFFFFF;
+  color: #F9F9F9;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: auto;
+  letter-spacing: 0%;
 }
 
 .icon-circle {
@@ -363,12 +369,19 @@ const formatDateAndEmit = () => {
 
 @media (max-width: 768px) {
   .dashboard-controls {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.25rem;
+    gap: 0;
     width: 100%;
     max-width: 392px;
-    margin: 0 auto;
+    margin: 0 auto 1.5rem;
+  }
+
+  .select-wrapper,
+  .date-range-wrapper,
+  .download-btn {
+    display: none;
   }
 
   .btn-primary {
@@ -381,6 +394,10 @@ const formatDateAndEmit = () => {
     color: #f4f6ff;
     letter-spacing: 0.2px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    min-height: 60px;
+    display: flex;
   }
 
   .btn-primary::before {
@@ -407,6 +424,8 @@ const formatDateAndEmit = () => {
   .btn-text {
     font-size: 18px;
     color: #f4f6ff;
+    position: relative;
+    z-index: 2;
   }
 
   .icon-circle {
@@ -415,11 +434,19 @@ const formatDateAndEmit = () => {
     background: linear-gradient(180deg, #f9fbff 0%, #dae3ff 100%);
     box-shadow: 0 10px 20px rgba(5, 21, 47, 0.35);
     border: 1px solid rgba(255, 255, 255, 0.4);
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .select-wrapper,
-  .date-range-wrapper {
-    width: 100%;
+  .icon-circle img {
+    width: 15px;
+    height: 15px;
+    position: relative;
+    z-index: 3;
+    filter: brightness(0) saturate(100%) invert(27%) sepia(95%) saturate(7482%) hue-rotate(230deg) brightness(98%) contrast(101%);
   }
 }
 </style>
