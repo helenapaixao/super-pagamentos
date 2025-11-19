@@ -20,30 +20,11 @@
       <AltArrowDown :size="16" class="select-chevron" />
     </div>
 
-    <div class="date-range-wrapper">
-      <div class="date-field date-field-start">
-        <Calendar :size="20" class="date-icon" />
-        <span class="date-display">{{ formatDate(dataInicio) }}</span>
-        <AltArrowDown :size="16" class="date-chevron" />
-        <input
-          type="date"
-          v-model="dataInicio"
-          class="date-range-input"
-          @change="formatDateAndEmit"
-        />
-      </div>
-      <div class="date-divider"></div>
-      <div class="date-field date-field-end">
-        <span class="date-display">{{ formatDate(dataFim) }}</span>
-        <AltArrowDown :size="16" class="date-chevron" />
-        <input
-          type="date"
-          v-model="dataFim"
-          class="date-range-input"
-          @change="formatDateAndEmit"
-        />
-      </div>
-    </div>
+    <DateRangePicker
+      :inicio="dataInicio"
+      :fim="dataFim"
+      @change="handleDateChange"
+    />
 
     <div class="select-wrapper">
       <CardTransfer :size="20" class="select-icon" />
@@ -68,25 +49,19 @@ import { ref } from 'vue'
 import { Calendar, AltArrowDown, CardTransfer, DownloadMinimalistic } from '@solar-icons/vue'
 import addCircleBoldIcon from '@/assets/icons/add-circle-bold.svg'
 import addCircleBoldWebIcon from '@/assets/icons/add-circle-bold-web.svg'
+import DateRangePicker from './DateRangePicker.vue'
 
 const periodo = ref('especifico')
 const dataInicio = ref('2020-06-10')
 const dataFim = ref('2025-01-30')
 const tipoCobranca = ref('')
 
-const formatDate = (dateString) => {
-  if (!dateString) return ''
-  const date = new Date(dateString)
-  const day = String(date.getDate()).padStart(2, '0')
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const year = date.getFullYear()
-  return `${day}-${month}-${year}`
-}
-
 const emit = defineEmits(['nova-cobranca', 'periodo-change', 'data-change', 'tipo-change'])
 
-const formatDateAndEmit = () => {
-  emit('data-change', { inicio: dataInicio.value, fim: dataFim.value })
+const handleDateChange = (dates) => {
+  dataInicio.value = dates.inicio
+  dataFim.value = dates.fim
+  emit('data-change', dates)
 }
 </script>
 
@@ -260,95 +235,6 @@ const formatDateAndEmit = () => {
   flex-shrink: 0;
 }
 
-.date-range-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0;
-  padding: 0.75rem 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 250px;
-  background-color: white;
-  transition: border-color 0.2s;
-  min-width: 0;
-}
-
-.date-range-wrapper:hover {
-  border-color: #2563eb;
-}
-
-.date-field {
-  position: relative;
-  display: flex;
-  align-items: center;
-  flex: 1;
-  min-width: 0;
-}
-
-.date-field-start {
-  padding-right: 0.75rem;
-}
-
-.date-field-end {
-  padding-left: 0.75rem;
-}
-
-.date-field-start,
-.date-field-end {
-  gap: 0.5rem;
-}
-
-.date-icon {
-  color: #2A2E33;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 1;
-}
-
-.date-range-input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-  z-index: 3;
-  border: none;
-  background: transparent;
-  padding: 0;
-  margin: 0;
-  font-size: 16px;
-}
-
-.date-display {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: auto;
-  letter-spacing: 0%;
-  color: #2A2E33;
-  pointer-events: none;
-  white-space: nowrap;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 1;
-}
-
-.date-chevron {
-  color: #2A2E33;
-  flex-shrink: 0;
-  pointer-events: none;
-  position: relative;
-  z-index: 1;
-}
-
-.date-divider {
-  width: 1px;
-  height: 20px;
-  background-color: #d1d5db;
-  flex-shrink: 0;
-}
 
 .icon-btn {
   background: none;
