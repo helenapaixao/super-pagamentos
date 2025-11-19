@@ -74,7 +74,9 @@
         <div class="mobile-faturamento-section">
           <h2 class="mobile-faturamento-title">Faturamento</h2>
           <div class="mobile-faturamento-value-row">
-            <span class="mobile-faturamento-value">{{ formatCurrency(faturamento?.total || 0) }}</span>
+            <span class="mobile-faturamento-value">
+              <span class="mobile-faturamento-currency">R$</span> {{ formatCurrency(faturamento?.total || 0) }}
+            </span>
             <img :src="eyeDashboardIcon" alt="Visibilidade" class="mobile-eye-icon" />
           </div>
         </div>
@@ -448,6 +450,15 @@ onUnmounted(() => {
     font-weight: 700;
     color: #FFFFFF;
     line-height: 100%;
+  }
+
+  .mobile-faturamento-currency {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #D1DCFF;
+    line-height: auto;
+    letter-spacing: 0%;
   }
 
   .mobile-eye-icon {
