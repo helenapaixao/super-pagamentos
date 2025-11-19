@@ -68,12 +68,10 @@ const handleDateChange = dates => {
 }
 
 const handlePeriodoChange = newPeriodo => {
-  periodo.value = newPeriodo
   emit('periodo-change', newPeriodo)
 }
 
 const handleTipoChange = newTipo => {
-  tipoCobranca.value = newTipo
   emit('tipo-change', newTipo)
 }
 </script>
@@ -83,11 +81,10 @@ const handleTipoChange = newTipo => {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.75rem 0;
+  padding: 0.75rem 24px;
   width: 100%;
   box-sizing: border-box;
   flex-wrap: nowrap;
-  align-content: flex-start;
   min-width: 0;
   overflow-x: auto;
   overflow-y: visible;
@@ -157,19 +154,24 @@ const handleTipoChange = newTipo => {
   white-space: nowrap;
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1441px) {
   .dashboard-controls {
     flex-wrap: nowrap !important;
   }
 
   .dashboard-controls > :nth-child(5) {
     margin-left: auto !important;
+    padding-right: 8px;
   }
-}
 
-@media (min-width: 1441px) {
+  .dashboard-controls > :nth-child(6) {
+    margin-left: 8px !important;
+    margin-right: 0 !important;
+    flex: 0 0 auto;
+  }
+
   .dashboard-controls {
-    flex-wrap: nowrap !important;
+    max-width: calc(100% - 48px);
   }
 }
 
@@ -179,31 +181,12 @@ const handleTipoChange = newTipo => {
     row-gap: 0.75rem;
   }
 
-  .dashboard-controls > :nth-child(1) {
-    order: 1;
-  }
-
-  .dashboard-controls > :nth-child(2) {
-    order: 2;
-  }
-
-  .dashboard-controls > :nth-child(3) {
-    order: 3;
-  }
-
-  .dashboard-controls > :nth-child(4) {
-    order: 4;
-  }
-
-  .dashboard-controls > :nth-child(5) {
-    order: 6;
-    margin-left: 0 !important;
-  }
-
-  .dashboard-controls > :nth-child(6) {
-    order: 7;
-    margin-left: 0 !important;
-  }
+  .dashboard-controls > :nth-child(1) { order: 1; }
+  .dashboard-controls > :nth-child(2) { order: 2; }
+  .dashboard-controls > :nth-child(3) { order: 3; }
+  .dashboard-controls > :nth-child(4) { order: 4; }
+  .dashboard-controls > :nth-child(5) { order: 6; margin-left: 0 !important; }
+  .dashboard-controls > :nth-child(6) { order: 7; margin-left: 0 !important; }
 
   .dashboard-controls > :nth-child(1)::after {
     content: '';
@@ -248,39 +231,4 @@ const handleTipoChange = newTipo => {
     margin: 24px auto !important;
   }
 }
-
-.date-range-wrapper { padding: 6px 12px; box-sizing: border-box; }
-.select-wrapper { padding: 6px 12px; box-sizing: border-box; }
-.date-display { max-width: 120px; }
-.select-control { padding-right: 28px; }
-
-:root {
-  --page-horizontal-padding: 24px;
-}
-
-.dashboard-controls {
-  padding-left: var(--page-horizontal-padding);
-  padding-right: var(--page-horizontal-padding);
-  box-sizing: border-box;
-}
-
-@media (min-width: 1440px) {
-  .dashboard-controls { flex-wrap: nowrap !important; }
-
-  .dashboard-controls > :nth-child(5) {
-    margin-left: auto !important;
-    padding-right: 8px;
-  }
-
-  .dashboard-controls > :nth-child(6) {
-    margin-left: 8px !important;
-    margin-right: 0 !important;
-    flex: 0 0 auto;
-  }
-
-  .dashboard-controls {
-    max-width: calc(100% - var(--page-horizontal-padding) * 2);
-  }
-}
-
 </style>

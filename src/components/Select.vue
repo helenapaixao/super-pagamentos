@@ -27,8 +27,9 @@
 
 <script setup>
 import { ref, computed, onUnmounted, nextTick, watch } from 'vue'
-import { Teleport } from 'vue'
 import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.svg'
+
+const DROPDOWN_CLOSE_DELAY = 150
 
 const props = defineProps({
   modelValue: {
@@ -37,8 +38,7 @@ const props = defineProps({
   },
   options: {
     type: Array,
-    required: true,
-    default: () => []
+    required: true
   },
   iconComponent: {
     type: Object,
@@ -99,9 +99,7 @@ const selectOption = (value) => {
   if (!value || value === '') return
   emit('update:modelValue', value)
   emit('change', value)
-  setTimeout(() => {
-    closeDropdown()
-  }, 150)
+  setTimeout(closeDropdown, DROPDOWN_CLOSE_DELAY)
 }
 
 watch(isOpen, (newVal) => {

@@ -26,25 +26,35 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { Calendar } from '@solar-icons/vue'
 import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.svg'
 
 const props = defineProps({
   inicio: {
     type: String,
-    default: '2020-06-10'
+    default: ''
   },
   fim: {
     type: String,
-    default: '2025-01-30'
+    default: ''
   }
 })
 
 const emit = defineEmits(['change'])
 
-const dataInicio = ref(props.inicio)
-const dataFim = ref(props.fim)
+const getDefaultStartDate = () => {
+  const date = new Date()
+  date.setMonth(date.getMonth() - 1)
+  return date.toISOString().split('T')[0]
+}
+
+const getDefaultEndDate = () => {
+  return new Date().toISOString().split('T')[0]
+}
+
+const dataInicio = ref(props.inicio || getDefaultStartDate())
+const dataFim = ref(props.fim || getDefaultEndDate())
 
 watch(() => props.inicio, (newVal) => {
   dataInicio.value = newVal
