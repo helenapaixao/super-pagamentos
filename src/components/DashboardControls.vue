@@ -19,17 +19,17 @@
       @change="handleDateChange"
     />
 
-    <div class="select-wrapper">
-      <CardTransfer :size="20" class="select-icon" />
-      <select v-model="tipoCobranca" class="select-control" @change="emit('tipo-change', tipoCobranca)">
-        <option value="">Tipo de cobrança</option>
-        <option value="credito">Crédito</option>
-        <option value="debito">Débito</option>
-        <option value="boleto">Boleto</option>
-        <option value="pix">Pix</option>
-      </select>
-      <AltArrowDown :size="16" class="select-chevron" />
-    </div>
+    <SelectWrapper
+      v-model="tipoCobranca"
+      :icon-component="CardTransfer"
+      @change="handleTipoChange"
+    >
+      <option value="">Tipo de cobrança</option>
+      <option value="credito">Crédito</option>
+      <option value="debito">Débito</option>
+      <option value="boleto">Boleto</option>
+      <option value="pix">Pix</option>
+    </SelectWrapper>
 
     <button class="download-btn" title="Download">
       <DownloadMinimalistic :size="20" class="download-icon" />
@@ -44,6 +44,7 @@ import addCircleBoldIcon from '@/assets/icons/add-circle-bold.svg'
 import addCircleBoldWebIcon from '@/assets/icons/add-circle-bold-web.svg'
 import DateRangePicker from './DateRangePicker.vue'
 import PeriodSelect from './PeriodSelect.vue'
+import SelectWrapper from './SelectWrapper.vue'
 
 const periodo = ref('especifico')
 const dataInicio = ref('2020-06-10')
@@ -61,6 +62,11 @@ const handleDateChange = (dates) => {
 const handlePeriodoChange = (newPeriodo) => {
   periodo.value = newPeriodo
   emit('periodo-change', newPeriodo)
+}
+
+const handleTipoChange = (newTipo) => {
+  tipoCobranca.value = newTipo
+  emit('tipo-change', newTipo)
 }
 </script>
 
