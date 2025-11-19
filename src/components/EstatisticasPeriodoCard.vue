@@ -3,15 +3,15 @@
     <div class="periodo-header">
       <div class="periodo-info">
         <p class="periodo-title">Estatísticas do período</p>
-        <p class="periodo-value">R$ {{ formatCurrency(valor) }}</p>
+        <p class="periodo-value">
+          <span class="periodo-currency">R$</span> {{ formatCurrency(valor) }}
+        </p>
         <p class="periodo-growth" :class="{ positive: crescimento >= 0, negative: crescimento < 0 }">
           <span>{{ crescimento >= 0 ? '↑' : '↓' }} {{ formatPercentual(Math.abs(crescimento)) }}%</span>
         </p>
       </div>
       <button class="filter-button" type="button">
-        <span class="filter-inner">
           <img :src="filterIcon" alt="Filtrar" />
-        </span>
       </button>
     </div>
 
@@ -100,19 +100,31 @@ const formatPercentual = (value) => {
 
 .periodo-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
-  color: #111827;
+  color: #000000;
   margin: 0 0 0.45rem 0;
 }
 
 .periodo-value {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 34px;
+  font-size: 24px;
   font-weight: 700;
   margin: 0;
   color: #0F172A;
   line-height: 1.1;
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.periodo-currency {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #2A2E33;
+  line-height: 1;
+  letter-spacing: 0%;
 }
 
 .periodo-growth {
@@ -131,11 +143,11 @@ const formatPercentual = (value) => {
 }
 
 .filter-button {
-  width: 58px;
-  height: 58px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  border: 2px solid #E5E9F3;
-  background: #FDFEFF;
+  border: 1px solid #D9D9D9;
+  background: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
