@@ -522,13 +522,14 @@ const handleLogout = () => {
 
   .mobile-nav-center {
     position: absolute;
-    top: -42px;
+    bottom: 1.5rem;
     left: 50%;
     transform: translateX(-50%);
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
+    z-index: 10;
   }
 
   .mobile-nav-center-outer {
@@ -539,7 +540,6 @@ const handleLogout = () => {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
   }
 
   .mobile-nav-center-middle {
@@ -550,6 +550,19 @@ const handleLogout = () => {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mobile-nav-center-middle::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 8px 8px;
+    opacity: 0.3;
   }
 
   .mobile-nav-center-inner {
