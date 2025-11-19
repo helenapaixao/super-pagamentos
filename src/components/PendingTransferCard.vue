@@ -110,18 +110,18 @@ const autorizarTransferencia = () => {
 
 .transferencia-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: #1F2430;
+  font-size: 14px;
+  font-weight: semibold;
+  color: #2A2E33;
   margin: 0;
   line-height: 1.3;
 }
 
 .transferencia-description {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
-  color: #8B8F99;
+  color:#86898B;
   margin: 0;
   line-height: 1.5;
 }
@@ -183,11 +183,11 @@ const autorizarTransferencia = () => {
   }
 
   .transferencia-title {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .transferencia-description {
-    font-size: 15px;
+    font-size: 12px;
   }
 
   .transferencia-action {
