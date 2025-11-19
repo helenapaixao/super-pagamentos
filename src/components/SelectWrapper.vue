@@ -1,102 +1,165 @@
 <template>
-  <div class="select-wrapper">
-    <component :is="iconComponent" :size="20" class="select-icon" v-if="iconComponent" />
-    <img :src="iconSrc" alt="" class="select-icon" v-if="iconSrc" />
-    <select v-model="localValue" class="select-control" @change="handleChange">
-      <slot></slot>
-    </select>
-    <img :src="roundAltArrowDownIcon" alt="" class="select-chevron" width="24" height="24" />
-  </div>
+  <button class="btn-primary" @click="$emit('click')">
+    <span class="btn-text">{{ text }}</span>
+
+    <div class="icon-circle" aria-hidden="true">
+      <AddCircle :size="18" class="icon-add-circle icon-web" />
+      <AddCircle :size="15" class="icon-add-circle icon-mobile" />
+    </div>
+  </button>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
-import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.svg'
+import { AddCircle } from '@solar-icons/vue'
 
-const props = defineProps({
-  modelValue: {
+defineProps({
+  text: {
     type: String,
-    default: ''
-  },
-  iconComponent: {
-    type: Object,
-    default: null
-  },
-  iconSrc: {
-    type: String,
-    default: null
+    default: 'Nova cobrança'
   }
 })
 
-const emit = defineEmits(['update:modelValue', 'change'])
-
-const localValue = ref(props.modelValue)
-
-watch(() => props.modelValue, (newVal) => {
-  localValue.value = newVal
-})
-
-const handleChange = () => {
-  emit('update:modelValue', localValue.value)
-  emit('change', localValue.value)
-}
+defineEmits(['click'])
 </script>
 
 <style scoped>
-.select-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0 1rem;
-  height: 40px;
-  border: 1px solid #D9D9D9;
-  border-radius: 250px;
-  background-color: white;
-  transition: border-color 0.2s;
-  min-width: fit-content;
-  flex-shrink: 0;
-  white-space: nowrap;
-}
-
-.select-wrapper:hover {
-  border-color: #2563eb;
-}
-
-.select-icon {
-  color: #0641FC;
-  flex-shrink: 0;
-  pointer-events: none;
-  position: relative;
-  z-index: 1;
-}
-
-.select-control {
+.btn-primary {
+  background-color: #0641FC;
+  color: white;
   border: none;
-  background: transparent;
-  color: #374151;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px;
+  outline: none;
+  height: 40px;
+  padding: 0 23px;
+  border-radius: 250px;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 600;
-  line-height: auto;
-  letter-spacing: 0%;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
   cursor: pointer;
-  flex: 1;
-  appearance: none;
-  outline: none;
   position: relative;
-  z-index: 2;
-  min-width: 0;
+  margin: 0;
+  overflow: visible;
 }
 
-.select-control:focus {
-  outline: none;
+.btn-primary::before,
+.btn-primary::after {
+  display: none;
 }
 
-.select-chevron {
-  color: #2A2E33;
+.btn-text {
+  color: #F9F9F9;
+  font-size: 14px;
+  user-select: none;
+}
+
+.icon-circle {
+  width: 24px;
+  height: 24px;
+  background: #E6E6E6;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  pointer-events: none;
+}
+.icon-circle :deep(svg) { color: #0641FC; }
+.icon-add-circle { width: 18px; height: 18px; display: block; }
+.icon-web { display: block; }
+.icon-mobile { display: none; }
+
+.btn-primary:hover {
+  background-color: #0530C7;
+}
+
+@media (max-width: 768px) {
+  .btn-primary {
+    width: calc(100% - 48px);
+    max-width: 390px;
+    height: 52px;
+    padding: 12px 23px;
+    background: #2A2E33;
+    border-radius: 250px;
+    margin: 24px auto !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    color: #F5F7FB;
+    position: relative;
+    z-index: 1;
+    box-shadow:
+      inset 0 4px 10.3px rgba(133,45,246,0.57),
+      inset 0 -19px 36.6px rgba(6,65,252,0.35);
+  }
+
+  .btn-primary::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: inherit;
+    z-index: -2;
+    background: linear-gradient(135deg,
+      rgba(194,140,255,0.95),
+      rgba(160,110,255,0.95),
+      rgba(111,97,255,0.95),
+      rgba(78,78,180,0.95)
+    );
+    filter: blur(8px);
+    pointer-events: none;
+  }
+
+  .btn-primary::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    z-index: -1;
+    background: linear-gradient(135deg,
+      rgba(180,130,255,0.95),
+      rgba(110,90,255,0.9)
+    );
+    padding: 3px;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .btn-text {
+    font-size: 18px;
+    color: #F5F7FB;
+    z-index: 2;
+  }
+
+  .icon-circle {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(180deg,#F3F7FC 0%, #E8EEF8 100%);
+    box-shadow: 0 4px 12px rgba(10,20,40,0.12);
+  }
+  .icon-circle :deep(svg) { color: #0D1726; }
+  .icon-web { display: none; }
+  .icon-mobile { display: block; width: 15px; height: 15px; }
+}
+
+@media (max-width: 360px) {
+  .btn-primary {
+    width: calc(100% - 32px);
+    max-width: none;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.14);
 }
 </style>
-

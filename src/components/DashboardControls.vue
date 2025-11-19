@@ -86,6 +86,7 @@ const handleTipoChange = newTipo => {
   scrollbar-color: #D1D5DB transparent;
   -webkit-overflow-scrolling: touch;
   padding-bottom: 8px;
+  margin-bottom: 22px;
 }
 
 .dashboard-controls::-webkit-scrollbar {
