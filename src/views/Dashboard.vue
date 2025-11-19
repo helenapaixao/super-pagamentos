@@ -1,59 +1,59 @@
 <template>
   <div class="dashboard-layout">
-    <Header :faturamento="faturamentoData" />
+    <Header :faturamento="revenueData" />
     <div class="dashboard-content">
       <Sidebar />
       <main class="dashboard-main">
         <DashboardControls
-          @nova-cobranca="handleNovaCobranca"
-          @periodo-change="handlePeriodoChange"
-          @data-change="handleDataChange"
-          @tipo-change="handleTipoChange"
+          @nova-cobranca="handleNewCharge"
+          @periodo-change="handlePeriodChange"
+          @data-change="handleDateChange"
+          @tipo-change="handleTypeChange"
         />
 
-        <RevenueCard :faturamento="faturamentoData" />
+        <RevenueCard :faturamento="revenueData" />
 
         <PendingTransferCard
-          v-if="transferenciaPendente"
-          :transferencia="transferenciaPendente"
-          @autorizar="handleAutorizarTransferencia"
+          v-if="pendingTransfer"
+          :transferencia="pendingTransfer"
+          @autorizar="handleAuthorizeTransfer"
         />
 
         <div class="statistics-mobile-wrapper">
-          <StatisticsMobileCard :items="estatisticasMobileItems" />
+          <StatisticsMobileCard :items="mobileStatisticsItems" />
         </div>
 
         <div class="statistics-grid">
-          <StatisticsCard
-            titulo="Reembolsos"
-            :valor="estatisticas.reembolsos.valor"
-            :cobrancas="estatisticas.reembolsos.cobrancas"
-            :percentual="estatisticas.reembolsos.percentual"
-          />
-          <StatisticsCard
-            titulo="Chargebacks"
-            :valor="estatisticas.chargebacks.valor"
-            :cobrancas="estatisticas.chargebacks.cobrancas"
-            :percentual="estatisticas.chargebacks.percentual"
-            :show-badge="true"
-          />
-          <StatisticsCard
-            titulo="Cancelados"
-            :valor="estatisticas.cancelados.valor"
-            :cobrancas="estatisticas.cancelados.cobrancas"
-            :percentual="estatisticas.cancelados.percentual"
-          />
-          <StatisticsCard
-            titulo="Não autorizado"
-            :valor="estatisticas.naoAutorizado.valor"
-            :cobrancas="estatisticas.naoAutorizado.cobrancas"
-            :percentual="estatisticas.naoAutorizado.percentual"
-          />
+        <StatisticsCard
+          titulo="Reembolsos"
+          :valor="statistics.reembolsos.valor"
+          :cobrancas="statistics.reembolsos.cobrancas"
+          :percentual="statistics.reembolsos.percentual"
+        />
+        <StatisticsCard
+          titulo="Chargebacks"
+          :valor="statistics.chargebacks.valor"
+          :cobrancas="statistics.chargebacks.cobrancas"
+          :percentual="statistics.chargebacks.percentual"
+          :show-badge="true"
+        />
+        <StatisticsCard
+          titulo="Cancelados"
+          :valor="statistics.cancelados.valor"
+          :cobrancas="statistics.cancelados.cobrancas"
+          :percentual="statistics.cancelados.percentual"
+        />
+        <StatisticsCard
+          titulo="Não autorizado"
+          :valor="statistics.naoAutorizado.valor"
+          :cobrancas="statistics.naoAutorizado.cobrancas"
+          :percentual="statistics.naoAutorizado.percentual"
+        />
         </div>
 
         <div class="charts-grid">
-          <ConversionModalityCard :modalidades="conversaoModalidades" />
-          <PaymentFlagsCard :bandeiras="bandeirasUtilizadas" />
+          <ConversionModalityCard :modalidades="conversionModalities" />
+          <PaymentFlagsCard :bandeiras="paymentFlags" />
         </div>
 
         <HelpButton :fixed="true" @click="handleHelpClick" />
@@ -76,12 +76,12 @@ import PaymentFlagsCard from '../components/PaymentFlagsCard.vue'
 import HelpButton from '../components/HelpButton.vue'
 import { dashboardService } from '../services/dashboardService'
 
-const periodoSelecionado = ref({
+const selectedPeriod = ref({
   inicio: '2024-12-14',
   fim: '2025-02-06'
 })
 
-const faturamentoData = ref({
+const revenueData = ref({
   total: 1060551.14,
   crescimento: 123.9,
   recebido: 245340.90,
@@ -90,15 +90,15 @@ const faturamentoData = ref({
   ticketMedio: 192.30,
   numeroCobrancas: 12349,
   dadosGrafico: Array.from({ length: 31 }, () => Math.random() * 200000),
-  periodo: periodoSelecionado
+  periodo: selectedPeriod
 })
 
-const transferenciaPendente = ref({
+const pendingTransfer = ref({
   id: 1,
   valor: 29119.15
 })
 
-const estatisticas = ref({
+const statistics = ref({
   reembolsos: {
     valor: 8260.10,
     cobrancas: 233,
@@ -121,14 +121,14 @@ const estatisticas = ref({
   }
 })
 
-const conversaoModalidades = ref([
+const conversionModalities = ref([
   { nome: 'Crédito', percentual: 92, cor: 'blue' },
   { nome: 'Débito', percentual: 95, cor: 'purple' },
   { nome: 'Boleto', percentual: 42, cor: 'orange' },
   { nome: 'Pix', percentual: 98, cor: 'blue' }
 ])
 
-const bandeirasUtilizadas = ref([
+const paymentFlags = ref([
   { nome: 'VISA', percentual: 70 },
   { nome: 'Mastercard', percentual: 65 },
   { nome: 'ELO', percentual: 55 },
@@ -140,31 +140,31 @@ const bandeirasUtilizadas = ref([
   { nome: 'Hiper', percentual: 8 }
 ])
 
-const handleNovaCobranca = () => {
+const handleNewCharge = () => {
   console.log('Nova cobrança')
 }
 
-const handlePeriodoChange = (periodo) => {
+const handlePeriodChange = (periodo) => {
   console.log('Período alterado:', periodo)
   loadDashboardData()
 }
 
-const handleDataChange = ({ inicio, fim }) => {
+const handleDateChange = ({ inicio, fim }) => {
   console.log('Datas alteradas:', inicio, fim)
-  periodoSelecionado.value = { inicio, fim }
-  faturamentoData.value.periodo = periodoSelecionado.value
+  selectedPeriod.value = { inicio, fim }
+  revenueData.value.periodo = selectedPeriod.value
   loadDashboardData()
 }
 
-const handleTipoChange = (tipo) => {
+const handleTypeChange = (tipo) => {
   console.log('Tipo alterado:', tipo)
   loadDashboardData()
 }
 
-const handleAutorizarTransferencia = async (transferenciaId) => {
+const handleAuthorizeTransfer = async (transferenciaId) => {
   try {
     await dashboardService.autorizarTransferencia(transferenciaId)
-    transferenciaPendente.value = null
+    pendingTransfer.value = null
     alert('Transferência autorizada com sucesso!')
   } catch (error) {
     console.error('Erro ao autorizar transferência:', error)
@@ -176,32 +176,32 @@ const handleHelpClick = () => {
   console.log('Ajuda clicada')
 }
 
-const estatisticasMobileItems = computed(() => [
+const mobileStatisticsItems = computed(() => [
   {
     titulo: 'Reembolsos',
-    valor: estatisticas.value.reembolsos.valor,
-    percentual: estatisticas.value.reembolsos.percentual,
+    valor: statistics.value.reembolsos.valor,
+    percentual: statistics.value.reembolsos.percentual,
     percentualColor: '#F89A1D',
     sparkline: [8, 10, 11, 14, 16, 18, 16]
   },
   {
     titulo: 'Chargebacks',
-    valor: estatisticas.value.chargebacks.valor,
-    percentual: estatisticas.value.chargebacks.percentual,
+    valor: statistics.value.chargebacks.valor,
+    percentual: statistics.value.chargebacks.percentual,
     percentualColor: '#FF4D6D',
     sparkline: [16, 15, 14, 13, 14, 15, 16]
   },
   {
     titulo: 'Cancelados',
-    valor: estatisticas.value.cancelados.valor,
-    percentual: estatisticas.value.cancelados.percentual,
+    valor: statistics.value.cancelados.valor,
+    percentual: statistics.value.cancelados.percentual,
     percentualColor: '#8B8F99',
     sparkline: [10, 11, 12, 12, 11, 12, 12]
   },
   {
     titulo: 'Não autorizado',
-    valor: estatisticas.value.naoAutorizado.valor,
-    percentual: estatisticas.value.naoAutorizado.percentual,
+    valor: statistics.value.naoAutorizado.valor,
+    percentual: statistics.value.naoAutorizado.percentual,
     percentualColor: '#FF4D6D',
     sparkline: [9, 10, 11, 12, 13, 14, 12]
   }
@@ -216,11 +216,11 @@ const loadDashboardData = async () => {
     // const bandeiras = await dashboardService.getBandeirasUtilizadas()
     // const transferencias = await dashboardService.getTransferenciasPendentes()
 
-    // faturamentoData.value = faturamento
-    // estatisticas.value = estatisticasData
-    // conversaoModalidades.value = conversao
-    // bandeirasUtilizadas.value = bandeiras
-    // transferenciaPendente.value = transferencias[0] || null
+    // revenueData.value = faturamento
+    // statistics.value = estatisticasData
+    // conversionModalities.value = conversao
+    // paymentFlags.value = bandeiras
+    // pendingTransfer.value = transferencias[0] || null
   } catch (error) {
     console.error('Erro ao carregar dados do dashboard:', error)
   }

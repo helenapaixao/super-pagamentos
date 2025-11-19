@@ -5,26 +5,26 @@
     <div class="controls-divider"></div>
 
     <Select
-      v-model="periodo"
+      v-model="period"
       :icon-component="Calendar"
-      :options="periodoOptions"
+      :options="periodOptions"
       placeholder="Período: Específico"
       width="200px"
-      @change="handlePeriodoChange"
+      @change="handlePeriodChange"
     />
 
     <DateRangePicker
-      :inicio="dataInicio"
-      :fim="dataFim"
+      :inicio="startDate"
+      :fim="endDate"
       @change="handleDateChange"
     />
 
     <Select
-      v-model="tipoCobranca"
+      v-model="chargeType"
       :icon-component="CardTransfer"
-      :options="tipoCobrancaOptions"
+      :options="chargeTypeOptions"
       placeholder="Tipo de cobrança"
-      @change="handleTipoChange"
+      @change="handleTypeChange"
     />
 
     <DownloadButton />
@@ -40,19 +40,19 @@ import DownloadButton from './DownloadButton.vue'
 import NewChargeButton from './NewChargeButton.vue'
 import Select from './Select.vue'
 
-const periodo = ref('')
-const dataInicio = ref('2020-06-10')
-const dataFim = ref('2025-01-30')
-const tipoCobranca = ref('')
+const period = ref('')
+const startDate = ref('2020-06-10')
+const endDate = ref('2025-01-30')
+const chargeType = ref('')
 
-const periodoOptions = [
+const periodOptions = [
   { value: 'hoje', label: 'Hoje' },
   { value: 'semana', label: 'Esta semana' },
   { value: 'mes', label: 'Este mês' },
   { value: 'ano', label: 'Este ano' }
 ]
 
-const tipoCobrancaOptions = [
+const chargeTypeOptions = [
   { value: 'credito', label: 'Crédito' },
   { value: 'debito', label: 'Débito' },
   { value: 'boleto', label: 'Boleto' },
@@ -62,16 +62,16 @@ const tipoCobrancaOptions = [
 const emit = defineEmits(['nova-cobranca', 'periodo-change', 'data-change', 'tipo-change'])
 
 const handleDateChange = dates => {
-  dataInicio.value = dates.inicio
-  dataFim.value = dates.fim
+  startDate.value = dates.inicio
+  endDate.value = dates.fim
   emit('data-change', dates)
 }
 
-const handlePeriodoChange = newPeriodo => {
+const handlePeriodChange = newPeriodo => {
   emit('periodo-change', newPeriodo)
 }
 
-const handleTipoChange = newTipo => {
+const handleTypeChange = newTipo => {
   emit('tipo-change', newTipo)
 }
 </script>

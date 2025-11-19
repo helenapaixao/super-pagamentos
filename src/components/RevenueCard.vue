@@ -55,7 +55,7 @@
         :crescimento="faturamento.crescimento"
         :dados-grafico="faturamento.dadosGrafico"
         :periodo="mobilePeriodo"
-        @periodo-change="handlePeriodoChange"
+        @periodo-change="handlePeriodChange"
       />
       
       <div class="revenue-metrics-mobile">
@@ -126,7 +126,7 @@ const mobilePeriodo = computed(() => {
 
 const emit = defineEmits(['periodo-change'])
 
-const handlePeriodoChange = (novoPeriodo) => {
+const handlePeriodChange = (novoPeriodo) => {
   emit('periodo-change', novoPeriodo)
 }
 

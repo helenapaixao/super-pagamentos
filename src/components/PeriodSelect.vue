@@ -1,8 +1,8 @@
 <template>
   <DropdownSelect
-    v-model="localPeriodo"
+    v-model="localPeriod"
     :icon-component="Calendar"
-    :options="periodoOptions"
+    :options="periodOptions"
     placeholder="Período: Específico"
     width="200px"
     @change="handleChange"
@@ -23,22 +23,22 @@ const props = defineProps({
 
 const emit = defineEmits(['change'])
 
-const localPeriodo = ref(props.periodo)
+const localPeriod = ref(props.periodo)
 
 watch(() => props.periodo, (newVal) => {
-  localPeriodo.value = newVal
+  localPeriod.value = newVal
 })
 
-const periodoOptions = [
+const periodOptions = [
   { value: 'hoje', label: 'Hoje' },
   { value: 'semana', label: 'Esta semana' },
   { value: 'mes', label: 'Este mês' },
   { value: 'ano', label: 'Este ano' }
 ]
 
-const handleChange = (newPeriodo) => {
-  localPeriodo.value = newPeriodo
-  emit('change', newPeriodo)
+const handleChange = (newPeriod) => {
+  localPeriod.value = newPeriod
+  emit('change', newPeriod)
 }
 </script>
 
