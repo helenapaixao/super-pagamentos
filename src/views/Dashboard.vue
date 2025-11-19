@@ -63,7 +63,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, computed } from 'vue'
 import Header from '../components/Header.vue'
 import Sidebar from '../components/Sidebar.vue'
 import DashboardControls from '../components/DashboardControls.vue'
@@ -146,19 +146,16 @@ const handleNewCharge = () => {
 
 const handlePeriodChange = (periodo) => {
   console.log('Período alterado:', periodo)
-  loadDashboardData()
 }
 
 const handleDateChange = ({ inicio, fim }) => {
   console.log('Datas alteradas:', inicio, fim)
   selectedPeriod.value = { inicio, fim }
   revenueData.value.periodo = selectedPeriod.value
-  loadDashboardData()
 }
 
 const handleTypeChange = (tipo) => {
   console.log('Tipo alterado:', tipo)
-  loadDashboardData()
 }
 
 const handleAuthorizeTransfer = async (transferenciaId) => {
@@ -207,28 +204,6 @@ const mobileStatisticsItems = computed(() => [
   }
 ])
 
-const loadDashboardData = async () => {
-  try {
-    // Carregar dados do dashboard
-    // const faturamento = await dashboardService.getFaturamento()
-    // const estatisticasData = await dashboardService.getEstatisticas()
-    // const conversao = await dashboardService.getConversaoModalidade()
-    // const bandeiras = await dashboardService.getBandeirasUtilizadas()
-    // const transferencias = await dashboardService.getTransferenciasPendentes()
-
-    // revenueData.value = faturamento
-    // statistics.value = estatisticasData
-    // conversionModalities.value = conversao
-    // paymentFlags.value = bandeiras
-    // pendingTransfer.value = transferencias[0] || null
-  } catch (error) {
-    console.error('Erro ao carregar dados do dashboard:', error)
-  }
-}
-
-onMounted(() => {
-  loadDashboardData()
-})
 </script>
 
 <style scoped>
