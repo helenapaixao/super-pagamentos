@@ -364,18 +364,23 @@ const formatDateAndEmit = () => {
 @media (max-width: 768px) {
   .dashboard-controls {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     gap: 1.25rem;
+    width: 100%;
+    max-width: 392px;
+    margin: 0 auto;
   }
 
   .btn-primary {
     width: 100%;
+    max-width: 392px;
     justify-content: space-between;
     padding: 20px 26px;
     box-shadow: none;
     background: transparent;
     color: #f4f6ff;
     letter-spacing: 0.2px;
+    margin: 0 auto;
   }
 
   .btn-primary::before {

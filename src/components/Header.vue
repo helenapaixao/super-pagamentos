@@ -60,7 +60,7 @@
       <div class="mobile-card">
         <div class="mobile-card-top">
           <div class="mobile-profile-pill">
-            <div class="mobile-profile-icon">S</div>
+            <img :src="superProfileIcon" alt="Super" class="mobile-profile-icon" />
             <div class="mobile-profile-info">
               <span class="mobile-profile-top">Empresarial</span>
               <span class="mobile-profile-bottom">Astra Pagamentos</span>
@@ -98,6 +98,7 @@ import superLogo from '@/assets/icons/super-logo.svg'
 import chartIcon from '@/assets/icons/chart-icon.svg'
 import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.svg'
 import eyeDashboardIcon from '@/assets/icons/eye-dashboard.svg'
+import superProfileIcon from '@/assets/icons/super-profile-icon.svg'
 
 const props = defineProps({
   faturamento: {
@@ -356,16 +357,8 @@ onUnmounted(() => {
   .mobile-profile-icon {
     width: 32px;
     height: 32px;
-    border-radius: 50%;
-    background: #111827;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
     flex-shrink: 0;
+    display: block;
   }
 
   .mobile-profile-info {
@@ -449,10 +442,10 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: white;
+    color: #D1DCFF;
     text-decoration: none;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     padding: 0.75rem 0;
   }
