@@ -256,6 +256,7 @@ const handleTipoChange = (newTipo) => {
     margin: 0 auto 1.5rem;
   }
 
+  .controls-divider,
   .select-wrapper,
   .date-range-wrapper,
   :deep(.download-btn) {
