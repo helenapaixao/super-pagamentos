@@ -85,9 +85,7 @@
       <div class="mobile-card">
         <a href="#" class="mobile-wallet-link">
           <span>Ir para a carteira</span>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 12L10 8L6 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <RoundAltArrowDownLinear :size="16" class="mobile-wallet-arrow" />
         </a>
       </div>
     </div>
@@ -96,7 +94,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import { CalculatorMinimalistic, Settings, BellBing } from '@solar-icons/vue'
+import { CalculatorMinimalistic, Settings, BellBing, RoundAltArrowDownLinear } from '@solar-icons/vue'
 import superLogo from '@/assets/icons/super-logo.svg'
 import chartIcon from '@/assets/icons/chart-icon.svg'
 import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.svg'
@@ -355,8 +353,9 @@ onUnmounted(() => {
     background: white;
     border-radius: 250px;
     padding: 0.5rem 0.75rem;
-    flex: 1;
-    max-width: calc(100% - 3rem);
+    width: 207px;
+    height: 54px;
+    flex-shrink: 0;
   }
 
   .mobile-profile-icon {
@@ -463,8 +462,10 @@ onUnmounted(() => {
     padding: 0.75rem 0;
   }
 
-  .mobile-wallet-link svg {
+  .mobile-wallet-link svg,
+  .mobile-wallet-arrow {
     flex-shrink: 0;
+    color: white;
   }
 }
 </style>
