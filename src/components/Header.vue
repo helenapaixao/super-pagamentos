@@ -85,7 +85,7 @@
       <div class="mobile-card">
         <a href="#" class="mobile-wallet-link">
           <span>Ir para a carteira</span>
-          <img :src="roundAltArrowDownIcon" alt="" class="mobile-wallet-arrow" width="16" height="16" />
+          <img :src="roundAltArrowDownIcon" alt="" class="mobile-wallet-arrow" width="24" height="24" />
         </a>
       </div>
     </div>
@@ -472,6 +472,7 @@ onUnmounted(() => {
   .mobile-wallet-arrow {
     flex-shrink: 0;
     filter: brightness(0) invert(1);
+    transform: rotate(-90deg);
   }
 }
 </style>
