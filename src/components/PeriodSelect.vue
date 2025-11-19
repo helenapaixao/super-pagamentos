@@ -1,21 +1,18 @@
 <template>
-  <SelectWrapper
-    :model-value="periodo"
+  <DropdownSelect
+    v-model="localPeriodo"
     :icon-component="Calendar"
-    @update:model-value="handleChange"
+    :options="periodoOptions"
+    placeholder="Período: Específico"
+    width="200px"
     @change="handleChange"
-  >
-    <option value="especifico">Período: Específico</option>
-    <option value="hoje">Hoje</option>
-    <option value="semana">Esta semana</option>
-    <option value="mes">Este mês</option>
-    <option value="ano">Este ano</option>
-  </SelectWrapper>
+  />
 </template>
 
 <script setup>
+import { ref, watch } from 'vue'
 import { Calendar } from '@solar-icons/vue'
-import SelectWrapper from './SelectWrapper.vue'
+import DropdownSelect from './DropdownSelect.vue'
 
 const props = defineProps({
   periodo: {
@@ -26,7 +23,22 @@ const props = defineProps({
 
 const emit = defineEmits(['change'])
 
+const localPeriodo = ref(props.periodo)
+
+watch(() => props.periodo, (newVal) => {
+  localPeriodo.value = newVal
+})
+
+const periodoOptions = [
+  { value: 'especifico', label: 'Período: Específico' },
+  { value: 'hoje', label: 'Hoje' },
+  { value: 'semana', label: 'Esta semana' },
+  { value: 'mes', label: 'Este mês' },
+  { value: 'ano', label: 'Este ano' }
+]
+
 const handleChange = (newPeriodo) => {
+  localPeriodo.value = newPeriodo
   emit('change', newPeriodo)
 }
 </script>

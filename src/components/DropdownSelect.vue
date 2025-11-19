@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-select-wrapper" :class="{ 'is-open': isOpen }" @click="handleWrapperClick" ref="selectRef">
+  <div class="dropdown-select-wrapper" :class="{ 'is-open': isOpen }" :style="{ width: width, minWidth: width, maxWidth: width }" @click="handleWrapperClick" ref="selectRef">
     <component :is="iconComponent" :size="20" class="select-icon" v-if="iconComponent" />
     <img :src="iconSrc" alt="" class="select-icon" v-if="iconSrc" />
     
@@ -51,6 +51,10 @@ const props = defineProps({
   placeholder: {
     type: String,
     default: 'Selecione uma opção'
+  },
+  width: {
+    type: String,
+    default: '180px'
   }
 })
 
@@ -120,7 +124,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.custom-select-wrapper {
+.dropdown-select-wrapper {
   position: relative;
   display: flex;
   align-items: center;
@@ -131,9 +135,6 @@ onUnmounted(() => {
   border-radius: 250px;
   background-color: white;
   transition: border-color 0.2s;
-  min-width: 180px;
-  width: 180px;
-  max-width: 180px;
   flex-shrink: 0;
   white-space: nowrap;
   cursor: pointer;
@@ -143,11 +144,11 @@ onUnmounted(() => {
   overflow: visible;
 }
 
-.custom-select-wrapper:hover {
+.dropdown-select-wrapper:hover {
   border-color: #2563eb;
 }
 
-.custom-select-wrapper.is-open {
+.dropdown-select-wrapper.is-open {
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }

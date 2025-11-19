@@ -15,7 +15,7 @@
       @change="handleDateChange"
     />
 
-    <CustomSelect
+    <DropdownSelect
       v-model="tipoCobranca"
       :icon-component="CardTransfer"
       :options="tipoCobrancaOptions"
@@ -36,7 +36,7 @@ import PeriodSelect from './PeriodSelect.vue'
 import SelectWrapper from './SelectWrapper.vue'
 import DownloadButton from './DownloadButton.vue'
 import NewChargeButton from './NewChargeButton.vue'
-import CustomSelect from './CustomSelect.vue'
+import DropdownSelect from './DropdownSelect.vue'
 
 const periodo = ref('especifico')
 const dataInicio = ref('2020-06-10')
@@ -112,10 +112,7 @@ const handleTipoChange = newTipo => {
   white-space: nowrap;
 }
 
-.custom-select-wrapper {
-  min-width: 180px;
-  width: 180px;
-  max-width: 180px;
+.dropdown-select-wrapper {
   flex: 0 0 auto;
   overflow: visible;
   white-space: nowrap;
