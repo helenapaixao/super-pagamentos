@@ -429,7 +429,7 @@ onUnmounted(() => {
 
   .mobile-faturamento-title {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
     color: white;
     margin: 0 0 0.75rem 0;
@@ -444,9 +444,9 @@ onUnmounted(() => {
 
   .mobile-faturamento-value {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 32px;
+    font-size: 40px;
     font-weight: 700;
-    color: white;
+    color: #FFFFFF;
     line-height: 100%;
   }
 
