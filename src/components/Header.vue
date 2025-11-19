@@ -36,7 +36,6 @@
 
     <!-- Mobile Header -->
     <div class="mobile-header">
-      <!-- Status Bar -->
       <div class="mobile-status-bar">
         <span class="mobile-time">{{ currentTime }}</span>
         <div class="mobile-status-icons">
@@ -79,7 +78,11 @@
             <img :src="eyeDashboardIcon" alt="Visibilidade" class="mobile-eye-icon" />
           </div>
         </div>
+      </div>
 
+      <div class="mobile-divider"></div>
+
+      <div class="mobile-card">
         <a href="#" class="mobile-wallet-link">
           <span>Ir para a carteira</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -304,6 +307,8 @@ onUnmounted(() => {
     background: #0641FC;
     width: 100%;
     min-height: auto;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
   }
 
   .header-wrapper {
@@ -405,7 +410,15 @@ onUnmounted(() => {
   }
 
   .mobile-faturamento-section {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .mobile-divider {
+    width: 100%;
+    height: 1px;
+    background: #1E54FF;
+    margin: 0;
+    flex-shrink: 0;
   }
 
   .mobile-faturamento-title {
@@ -442,7 +455,7 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: #D1DCFF;
+    color: white;
     text-decoration: none;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 12px;
