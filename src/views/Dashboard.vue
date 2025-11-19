@@ -302,6 +302,13 @@ onMounted(() => {
     width: 100%;
     margin: 0 auto 1.75rem;
   }
+
+  .charts-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
 }
 
 </style>
