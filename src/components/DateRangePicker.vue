@@ -73,8 +73,8 @@ const formatDateAndEmit = () => {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0 1rem;
+  gap: 0.5rem;
+  padding: 0 0.75rem;
   height: 40px;
   border: 1px solid #d1d5db;
   border-radius: 250px;
@@ -83,6 +83,7 @@ const formatDateAndEmit = () => {
   min-width: fit-content;
   flex-shrink: 0;
   white-space: nowrap;
+  overflow: visible;
 }
 
 .date-range-wrapper:hover {
@@ -93,8 +94,9 @@ const formatDateAndEmit = () => {
   position: relative;
   display: flex;
   align-items: center;
-  flex: 1;
-  min-width: 0;
+  flex: 0 1 auto;
+  min-width: fit-content;
+  overflow: visible;
 }
 
 .date-field-start {
@@ -116,6 +118,7 @@ const formatDateAndEmit = () => {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
@@ -126,6 +129,8 @@ const formatDateAndEmit = () => {
   padding: 0;
   margin: 0;
   font-size: 16px;
+  pointer-events: auto;
+  box-sizing: border-box;
 }
 
 .date-display {
@@ -156,6 +161,56 @@ const formatDateAndEmit = () => {
   background-color: #D9D9D9;
   flex-shrink: 0;
   margin: 0 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .date-range-wrapper {
+    gap: 0.375rem;
+    padding: 0 0.625rem;
+  }
+
+  .date-field {
+    flex: 0 0 auto;
+  }
+
+  .date-display {
+    font-size: 13px;
+  }
+
+  .date-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .date-chevron {
+    width: 20px;
+    height: 20px;
+  }
+
+  .date-divider {
+    margin: 0 0.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .date-range-wrapper {
+    gap: 0.25rem;
+    padding: 0 0.5rem;
+  }
+
+  .date-display {
+    font-size: 12px;
+  }
+
+  .date-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .date-chevron {
+    width: 18px;
+    height: 18px;
+  }
 }
 </style>
 

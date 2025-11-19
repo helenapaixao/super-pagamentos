@@ -4,6 +4,7 @@
     :icon-component="Calendar"
     :options="periodoOptions"
     placeholder="Período: Específico"
+    width="200px"
     @change="handleChange"
   />
 </template>

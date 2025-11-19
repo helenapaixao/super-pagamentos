@@ -4,8 +4,12 @@
 
     <div class="controls-divider"></div>
 
-    <PeriodSelect
-      :periodo="periodo"
+    <Select
+      v-model="periodo"
+      :icon-component="Calendar"
+      :options="periodoOptions"
+      placeholder="Período: Específico"
+      width="200px"
       @change="handlePeriodoChange"
     />
 
@@ -15,7 +19,7 @@
       @change="handleDateChange"
     />
 
-    <DropdownSelect
+    <Select
       v-model="tipoCobranca"
       :icon-component="CardTransfer"
       :options="tipoCobrancaOptions"
@@ -29,19 +33,24 @@
 
 <script setup>
 import { ref } from 'vue'
-import { CardTransfer } from '@solar-icons/vue'
+import { CardTransfer, Calendar } from '@solar-icons/vue'
 
 import DateRangePicker from './DateRangePicker.vue'
-import PeriodSelect from './PeriodSelect.vue'
-import SelectWrapper from './SelectWrapper.vue'
 import DownloadButton from './DownloadButton.vue'
 import NewChargeButton from './NewChargeButton.vue'
-import DropdownSelect from './DropdownSelect.vue'
+import Select from './Select.vue'
 
 const periodo = ref('')
 const dataInicio = ref('2020-06-10')
 const dataFim = ref('2025-01-30')
 const tipoCobranca = ref('')
+
+const periodoOptions = [
+  { value: 'hoje', label: 'Hoje' },
+  { value: 'semana', label: 'Esta semana' },
+  { value: 'mes', label: 'Este mês' },
+  { value: 'ano', label: 'Este ano' }
+]
 
 const tipoCobrancaOptions = [
   { value: 'credito', label: 'Crédito' },

@@ -1,5 +1,5 @@
 <template>
-  <div class="dropdown-select-wrapper" :class="{ 'is-open': isOpen }" :style="width ? { width: width, minWidth: width, maxWidth: width } : {}" @click="handleWrapperClick" ref="selectRef">
+  <div class="select-wrapper" :class="{ 'is-open': isOpen }" :style="width ? { width: width, minWidth: width, maxWidth: width } : {}" @click="handleWrapperClick" ref="selectRef">
     <component :is="iconComponent" :size="20" class="select-icon" v-if="iconComponent" />
     <img :src="iconSrc" alt="" class="select-icon" v-if="iconSrc" />
     
@@ -124,7 +124,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.dropdown-select-wrapper {
+.select-wrapper {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -145,11 +145,11 @@ onUnmounted(() => {
   min-width: 180px;
 }
 
-.dropdown-select-wrapper:hover {
+.select-wrapper:hover {
   border-color: #2563eb;
 }
 
-.dropdown-select-wrapper.is-open {
+.select-wrapper.is-open {
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
@@ -220,28 +220,31 @@ onUnmounted(() => {
   max-height: 300px;
   overflow-y: auto;
   pointer-events: auto;
+  padding: 6px;
 }
 
 .dropdown-option {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
+  justify-content: flex-start;
+  padding: 10px 14px;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   font-weight: 500;
   color: #374151;
   cursor: pointer;
-  transition: background-color 0.15s ease;
-  border-bottom: 1px solid #F3F4F6;
+  transition: all 0.15s ease;
+  border-radius: 8px;
+  margin-bottom: 2px;
 }
 
 .dropdown-option:last-child {
-  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .dropdown-option:hover {
-  background-color: #F9FAFB;
+  background-color: #F3F4F6;
+  color: #0641FC;
 }
 
 .dropdown-option.is-selected {
@@ -275,3 +278,4 @@ onUnmounted(() => {
   background-color: #9CA3AF;
 }
 </style>
+
