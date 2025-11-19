@@ -269,6 +269,7 @@ const handleTipoChange = (newTipo) => {
     height: 52px;
     justify-content: space-between;
     padding: 12px 23px;
+    border-radius: 250px;
     box-shadow: 
       0px 4px 10.3px 0px #852DF691 inset,
       0px -19px 36.6px 0px #0641FC59 inset;
