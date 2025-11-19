@@ -305,7 +305,7 @@ onUnmounted(() => {
     display: block;
     background: transparent;
     width: 100%;
-    min-height: auto;
+    min-height: auto;  margin-bottom: -12px !important;
   }
 
   .header-wrapper {
@@ -313,7 +313,6 @@ onUnmounted(() => {
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
     overflow: hidden;
-    margin-bottom: 12px;
   }
 
   .mobile-status-bar {
