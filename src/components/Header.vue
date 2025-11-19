@@ -313,6 +313,7 @@ onUnmounted(() => {
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
     overflow: hidden;
+    margin-bottom: 12px;
   }
 
   .mobile-status-bar {

@@ -292,7 +292,7 @@ onMounted(() => {
     padding: 0 1rem 1.5rem;
     margin-top: 0;
     margin-left: 0;
-    padding-top: 332px;
+    padding-top: 320px;
     overflow-x: hidden;
   }
 
