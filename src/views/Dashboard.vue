@@ -242,6 +242,10 @@ onMounted(() => {
   display: flex;
   flex: 1;
   margin-top: 60px;
+  overflow-x: hidden;
+  overflow-y: visible;
+  min-width: 0;
+  width: 100%;
 }
 
 .dashboard-main {
@@ -249,8 +253,31 @@ onMounted(() => {
   padding: 52px 2rem 2rem 2rem;
   background-color: #f5f5f5;
   overflow-y: auto;
+  overflow-x: hidden;
   min-height: calc(100vh - 60px);
   margin-left: 315px;
+  min-width: 0;
+  max-width: none;
+  width: calc(100% - 315px);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.dashboard-main > * {
+  box-sizing: border-box;
+}
+
+.dashboard-main > :deep(.dashboard-controls) {
+  max-width: none;
+  width: 100%;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  margin-left: -2rem;
+  margin-right: -2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .estatisticas-grid {
@@ -276,6 +303,13 @@ onMounted(() => {
   .dashboard-main {
     margin-left: 0;
     padding: 2rem 1.25rem 1.5rem;
+  }
+
+  .dashboard-main > :deep(.dashboard-controls) {
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 
   .charts-grid {

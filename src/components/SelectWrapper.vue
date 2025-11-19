@@ -48,12 +48,15 @@ const handleChange = () => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1rem;
+  padding: 0 1rem;
+  height: 40px;
   border: 1px solid #D9D9D9;
   border-radius: 250px;
   background-color: white;
   transition: border-color 0.2s;
-  min-width: 200px;
+  min-width: fit-content;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .select-wrapper:hover {

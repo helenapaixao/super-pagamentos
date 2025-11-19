@@ -4,7 +4,7 @@
       <div class="card-header">
         <h2 class="card-title">Faturamento</h2>
         <div class="title-icon">
-          <img :src="eyeDashboardIcon" alt="Visibilidade" class="eye-svg" />
+          <Eye :size="24" class="eye-icon" />
         </div>
       </div>
 
@@ -92,7 +92,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import eyeDashboardIcon from '@/assets/icons/eye-dashboard.svg'
+import { Eye } from '@solar-icons/vue'
 import MetricCard from './MetricCard.vue'
 import BarChart from './BarChart.vue'
 import StatisticsPeriodCard from './StatisticsPeriodCard.vue'
@@ -183,12 +183,9 @@ const formatNumber = (value) => {
 }
 
 .eye-icon {
-  color: #86898B;
-}
-
-.eye-svg {
   width: 24px;
   height: 24px;
+  color: #86898B;
   display: block;
 }
 

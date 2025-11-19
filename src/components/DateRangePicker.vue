@@ -73,13 +73,16 @@ const formatDateAndEmit = () => {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 2rem;
-  padding: 0.75rem 1rem;
+  gap: 1rem;
+  padding: 0 1rem;
+  height: 40px;
   border: 1px solid #d1d5db;
   border-radius: 250px;
   background-color: white;
   transition: border-color 0.2s;
-  min-width: 0;
+  min-width: fit-content;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .date-range-wrapper:hover {

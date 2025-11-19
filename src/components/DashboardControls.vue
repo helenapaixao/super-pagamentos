@@ -3,6 +3,7 @@
     <NewChargeButton @click="emit('nova-cobranca')" />
 
     <div class="controls-divider"></div>
+
     <PeriodSelect
       :periodo="periodo"
       @change="handlePeriodoChange"
@@ -33,6 +34,7 @@
 <script setup>
 import { ref } from 'vue'
 import { CardTransfer } from '@solar-icons/vue'
+
 import DateRangePicker from './DateRangePicker.vue'
 import PeriodSelect from './PeriodSelect.vue'
 import SelectWrapper from './SelectWrapper.vue'
@@ -46,18 +48,18 @@ const tipoCobranca = ref('')
 
 const emit = defineEmits(['nova-cobranca', 'periodo-change', 'data-change', 'tipo-change'])
 
-const handleDateChange = (dates) => {
+const handleDateChange = dates => {
   dataInicio.value = dates.inicio
   dataFim.value = dates.fim
   emit('data-change', dates)
 }
 
-const handlePeriodoChange = (newPeriodo) => {
+const handlePeriodoChange = newPeriodo => {
   periodo.value = newPeriodo
   emit('periodo-change', newPeriodo)
 }
 
-const handleTipoChange = (newTipo) => {
+const handleTipoChange = newTipo => {
   tipoCobranca.value = newTipo
   emit('tipo-change', newTipo)
 }
@@ -67,120 +69,164 @@ const handleTipoChange = (newTipo) => {
 .dashboard-controls {
   display: flex;
   align-items: center;
-  margin-bottom: 2rem;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  width: 100%;
+  box-sizing: border-box;
   flex-wrap: wrap;
-  gap: 1rem;
+  align-content: flex-start;
+  min-width: 0;
 }
 
-
-.controls-group {
+.dashboard-controls > * {
+  flex: 0 1 auto;
+  min-width: 0;
+  height: 40px;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+}
+
+.dashboard-controls :deep(.btn-primary) {
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .controls-divider {
   width: 1px;
   height: 40px;
-  background-color: #D9D9D9;
+  background: #D9D9D9;
   flex-shrink: 0;
 }
 
-.select-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  border: 1px solid #D9D9D9;
-  border-radius: 250px;
-  background-color: white;
-  cursor: pointer;
-  transition: border-color 0.2s;
+.date-range-wrapper,
+.select-wrapper,
+.period-select-wrapper {
+  min-width: 140px;
+  max-width: 360px;
+  flex: 0 1 auto;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-.select-wrapper:hover {
-  border-color: #2563eb;
-}
-
-.select-icon {
-  color: #0641FC;
-  flex-shrink: 0;
-}
-
-
-.select-control {
-  border: none;
-  background: transparent;
-  color: #374151;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: auto;
-  letter-spacing: 0%;
-  cursor: pointer;
-  flex: 1;
-  appearance: none;
-  outline: none;
-}
-
+.date-display,
+.select-control,
 .select-text {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: auto;
-  letter-spacing: 0%;
-  color: #2A2E33;
-  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.select-control:focus {
-  outline: none;
-}
-
-.select-chevron {
-  color: #2A2E33;
-  flex-shrink: 0;
-}
-
-
-.icon-btn {
-  background: none;
-  border: 1px solid #d1d5db;
-  color: #374151;
-  padding: 0.75rem;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-
-.icon-btn:hover {
-  background-color: #f3f4f6;
-  border-color: #2563eb;
-  color: #2563eb;
-}
-
-@media (max-width: 768px) {
+@media (min-width: 1440px) {
   .dashboard-controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    width: 100%;
-    max-width: 392px;
-    margin: 0 auto 1.5rem;
+    flex-wrap: nowrap !important;
   }
 
-  .controls-divider,
-  .select-wrapper,
-  .date-range-wrapper,
-  :deep(.download-btn) {
-    display: none;
+  .dashboard-controls > :nth-child(5) {
+    margin-left: auto !important;
   }
 }
-</style>
 
+@media (min-width: 1367px) and (max-width: 1439px) {
+  .dashboard-controls {
+    flex-wrap: wrap;
+  }
+
+  .dashboard-controls > :nth-child(5),
+  .dashboard-controls > :nth-child(6) {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .dashboard-controls > :nth-child(1),
+  .dashboard-controls > :nth-child(2),
+  .dashboard-controls > :nth-child(3),
+  .dashboard-controls > :nth-child(4) {
+    order: 1;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1366px) {
+  .dashboard-controls {
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .dashboard-controls > :nth-child(1),
+  .dashboard-controls > :nth-child(2),
+  .dashboard-controls > :nth-child(3),
+  .dashboard-controls > :nth-child(4) {
+    order: 1;
+    flex: 0 1 auto;
+  }
+
+  .dashboard-controls > :nth-child(5),
+  .dashboard-controls > :nth-child(6) {
+    order: 2;
+    margin-left: 0 !important;
+    align-self: flex-start;
+    flex: 0 0 auto;
+    margin-top: 4px;
+  }
+
+  .dashboard-controls > :nth-child(5) {
+    max-width: 340px;
+  }
+
+  .dashboard-controls > :nth-child(6) {
+    margin-left: 8px;
+  }
+}
+
+@media (max-width: 899px) {
+  .dashboard-controls {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .dashboard-controls > :not(:nth-child(1)) {
+    display: none !important;
+  }
+
+  .dashboard-controls > :nth-child(1) {
+    width: 100% !important;
+    height: 48px !important;
+  }
+}
+
+.date-range-wrapper { padding: 6px 12px; box-sizing: border-box; }
+.select-wrapper { padding: 6px 12px; box-sizing: border-box; }
+.date-display { max-width: 120px; }
+.select-control { padding-right: 28px; }
+
+:root {
+  --page-horizontal-padding: 24px;
+}
+
+.dashboard-controls {
+  padding-left: var(--page-horizontal-padding);
+  padding-right: var(--page-horizontal-padding);
+  box-sizing: border-box;
+}
+
+@media (min-width: 1440px) {
+  .dashboard-controls { flex-wrap: nowrap !important; }
+
+  .dashboard-controls > :nth-child(5) {
+    margin-left: auto !important;
+    padding-right: 8px;
+  }
+
+  .dashboard-controls > :nth-child(6) {
+    margin-left: 8px !important;
+    margin-right: 0 !important;
+    flex: 0 0 auto;
+  }
+
+  .dashboard-controls {
+    max-width: calc(100% - var(--page-horizontal-padding) * 2);
+  }
+}
+
+</style>

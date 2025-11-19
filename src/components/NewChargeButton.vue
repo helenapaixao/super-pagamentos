@@ -26,13 +26,15 @@ defineEmits(['click'])
   background-color: #0641FC;
   color: white;
   border: none;
-  padding: 12px 23px;
+  outline: none;
+  padding: 0;
+  height: 40px;
+  padding-left: 23px;
+  padding-right: 23px;
   border-radius: 250px;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   font-weight: 600;
-  line-height: auto;
-  letter-spacing: 0%;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -42,7 +44,6 @@ defineEmits(['click'])
   overflow: visible;
   z-index: 0;
 }
-
 .btn-primary::before {
   content: '';
   display: none;
@@ -53,21 +54,18 @@ defineEmits(['click'])
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   font-weight: 600;
-  line-height: auto;
-  letter-spacing: 0%;
 }
 
 .icon-circle {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-color: #D1DCFF;
+  background-color: #E6E6E6;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   position: relative;
-  overflow: hidden;
 }
 
 .icon-circle::before {
@@ -81,8 +79,11 @@ defineEmits(['click'])
 }
 
 .icon-add-circle {
-  width: 18px;
-  height: 18px;
+  width: 60%;
+  height: 60%;
+  display: block;
+  color: #2A2E33;
+  line-height: 0;
 }
 
 .icon-web {
@@ -94,7 +95,7 @@ defineEmits(['click'])
 }
 
 .btn-primary:hover {
-  background-color: #1f2327;
+  background-color: #0530C7;
 }
 
 @media (max-width: 768px) {
@@ -105,11 +106,10 @@ defineEmits(['click'])
     justify-content: space-between;
     padding: 12px 23px;
     border-radius: 250px;
-    box-shadow: 
-      0px 4px 10.3px 0px #852DF691 inset,
-      0px -19px 36.6px 0px #0641FC59 inset;
+    box-shadow: 0px 4px 10.3px 0px #852DF691 inset;
     background: #2A2E33;
-    border: 3px solid #2A2E3324;
+    border: none;
+    outline: none;
     color: white;
     letter-spacing: 0%;
     margin: 0 auto;
@@ -135,16 +135,19 @@ defineEmits(['click'])
   }
 
   .icon-circle {
-    width: 34px;
-    height: 34px;
-    background: linear-gradient(180deg, #f9fbff 0%, #dae3ff 100%);
-    box-shadow: 0 10px 20px rgba(5, 21, 47, 0.35);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    position: relative;
-    z-index: 2;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #CCCCCC;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .icon-circle :deep(svg) {
+    color: #2A2E33;
   }
 
   .icon-web {
