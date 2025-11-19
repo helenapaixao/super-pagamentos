@@ -81,24 +81,18 @@ defineEmits(['click'])
     min-width: 280px;
     max-width: 390px;
     height: 52px;
-    padding: 12px 23px;
+    padding: 12px 16px 12px 23px;
     box-sizing: border-box;
-
     background: #2A2E33;
     border-radius: 250px;
-
     margin: 24px auto !important;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     font-size: 18px;
     color: #F5F7FB;
-
     position: relative;
     z-index: 1;
-
     box-shadow:
       inset 0 4px 10.3px rgba(133,45,246,0.57),
       inset 0 -19px 36.6px rgba(6,65,252,0.35);
@@ -132,6 +126,8 @@ defineEmits(['click'])
     font-size: 18px;
     color: #F5F7FB;
     z-index: 2;
+    flex: 1;
+    text-align: left;
   }
 
   .icon-circle {
@@ -139,6 +135,7 @@ defineEmits(['click'])
     height: 26px;
     background: linear-gradient(180deg,#F3F7FC 0%, #E8EEF8 100%);
     box-shadow: 0 4px 12px rgba(10,20,40,0.12);
+    margin-left: auto;
   }
   .icon-circle :deep(svg) { color: #0D1726; }
   .icon-web { display: none; }
