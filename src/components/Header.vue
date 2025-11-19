@@ -64,7 +64,7 @@
               <span class="mobile-profile-top">Empresarial</span>
               <span class="mobile-profile-bottom">Astra Pagamentos</span>
             </div>
-            <img :src="roundAltArrowDownIcon" alt="" class="mobile-profile-arrow" width="16" height="16" />
+            <img :src="roundAltArrowDownIcon" alt="" class="mobile-profile-arrow" width="24" height="24" />
           </div>
           <button class="mobile-bell-btn">
             <BellBing :size="20" class="mobile-bell-icon" />
