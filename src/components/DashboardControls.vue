@@ -135,17 +135,14 @@ const handleTipoChange = newTipo => {
   flex-shrink: 0;
 }
 
-.date-range-wrapper,
-.select-wrapper,
-.period-select-wrapper {
-  min-width: 140px;
-  max-width: 360px;
-  flex: 0 1 auto;
-  overflow: hidden;
+.date-range-wrapper {
+  flex: 0 0 auto;
+  overflow: visible;
   white-space: nowrap;
+  min-width: fit-content;
 }
 
-.dropdown-select-wrapper {
+.select-wrapper {
   flex: 0 0 auto;
   overflow: visible;
   white-space: nowrap;
@@ -170,9 +167,48 @@ const handleTipoChange = newTipo => {
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1441px) {
   .dashboard-controls {
     flex-wrap: nowrap !important;
+  }
+}
+
+@media (max-width: 1440px) and (min-width: 900px) {
+  .dashboard-controls {
+    flex-wrap: wrap !important;
+    row-gap: 0.75rem;
+  }
+
+  .dashboard-controls > :nth-child(1) {
+    order: 1;
+  }
+
+  .dashboard-controls > :nth-child(2) {
+    order: 2;
+  }
+
+  .dashboard-controls > :nth-child(3) {
+    order: 3;
+  }
+
+  .dashboard-controls > :nth-child(4) {
+    order: 4;
+  }
+
+  .dashboard-controls > :nth-child(5) {
+    order: 6;
+    margin-left: 0 !important;
+  }
+
+  .dashboard-controls > :nth-child(6) {
+    order: 7;
+    margin-left: 0 !important;
+  }
+
+  .dashboard-controls > :nth-child(1)::after {
+    content: '';
+    width: 100%;
+    order: 5;
   }
 }
 

@@ -71,7 +71,7 @@ const formatDateAndEmit = () => {
 <style scoped>
 .date-range-wrapper {
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0 0.75rem;
@@ -84,6 +84,7 @@ const formatDateAndEmit = () => {
   flex-shrink: 0;
   white-space: nowrap;
   overflow: visible;
+  box-sizing: border-box;
 }
 
 .date-range-wrapper:hover {
@@ -92,19 +93,19 @@ const formatDateAndEmit = () => {
 
 .date-field {
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  flex: 0 1 auto;
+  flex: 0 0 auto;
   min-width: fit-content;
   overflow: visible;
 }
 
 .date-field-start {
-  gap: 0.5rem;
+  gap: 0.375rem;
 }
 
 .date-field-end {
-  gap: 0.5rem;
+  gap: 0.375rem;
 }
 
 .date-icon {
@@ -163,14 +164,15 @@ const formatDateAndEmit = () => {
   margin: 0 0.25rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .date-range-wrapper {
     gap: 0.375rem;
     padding: 0 0.625rem;
   }
 
-  .date-field {
-    flex: 0 0 auto;
+  .date-field-start,
+  .date-field-end {
+    gap: 0.25rem;
   }
 
   .date-display {
@@ -192,10 +194,15 @@ const formatDateAndEmit = () => {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 900px) {
   .date-range-wrapper {
     gap: 0.25rem;
     padding: 0 0.5rem;
+  }
+
+  .date-field-start,
+  .date-field-end {
+    gap: 0.25rem;
   }
 
   .date-display {
@@ -210,6 +217,10 @@ const formatDateAndEmit = () => {
   .date-chevron {
     width: 18px;
     height: 18px;
+  }
+
+  .date-divider {
+    margin: 0 0.0625rem;
   }
 }
 </style>
