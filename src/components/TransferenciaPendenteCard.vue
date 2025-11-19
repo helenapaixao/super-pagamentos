@@ -18,14 +18,15 @@
 
     <button class="transferencia-action" type="button" @click="autorizarTransferencia">
       <span>Autorizar transferência</span>
-      <ArrowRight :size="20" />
+      <img :src="walletMoneyBoldIcon" alt="Autorizar" class="transferencia-icon" />
     </button>
   </div>
 </template>
 
 <script setup>
-import { ArrowUp, ArrowRight } from '@solar-icons/vue'
+import { ArrowUp } from '@solar-icons/vue'
 import BadgeOrange from './BadgeOrange.vue'
+import walletMoneyBoldIcon from '@/assets/icons/wallet-money-bold.svg'
 
 const props = defineProps({
   transferencia: {
@@ -138,8 +139,11 @@ const autorizarTransferencia = () => {
   cursor: pointer;
 }
 
-.transferencia-action :deep(svg) {
-  color: inherit;
+.transferencia-action :deep(svg),
+.transferencia-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
