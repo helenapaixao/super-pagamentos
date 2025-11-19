@@ -196,6 +196,12 @@ const getLogo = (nome) => {
 }
 
 @media (max-width: 768px) {
+  .bandeiras-card {
+    width: calc(100% - 2rem);
+    max-width: 392px;
+    margin: 0 auto 1.5rem;
+  }
+
   .bandeiras-grid {
     gap: 0.5rem;
     border: 1px solid #EEEEEE;
