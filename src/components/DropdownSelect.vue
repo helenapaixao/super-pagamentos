@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
+import { ref, computed, onUnmounted, nextTick, watch } from 'vue'
 import { Teleport } from 'vue'
 import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.svg'
 
