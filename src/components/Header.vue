@@ -393,6 +393,7 @@ onUnmounted(() => {
     font-weight: 600;
     color: #86898B;
     line-height: 100%;
+    white-space: nowrap;
   }
 
   .mobile-profile-arrow {
