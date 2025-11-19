@@ -3,8 +3,8 @@
     <button class="btn-primary" @click="emit('nova-cobranca')">
       <span class="btn-text">Nova cobrança</span>
       <div class="icon-circle">
-        <img :src="addCircleBoldWebIcon" alt="Adicionar" class="icon-add-circle icon-web" />
-        <img :src="addCircleBoldIcon" alt="Adicionar" class="icon-add-circle icon-mobile" />
+        <AddCircle :size="18" class="icon-add-circle icon-web" />
+        <AddCircle :size="15" class="icon-add-circle icon-mobile" />
       </div>
     </button>
 
@@ -38,9 +38,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { CardTransfer } from '@solar-icons/vue'
-import addCircleBoldIcon from '@/assets/icons/add-circle-bold.svg'
-import addCircleBoldWebIcon from '@/assets/icons/add-circle-bold-web.svg'
+import { CardTransfer, AddCircle } from '@solar-icons/vue'
 import DateRangePicker from './DateRangePicker.vue'
 import PeriodSelect from './PeriodSelect.vue'
 import SelectWrapper from './SelectWrapper.vue'
@@ -322,7 +320,13 @@ const handleTipoChange = (newTipo) => {
     height: 15px;
     position: relative;
     z-index: 3;
-    filter: brightness(0) invert(1);
+    color: white;
+  }
+  
+  .icon-circle .icon-mobile :deep(svg) {
+    width: 100%;
+    height: 100%;
+    color: white;
   }
 }
 </style>
