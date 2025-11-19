@@ -214,8 +214,22 @@ const handleTipoChange = newTipo => {
 
 @media (max-width: 899px) {
   .dashboard-controls {
-    flex-direction: column;
-    gap: 0.75rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .dashboard-controls::-webkit-scrollbar {
+    display: none;
   }
 
   .dashboard-controls > :not(:nth-child(1)) {
@@ -224,7 +238,14 @@ const handleTipoChange = newTipo => {
 
   .dashboard-controls > :nth-child(1) {
     width: 100% !important;
-    height: 48px !important;
+    height: auto !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dashboard-controls :deep(.btn-primary) {
+    margin: 24px auto !important;
   }
 }
 

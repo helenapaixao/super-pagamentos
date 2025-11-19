@@ -330,6 +330,17 @@ onMounted(() => {
     padding-bottom: calc(37px + 1.5rem);
     overflow-x: hidden;
     margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dashboard-main > :deep(.dashboard-controls) {
+    max-width: 392px;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .dashboard-content :deep(.sidebar) {

@@ -1,7 +1,8 @@
 <template>
   <button class="btn-primary" @click="$emit('click')">
     <span class="btn-text">{{ text }}</span>
-    <div class="icon-circle">
+
+    <div class="icon-circle" aria-hidden="true">
       <AddCircle :size="18" class="icon-add-circle icon-web" />
       <AddCircle :size="15" class="icon-add-circle icon-mobile" />
     </div>
@@ -27,147 +28,131 @@ defineEmits(['click'])
   color: white;
   border: none;
   outline: none;
-  padding: 0;
   height: 40px;
-  padding-left: 23px;
-  padding-right: 23px;
+  padding: 0 23px;
   border-radius: 250px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 600;
-  cursor: pointer;
-  display: flex;
+  font-size: 14px;
+  display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  transition: background-color 0.2s;
+  cursor: pointer;
   position: relative;
+  margin: 0;
   overflow: visible;
-  z-index: 0;
 }
-.btn-primary::before {
-  content: '';
+
+.btn-primary::before,
+.btn-primary::after {
   display: none;
 }
 
 .btn-text {
   color: #F9F9F9;
-  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
-  font-weight: 600;
+  user-select: none;
 }
 
 .icon-circle {
   width: 24px;
   height: 24px;
+  background: #E6E6E6;
   border-radius: 50%;
-  background-color: #E6E6E6;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  position: relative;
 }
-
-.icon-circle::before {
-  display: none;
-}
-
-.icon-circle :deep(svg) {
-  color: #0641FC;
-  position: relative;
-  z-index: 1;
-}
-
-.icon-add-circle {
-  width: 60%;
-  height: 60%;
-  display: block;
-  color: #2A2E33;
-  line-height: 0;
-}
-
-.icon-web {
-  display: block;
-}
-
-.icon-mobile {
-  display: none;
-}
+.icon-circle :deep(svg) { color: #0641FC; }
+.icon-add-circle { width: 18px; height: 18px; display: block; }
+.icon-web { display: block; }
+.icon-mobile { display: none; }
 
 .btn-primary:hover {
   background-color: #0530C7;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px) and (pointer: coarse),
+       (max-width: 768px) and (hover: none) {
+
   .btn-primary {
-    width: 100%;
+    width: calc(100% - 48px);
+    min-width: 280px;
     max-width: 390px;
     height: 52px;
-    justify-content: space-between;
     padding: 12px 23px;
-    border-radius: 250px;
-    box-shadow: 0px 4px 10.3px 0px #852DF691 inset;
+    box-sizing: border-box;
+
     background: #2A2E33;
-    border: none;
-    outline: none;
-    color: white;
-    letter-spacing: 0%;
-    margin: 0 auto;
+    border-radius: 250px;
+
+    margin: 24px auto !important;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 18px;
+    color: #F5F7FB;
+
     position: relative;
     z-index: 1;
-    display: flex;
-    opacity: 1;
+
+    box-shadow:
+      inset 0 4px 10.3px rgba(133,45,246,0.57),
+      inset 0 -19px 36.6px rgba(6,65,252,0.35);
   }
 
-  .btn-primary::before {
-    display: none;
-  }
 
   .btn-primary::after {
-    display: none;
+    display: block;
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    z-index: -1;
+    background: linear-gradient(135deg,
+      rgba(180,130,255,0.95),
+      rgba(110,90,255,0.9)
+    );
+    padding: 3px;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
   }
 
   .btn-text {
     font-size: 18px;
-    color: white;
-    position: relative;
+    color: #F5F7FB;
     z-index: 2;
   }
 
   .icon-circle {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: #CCCCCC;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 2;
+    width: 26px;
+    height: 26px;
+    background: linear-gradient(180deg,#F3F7FC 0%, #E8EEF8 100%);
+    box-shadow: 0 4px 12px rgba(10,20,40,0.12);
   }
-  
-  .icon-circle :deep(svg) {
-    color: #2A2E33;
-  }
+  .icon-circle :deep(svg) { color: #0D1726; }
+  .icon-web { display: none; }
+  .icon-mobile { display: block; width: 15px; height: 15px; }
+}
 
-  .icon-web {
-    display: none;
-  }
-
-  .icon-mobile {
-    display: block;
-    width: 15px;
-    height: 15px;
-    position: relative;
-    z-index: 3;
-    color: white;
-  }
-  
-  .icon-circle .icon-mobile :deep(svg) {
-    width: 100%;
-    height: 100%;
-    color: white;
+@media (max-width: 360px) and (pointer: coarse),
+       (max-width: 360px) and (hover: none) {
+  .btn-primary {
+    width: calc(100% - 32px);
+    min-width: 250px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
-</style>
 
+</style>
