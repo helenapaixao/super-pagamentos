@@ -289,10 +289,10 @@ onMounted(() => {
   }
 
   .dashboard-main {
-    padding: 1rem 1rem 1.5rem;
+    padding: 0 1rem 1.5rem;
     margin-top: 0;
     margin-left: 0;
-    padding-top: 320px;
+    padding-top: 332px;
     overflow-x: hidden;
   }
 

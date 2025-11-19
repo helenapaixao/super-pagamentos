@@ -3,7 +3,8 @@
     <button class="btn-primary" @click="emit('nova-cobranca')">
       <span class="btn-text">Nova cobrança</span>
       <div class="icon-circle">
-        <img :src="addCircleBoldIcon" alt="Adicionar" width="15" height="15" />
+        <img :src="addCircleBoldWebIcon" alt="Adicionar" class="icon-add-circle icon-web" />
+        <img :src="addCircleBoldIcon" alt="Adicionar" class="icon-add-circle icon-mobile" />
       </div>
     </button>
 
@@ -66,6 +67,7 @@
 import { ref } from 'vue'
 import { Calendar, AltArrowDown, CardTransfer, DownloadMinimalistic } from '@solar-icons/vue'
 import addCircleBoldIcon from '@/assets/icons/add-circle-bold.svg'
+import addCircleBoldWebIcon from '@/assets/icons/add-circle-bold-web.svg'
 
 const periodo = ref('especifico')
 const dataInicio = ref('2020-06-10')
@@ -136,7 +138,7 @@ const formatDateAndEmit = () => {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-color: #FFFFFF;
+  background-color: #D1DCFF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -146,26 +148,26 @@ const formatDateAndEmit = () => {
 }
 
 .icon-circle::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  background: repeating-linear-gradient(
-    45deg,
-    rgba(209, 220, 255, 0.3),
-    rgba(209, 220, 255, 0.3) 0.5px,
-    transparent 0.5px,
-    transparent 1px
-  );
-  background-size: 2px 2px;
+  display: none;
 }
 
 .icon-circle :deep(svg) {
   color: #0641FC;
   position: relative;
   z-index: 1;
+}
+
+.icon-add-circle {
+  width: 18px;
+  height: 18px;
+}
+
+.icon-web {
+  display: block;
+}
+
+.icon-mobile {
+  display: none;
 }
 
 .btn-primary:hover {
@@ -441,7 +443,12 @@ const formatDateAndEmit = () => {
     justify-content: center;
   }
 
-  .icon-circle img {
+  .icon-web {
+    display: none;
+  }
+
+  .icon-mobile {
+    display: block;
     width: 15px;
     height: 15px;
     position: relative;
