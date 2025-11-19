@@ -50,7 +50,7 @@
     </div>
 
     <div class="faturamento-mobile-view">
-      <EstatisticasPeriodoCard
+      <StatisticsPeriodCard
         :valor="faturamento.total"
         :crescimento="faturamento.crescimento"
         :dados-grafico="faturamento.dadosGrafico"
@@ -95,7 +95,7 @@ import { computed } from 'vue'
 import eyeDashboardIcon from '@/assets/icons/eye-dashboard.svg'
 import MetricCard from './MetricCard.vue'
 import BarChart from './BarChart.vue'
-import EstatisticasPeriodoCard from './EstatisticasPeriodoCard.vue'
+import StatisticsPeriodCard from './StatisticsPeriodCard.vue'
 
 const props = defineProps({
   faturamento: {

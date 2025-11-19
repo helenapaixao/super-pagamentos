@@ -8,6 +8,7 @@
       </div>
     </button>
 
+    <div class="controls-divider"></div>
     <PeriodSelect
       :periodo="periodo"
       @change="handlePeriodoChange"
@@ -31,9 +32,7 @@
       <option value="pix">Pix</option>
     </SelectWrapper>
 
-    <button class="download-btn" title="Download">
-      <DownloadMinimalistic :size="20" class="download-icon" />
-    </button>
+    <DownloadButton />
   </div>
 </template>
 
@@ -45,6 +44,7 @@ import addCircleBoldWebIcon from '@/assets/icons/add-circle-bold-web.svg'
 import DateRangePicker from './DateRangePicker.vue'
 import PeriodSelect from './PeriodSelect.vue'
 import SelectWrapper from './SelectWrapper.vue'
+import DownloadButton from './DownloadButton.vue'
 
 const periodo = ref('especifico')
 const dataInicio = ref('2020-06-10')
@@ -161,6 +161,13 @@ const handleTipoChange = (newTipo) => {
   flex-wrap: wrap;
 }
 
+.controls-divider {
+  width: 1px;
+  height: 40px;
+  background-color: #D9D9D9;
+  flex-shrink: 0;
+}
+
 .select-wrapper {
   position: relative;
   display: flex;
@@ -183,28 +190,6 @@ const handleTipoChange = (newTipo) => {
   flex-shrink: 0;
 }
 
-.download-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: white;
-  border: 1px solid #d1d5db;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  flex-shrink: 0;
-}
-
-.download-btn:hover {
-  border-color: #2563eb;
-  background-color: #f3f4f6;
-}
-
-.download-icon {
-  color: #2A2E33;
-}
 
 .select-control {
   border: none;
@@ -273,7 +258,7 @@ const handleTipoChange = (newTipo) => {
 
   .select-wrapper,
   .date-range-wrapper,
-  .download-btn {
+  :deep(.download-btn) {
     display: none;
   }
 

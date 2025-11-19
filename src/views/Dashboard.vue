@@ -11,39 +11,39 @@
           @tipo-change="handleTipoChange"
         />
 
-        <FaturamentoCard :faturamento="faturamentoData" />
+        <RevenueCard :faturamento="faturamentoData" />
 
-        <TransferenciaPendenteCard
+        <PendingTransferCard
           v-if="transferenciaPendente"
           :transferencia="transferenciaPendente"
           @autorizar="handleAutorizarTransferencia"
         />
 
         <div class="estatisticas-mobile-wrapper">
-          <EstatisticasMobileCard :items="estatisticasMobileItems" />
+          <StatisticsMobileCard :items="estatisticasMobileItems" />
         </div>
 
         <div class="estatisticas-grid">
-          <EstatisticasCard
+          <StatisticsCard
             titulo="Reembolsos"
             :valor="estatisticas.reembolsos.valor"
             :cobrancas="estatisticas.reembolsos.cobrancas"
             :percentual="estatisticas.reembolsos.percentual"
           />
-          <EstatisticasCard
+          <StatisticsCard
             titulo="Chargebacks"
             :valor="estatisticas.chargebacks.valor"
             :cobrancas="estatisticas.chargebacks.cobrancas"
             :percentual="estatisticas.chargebacks.percentual"
             :show-badge="true"
           />
-          <EstatisticasCard
+          <StatisticsCard
             titulo="Cancelados"
             :valor="estatisticas.cancelados.valor"
             :cobrancas="estatisticas.cancelados.cobrancas"
             :percentual="estatisticas.cancelados.percentual"
           />
-          <EstatisticasCard
+          <StatisticsCard
             titulo="Não autorizado"
             :valor="estatisticas.naoAutorizado.valor"
             :cobrancas="estatisticas.naoAutorizado.cobrancas"
@@ -52,8 +52,8 @@
         </div>
 
         <div class="charts-grid">
-          <ConversaoModalidadeCard :modalidades="conversaoModalidades" />
-          <BandeirasCard :bandeiras="bandeirasUtilizadas" />
+          <ConversionModalityCard :modalidades="conversaoModalidades" />
+          <PaymentFlagsCard :bandeiras="bandeirasUtilizadas" />
         </div>
 
         <HelpButton :fixed="true" @click="handleHelpClick" />
@@ -67,12 +67,12 @@ import { ref, onMounted, computed } from 'vue'
 import Header from '../components/Header.vue'
 import Sidebar from '../components/Sidebar.vue'
 import DashboardControls from '../components/DashboardControls.vue'
-import FaturamentoCard from '../components/FaturamentoCard.vue'
-import TransferenciaPendenteCard from '../components/TransferenciaPendenteCard.vue'
-import EstatisticasCard from '../components/EstatisticasCard.vue'
-import EstatisticasMobileCard from '../components/EstatisticasMobileCard.vue'
-import ConversaoModalidadeCard from '../components/ConversaoModalidadeCard.vue'
-import BandeirasCard from '../components/BandeirasCard.vue'
+import RevenueCard from '../components/RevenueCard.vue'
+import PendingTransferCard from '../components/PendingTransferCard.vue'
+import StatisticsCard from '../components/StatisticsCard.vue'
+import StatisticsMobileCard from '../components/StatisticsMobileCard.vue'
+import ConversionModalityCard from '../components/ConversionModalityCard.vue'
+import PaymentFlagsCard from '../components/PaymentFlagsCard.vue'
 import HelpButton from '../components/HelpButton.vue'
 import { dashboardService } from '../services/dashboardService'
 
