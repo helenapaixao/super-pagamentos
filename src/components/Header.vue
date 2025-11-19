@@ -478,9 +478,10 @@ onUnmounted(() => {
     text-decoration: none;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 12px;
-    font-weight: 600;
-    height: 44.5px;
+    font-weight: semibold;
     padding: 0;
+    margin-bottom: 20px;
+    margin-left: 4px;
   }
 
   .mobile-wallet-link svg,

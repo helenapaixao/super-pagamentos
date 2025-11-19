@@ -100,9 +100,9 @@ const formatDateAndEmit = () => {
 }
 
 .btn-primary {
-  background-color: #0641FC;
+  background-color: #2A2E33;
   color: white;
-  border: none;
+  border: 3px solid rgba(42, 46, 51, 0.14);
   padding: 12px 23px;
   border-radius: 250px;
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -118,6 +118,9 @@ const formatDateAndEmit = () => {
   position: relative;
   overflow: visible;
   z-index: 0;
+  box-shadow: 
+    inset 0 4px 10.3px 0 rgba(133, 45, 246, 0.57),
+    inset 0 -19px 36.6px 0 rgba(6, 65, 252, 0.35);
 }
 
 .btn-primary::before {
@@ -171,7 +174,7 @@ const formatDateAndEmit = () => {
 }
 
 .btn-primary:hover {
-  background-color: #0530C7;
+  background-color: #1f2327;
 }
 
 .controls-group {
