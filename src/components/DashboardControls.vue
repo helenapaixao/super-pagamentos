@@ -15,17 +15,13 @@
       @change="handleDateChange"
     />
 
-    <SelectWrapper
+    <CustomSelect
       v-model="tipoCobranca"
       :icon-component="CardTransfer"
+      :options="tipoCobrancaOptions"
+      placeholder="Tipo de cobrança"
       @change="handleTipoChange"
-    >
-      <option value="">Tipo de cobrança</option>
-      <option value="credito">Crédito</option>
-      <option value="debito">Débito</option>
-      <option value="boleto">Boleto</option>
-      <option value="pix">Pix</option>
-    </SelectWrapper>
+    />
 
     <DownloadButton />
   </div>
@@ -40,11 +36,19 @@ import PeriodSelect from './PeriodSelect.vue'
 import SelectWrapper from './SelectWrapper.vue'
 import DownloadButton from './DownloadButton.vue'
 import NewChargeButton from './NewChargeButton.vue'
+import CustomSelect from './CustomSelect.vue'
 
 const periodo = ref('especifico')
 const dataInicio = ref('2020-06-10')
 const dataFim = ref('2025-01-30')
 const tipoCobranca = ref('')
+
+const tipoCobrancaOptions = [
+  { value: 'credito', label: 'Crédito' },
+  { value: 'debito', label: 'Débito' },
+  { value: 'boleto', label: 'Boleto' },
+  { value: 'pix', label: 'Pix' }
+]
 
 const emit = defineEmits(['nova-cobranca', 'periodo-change', 'data-change', 'tipo-change'])
 
@@ -105,6 +109,15 @@ const handleTipoChange = newTipo => {
   max-width: 360px;
   flex: 0 1 auto;
   overflow: hidden;
+  white-space: nowrap;
+}
+
+.custom-select-wrapper {
+  min-width: 180px;
+  width: 180px;
+  max-width: 180px;
+  flex: 0 0 auto;
+  overflow: visible;
   white-space: nowrap;
 }
 
