@@ -341,7 +341,7 @@ onMounted(() => {
     margin-right: 0;
     padding-left: 0;
     padding-right: 0;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
   }
 
   .dashboard-main > :deep(.faturamento-card) {

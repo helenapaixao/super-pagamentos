@@ -25,10 +25,11 @@ defineEmits(['click'])
 <style scoped>
 .btn-primary {
   background-color: #0641FC;
-  color: white;
+  color: #F9F9F9;
   border: none;
   outline: none;
-  height: 40px;
+  width: 162px;
+  height: 46px;
   padding: 0 23px;
   border-radius: 250px;
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -52,12 +53,13 @@ defineEmits(['click'])
   color: #F9F9F9;
   font-size: 14px;
   user-select: none;
+  font-weight: 600;
 }
 
 .icon-circle {
-  width: 24px;
-  height: 24px;
-  background: #E6E6E6;
+  width: 18px;
+  height: 18px;
+  background: #D1DCFF;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -67,7 +69,7 @@ defineEmits(['click'])
 .icon-circle :deep(svg) { color: #0641FC; }
 .icon-add-circle { width: 18px; height: 18px; display: block; }
 .icon-web { display: block; }
-.icon-mobile { display: none; }
+.icon-mobile { display: none;  }
 
 .btn-primary:hover {
   background-color: #0530C7;
@@ -123,18 +125,18 @@ defineEmits(['click'])
   }
 
   .btn-text {
-    font-size: 18px;
-    color: #F5F7FB;
+    font-size: 14px;
+    color: #F9F9F9;
     z-index: 2;
     flex: 1;
     text-align: left;
+    font-weight: 600;
   }
 
   .icon-circle {
     width: 26px;
     height: 26px;
     background: linear-gradient(180deg,#F3F7FC 0%, #E8EEF8 100%);
-    box-shadow: 0 4px 12px rgba(10,20,40,0.12);
     margin-left: auto;
   }
   .icon-circle :deep(svg) { color: #0D1726; }

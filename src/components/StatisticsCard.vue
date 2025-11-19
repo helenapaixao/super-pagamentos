@@ -1,5 +1,5 @@
 <template>
-  <div class="estatisticas-card">
+  <div class="statistics-card">
     <div class="card-header">
       <div class="title-group">
         <h3 class="card-title">{{ titulo }}</h3>
@@ -9,11 +9,11 @@
         <span class="percent-symbol">%</span>
       </div>
     </div>
-    <div class="estatistica-value">R$ {{ formatCurrency(valor) }}</div>
+    <div class="card-value">R$ {{ formatCurrency(valor) }}</div>
     <div class="divider"></div>
-    <div class="estatistica-details">
-      <span class="cobrancas">{{ cobrancas }} cobranças</span>
-      <span class="percentual">{{ formatPercentual(percentual) }}%</span>
+    <div class="card-details">
+      <span class="charges">{{ cobrancas }} cobranças</span>
+      <span class="percentage">{{ formatPercentual(percentual) }}%</span>
     </div>
   </div>
 </template>
@@ -60,7 +60,7 @@ const formatPercentual = (value) => {
 </script>
 
 <style scoped>
-.estatisticas-card {
+.statistics-card {
   background: white;
   width: 100%;
   max-width: 420px;
@@ -120,7 +120,7 @@ const formatPercentual = (value) => {
   color: #2A2E33;
 }
 
-.estatistica-value {
+.card-value {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 28px;
   font-weight: 700;
@@ -141,7 +141,7 @@ const formatPercentual = (value) => {
   flex-shrink: 0;
 }
 
-.estatistica-details {
+.card-details {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -149,7 +149,7 @@ const formatPercentual = (value) => {
   margin-top: auto;
 }
 
-.cobrancas {
+.charges {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -159,7 +159,7 @@ const formatPercentual = (value) => {
   color: #2A2E33;
 }
 
-.percentual {
+.percentage {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 14px;
   font-weight: 700;
