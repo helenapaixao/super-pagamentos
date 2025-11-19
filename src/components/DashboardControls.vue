@@ -100,9 +100,9 @@ const formatDateAndEmit = () => {
 }
 
 .btn-primary {
-  background-color: #2A2E33;
+  background-color: #0641FC;
   color: white;
-  border: 3px solid rgba(42, 46, 51, 0.14);
+  border: none;
   padding: 12px 23px;
   border-radius: 250px;
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -118,9 +118,6 @@ const formatDateAndEmit = () => {
   position: relative;
   overflow: visible;
   z-index: 0;
-  box-shadow: 
-    inset 0 4px 10.3px 0 rgba(133, 45, 246, 0.57),
-    inset 0 -19px 36.6px 0 rgba(6, 65, 252, 0.35);
 }
 
 .btn-primary::before {
@@ -391,44 +388,35 @@ const formatDateAndEmit = () => {
 
   .btn-primary {
     width: 100%;
-    max-width: 392px;
+    max-width: 390px;
+    height: 52px;
     justify-content: space-between;
-    padding: 20px 26px;
-    box-shadow: none;
-    background: transparent;
-    color: #f4f6ff;
-    letter-spacing: 0.2px;
+    padding: 12px 23px;
+    box-shadow: 
+      0px 4px 10.3px 0px #852DF691 inset,
+      0px -19px 36.6px 0px #0641FC59 inset;
+    background: #2A2E33;
+    border: 3px solid #2A2E3324;
+    color: white;
+    letter-spacing: 0%;
     margin: 0 auto;
     position: relative;
     z-index: 1;
-    min-height: 60px;
     display: flex;
+    opacity: 1;
   }
 
   .btn-primary::before {
-    display: block;
-    position: absolute;
-    inset: -4px;
-    border-radius: 999px;
-    background: linear-gradient(90deg, #a78bfa, #7c5cff);
-    z-index: -2;
-    content: '';
-    filter: drop-shadow(0 14px 28px rgba(122, 102, 255, 0.38));
+    display: none;
   }
 
   .btn-primary::after {
-    content: '';
-    position: absolute;
-    inset: 1.5px;
-    border-radius: 999px;
-    background: linear-gradient(180deg, #1f2434 0%, #0c1f4c 100%);
-    z-index: -1;
-    box-shadow: inset 0 6px 12px rgba(255, 255, 255, 0.05), inset 0 -6px 20px rgba(4, 9, 24, 0.85);
+    display: none;
   }
 
   .btn-text {
     font-size: 18px;
-    color: #f4f6ff;
+    color: white;
     position: relative;
     z-index: 2;
   }
@@ -456,7 +444,7 @@ const formatDateAndEmit = () => {
     height: 15px;
     position: relative;
     z-index: 3;
-    filter: brightness(0) saturate(100%) invert(27%) sepia(95%) saturate(7482%) hue-rotate(230deg) brightness(98%) contrast(101%);
+    filter: brightness(0) invert(1);
   }
 }
 </style>

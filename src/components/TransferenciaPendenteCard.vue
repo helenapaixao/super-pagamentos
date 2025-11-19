@@ -18,7 +18,8 @@
 
     <button class="transferencia-action" type="button" @click="autorizarTransferencia">
       <span>Autorizar transferência</span>
-      <img :src="walletMoneyBoldIcon" alt="Autorizar" class="transferencia-icon" />
+      <img :src="walletMoneyBoldIcon" alt="Autorizar" class="transferencia-icon transferencia-icon-web" />
+      <img :src="roundAltArrowDownIcon" alt="Autorizar" class="transferencia-icon transferencia-icon-mobile" />
     </button>
   </div>
 </template>
@@ -27,6 +28,7 @@
 import { ArrowUp } from '@solar-icons/vue'
 import BadgeOrange from './BadgeOrange.vue'
 import walletMoneyBoldIcon from '@/assets/icons/wallet-money-bold.svg'
+import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.svg'
 
 const props = defineProps({
   transferencia: {
@@ -146,6 +148,14 @@ const autorizarTransferencia = () => {
   flex-shrink: 0;
 }
 
+.transferencia-icon-mobile {
+  display: none;
+}
+
+.transferencia-icon-web {
+  display: block;
+}
+
 @media (max-width: 768px) {
   .transferencia-card {
     border-radius: 28px;
@@ -187,6 +197,18 @@ const autorizarTransferencia = () => {
     justify-content: space-between;
     font-size: 17px;
     padding: 1.1rem 1.75rem;
+  }
+
+  .transferencia-icon-web {
+    display: none;
+  }
+
+  .transferencia-icon-mobile {
+    display: block;
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+    transform: rotate(-90deg);
   }
 }
 </style>
