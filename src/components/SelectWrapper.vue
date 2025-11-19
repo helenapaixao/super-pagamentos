@@ -63,6 +63,9 @@ const handleChange = () => {
 .select-icon {
   color: #0641FC;
   flex-shrink: 0;
+  pointer-events: none;
+  position: relative;
+  z-index: 1;
 }
 
 .select-control {
@@ -78,6 +81,9 @@ const handleChange = () => {
   flex: 1;
   appearance: none;
   outline: none;
+  position: relative;
+  z-index: 2;
+  min-width: 0;
 }
 
 .select-control:focus {
