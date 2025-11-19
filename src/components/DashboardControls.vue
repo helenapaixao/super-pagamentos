@@ -38,7 +38,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { Calendar, AltArrowDown, CardTransfer, DownloadMinimalistic } from '@solar-icons/vue'
+import { CardTransfer } from '@solar-icons/vue'
 import addCircleBoldIcon from '@/assets/icons/add-circle-bold.svg'
 import addCircleBoldWebIcon from '@/assets/icons/add-circle-bold-web.svg'
 import DateRangePicker from './DateRangePicker.vue'
