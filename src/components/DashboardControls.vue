@@ -38,7 +38,7 @@ import DownloadButton from './DownloadButton.vue'
 import NewChargeButton from './NewChargeButton.vue'
 import DropdownSelect from './DropdownSelect.vue'
 
-const periodo = ref('especifico')
+const periodo = ref('')
 const dataInicio = ref('2020-06-10')
 const dataFim = ref('2025-01-30')
 const tipoCobranca = ref('')
@@ -77,14 +77,37 @@ const handleTipoChange = newTipo => {
   padding: 0.75rem 0;
   width: 100%;
   box-sizing: border-box;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-content: flex-start;
   min-width: 0;
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: thin;
+  scrollbar-color: #D1D5DB transparent;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+}
+
+.dashboard-controls::-webkit-scrollbar {
+  height: 6px;
+}
+
+.dashboard-controls::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dashboard-controls::-webkit-scrollbar-thumb {
+  background-color: #D1D5DB;
+  border-radius: 3px;
+}
+
+.dashboard-controls::-webkit-scrollbar-thumb:hover {
+  background-color: #9CA3AF;
 }
 
 .dashboard-controls > * {
-  flex: 0 1 auto;
-  min-width: 0;
+  flex: 0 0 auto;
+  min-width: fit-content;
   height: 40px;
   display: flex;
   align-items: center;
@@ -116,6 +139,7 @@ const handleTipoChange = newTipo => {
   flex: 0 0 auto;
   overflow: visible;
   white-space: nowrap;
+  min-width: fit-content;
 }
 
 .date-display,
@@ -136,56 +160,9 @@ const handleTipoChange = newTipo => {
   }
 }
 
-@media (min-width: 1367px) and (max-width: 1439px) {
+@media (min-width: 900px) {
   .dashboard-controls {
-    flex-wrap: wrap;
-  }
-
-  .dashboard-controls > :nth-child(5),
-  .dashboard-controls > :nth-child(6) {
-    order: 2;
-    margin-left: auto;
-  }
-
-  .dashboard-controls > :nth-child(1),
-  .dashboard-controls > :nth-child(2),
-  .dashboard-controls > :nth-child(3),
-  .dashboard-controls > :nth-child(4) {
-    order: 1;
-  }
-}
-
-@media (min-width: 900px) and (max-width: 1366px) {
-  .dashboard-controls {
-    flex-wrap: wrap;
-    row-gap: 0.5rem;
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
-  .dashboard-controls > :nth-child(1),
-  .dashboard-controls > :nth-child(2),
-  .dashboard-controls > :nth-child(3),
-  .dashboard-controls > :nth-child(4) {
-    order: 1;
-    flex: 0 1 auto;
-  }
-
-  .dashboard-controls > :nth-child(5),
-  .dashboard-controls > :nth-child(6) {
-    order: 2;
-    margin-left: 0 !important;
-    align-self: flex-start;
-    flex: 0 0 auto;
-    margin-top: 4px;
-  }
-
-  .dashboard-controls > :nth-child(5) {
-    max-width: 340px;
-  }
-
-  .dashboard-controls > :nth-child(6) {
-    margin-left: 8px;
+    flex-wrap: nowrap !important;
   }
 }
 

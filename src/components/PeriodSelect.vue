@@ -4,7 +4,6 @@
     :icon-component="Calendar"
     :options="periodoOptions"
     placeholder="Período: Específico"
-    width="200px"
     @change="handleChange"
   />
 </template>
@@ -17,7 +16,7 @@ import DropdownSelect from './DropdownSelect.vue'
 const props = defineProps({
   periodo: {
     type: String,
-    default: 'especifico'
+    default: ''
   }
 })
 
@@ -30,7 +29,6 @@ watch(() => props.periodo, (newVal) => {
 })
 
 const periodoOptions = [
-  { value: 'especifico', label: 'Período: Específico' },
   { value: 'hoje', label: 'Hoje' },
   { value: 'semana', label: 'Esta semana' },
   { value: 'mes', label: 'Este mês' },

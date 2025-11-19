@@ -1,5 +1,5 @@
 <template>
-  <div class="dropdown-select-wrapper" :class="{ 'is-open': isOpen }" :style="{ width: width, minWidth: width, maxWidth: width }" @click="handleWrapperClick" ref="selectRef">
+  <div class="dropdown-select-wrapper" :class="{ 'is-open': isOpen }" :style="width ? { width: width, minWidth: width, maxWidth: width } : {}" @click="handleWrapperClick" ref="selectRef">
     <component :is="iconComponent" :size="20" class="select-icon" v-if="iconComponent" />
     <img :src="iconSrc" alt="" class="select-icon" v-if="iconSrc" />
     
@@ -54,7 +54,7 @@ const props = defineProps({
   },
   width: {
     type: String,
-    default: '180px'
+    default: null
   }
 })
 
@@ -126,7 +126,7 @@ onUnmounted(() => {
 <style scoped>
 .dropdown-select-wrapper {
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0 1rem;
@@ -178,9 +178,9 @@ onUnmounted(() => {
   letter-spacing: 0%;
   color: #2A2E33;
   flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
+  word-break: keep-all;
+  overflow-wrap: normal;
 }
 
 .select-chevron {
@@ -248,6 +248,9 @@ onUnmounted(() => {
 
 .option-label {
   flex: 1;
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow-wrap: normal;
 }
 
 .dropdown-menu::-webkit-scrollbar {
