@@ -8,17 +8,10 @@
       </div>
     </button>
 
-    <div class="select-wrapper">
-      <Calendar :size="20" class="select-icon" />
-      <select v-model="periodo" class="select-control" @change="emit('periodo-change', periodo)">
-        <option value="especifico">Período: Específico</option>
-        <option value="hoje">Hoje</option>
-        <option value="semana">Esta semana</option>
-        <option value="mes">Este mês</option>
-        <option value="ano">Este ano</option>
-      </select>
-      <AltArrowDown :size="16" class="select-chevron" />
-    </div>
+    <PeriodSelect
+      :periodo="periodo"
+      @change="handlePeriodoChange"
+    />
 
     <DateRangePicker
       :inicio="dataInicio"
@@ -50,6 +43,7 @@ import { Calendar, AltArrowDown, CardTransfer, DownloadMinimalistic } from '@sol
 import addCircleBoldIcon from '@/assets/icons/add-circle-bold.svg'
 import addCircleBoldWebIcon from '@/assets/icons/add-circle-bold-web.svg'
 import DateRangePicker from './DateRangePicker.vue'
+import PeriodSelect from './PeriodSelect.vue'
 
 const periodo = ref('especifico')
 const dataInicio = ref('2020-06-10')
@@ -62,6 +56,11 @@ const handleDateChange = (dates) => {
   dataInicio.value = dates.inicio
   dataFim.value = dates.fim
   emit('data-change', dates)
+}
+
+const handlePeriodoChange = (newPeriodo) => {
+  periodo.value = newPeriodo
+  emit('periodo-change', newPeriodo)
 }
 </script>
 
