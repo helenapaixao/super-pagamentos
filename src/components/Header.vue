@@ -85,7 +85,7 @@
       <div class="mobile-card">
         <a href="#" class="mobile-wallet-link">
           <span>Ir para a carteira</span>
-          <RoundAltArrowDownLinear :size="16" class="mobile-wallet-arrow" />
+          <img :src="roundAltArrowDownIcon" alt="" class="mobile-wallet-arrow" width="16" height="16" />
         </a>
       </div>
     </div>
@@ -94,11 +94,11 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import { CalculatorMinimalistic, Settings, BellBing, RoundAltArrowDownLinear } from '@solar-icons/vue'
+import { CalculatorMinimalistic, Settings, BellBing } from '@solar-icons/vue'
 import superLogo from '@/assets/icons/super-logo.svg'
 import chartIcon from '@/assets/icons/chart-icon.svg'
 import roundAltArrowDownIcon from '@/assets/icons/round-alt-arrow-down-linear.svg'
-import eyeDashboardIcon from '@/assets/icons/eye-dashboard.svg'
+import eyeDashboardIcon from '@/assets/icons/eye-icon.svg'
 import superProfileIcon from '@/assets/icons/super-profile-icon.svg'
 
 const props = defineProps({
@@ -290,7 +290,6 @@ onUnmounted(() => {
   flex-shrink: 0;
 }
 
-/* Mobile Header */
 .mobile-header {
   display: none;
 }
@@ -302,15 +301,16 @@ onUnmounted(() => {
 
   .mobile-header {
     display: block;
-    background: #0641FC;
+    background: transparent;
     width: 100%;
     min-height: auto;
-    border-bottom-left-radius: 24px;
-    border-bottom-right-radius: 24px;
   }
 
   .header-wrapper {
     background: #0641FC;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    overflow: hidden;
   }
 
   .mobile-status-bar {
@@ -337,6 +337,12 @@ onUnmounted(() => {
   .mobile-card {
     padding: 1rem;
     background: transparent;
+  }
+
+  .mobile-header .mobile-card:last-child {
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    background: #0641FC;
   }
 
   .mobile-card-top {
@@ -444,9 +450,8 @@ onUnmounted(() => {
   }
 
   .mobile-eye-icon {
-    width: 24px;
-    height: 24px;
-    filter: brightness(0) invert(1);
+    width: 32px;
+    height: 33px;
     flex-shrink: 0;
   }
 
@@ -459,13 +464,14 @@ onUnmounted(() => {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 12px;
     font-weight: 600;
-    padding: 0.75rem 0;
+    height: 44.5px;
+    padding: 0;
   }
 
   .mobile-wallet-link svg,
   .mobile-wallet-arrow {
     flex-shrink: 0;
-    color: white;
+    filter: brightness(0) invert(1);
   }
 }
 </style>
