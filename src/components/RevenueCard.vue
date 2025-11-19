@@ -1,6 +1,6 @@
 <template>
-  <div class="faturamento-card">
-    <div class="faturamento-desktop-view">
+  <div class="revenue-card">
+    <div class="revenue-desktop-view">
       <div class="card-header">
         <h2 class="card-title">Faturamento</h2>
         <div class="title-icon">
@@ -10,16 +10,16 @@
 
       <div class="value-row">
         <span class="currency-label">R$</span>
-        <span class="faturamento-value">{{ formatCurrency(faturamento.total) }}</span>
+        <span class="revenue-value">{{ formatCurrency(faturamento.total) }}</span>
         <div class="growth-group">
           <span class="growth-indicator positive">↑ {{ faturamento.crescimento }}%</span>
           <span class="growth-text">Em crescimento</span>
         </div>
       </div>
 
-      <BarChart :data="faturamento.dadosGrafico" :max-value="200000" :height="172" class="faturamento-chart" />
+      <BarChart :data="faturamento.dadosGrafico" :max-value="200000" :height="172" class="revenue-chart" />
 
-      <div class="faturamento-metrics">
+      <div class="revenue-metrics">
         <MetricCard
           label="Faturamento recebido"
           :value="`R$ ${formatCurrency(faturamento.recebido)}`"
@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <div class="faturamento-mobile-view">
+    <div class="revenue-mobile-view">
       <StatisticsPeriodCard
         :valor="faturamento.total"
         :crescimento="faturamento.crescimento"
@@ -58,7 +58,7 @@
         @periodo-change="handlePeriodoChange"
       />
       
-      <div class="faturamento-metrics-mobile">
+      <div class="revenue-metrics-mobile">
         <MetricCard
           label="Faturamento recebido"
           :value="`R$ ${formatCurrency(faturamento.recebido)}`"
@@ -143,7 +143,7 @@ const formatNumber = (value) => {
 </script>
 
 <style scoped>
-.faturamento-card {
+.revenue-card {
   background: white;
   width: 100%;
   border-radius: 20px;
@@ -203,7 +203,7 @@ const formatNumber = (value) => {
   color: #86898B;
 }
 
-.faturamento-value {
+.revenue-value {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 2.5rem;
   font-weight: 700;
@@ -234,37 +234,37 @@ const formatNumber = (value) => {
   font-size: 0.9rem;
 }
 
-.faturamento-chart {
+.revenue-chart {
   margin-top: 51px;
 }
 
-.faturamento-metrics {
+.revenue-metrics {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
   margin-top: 33px;
 }
 
-.faturamento-mobile-view {
+.revenue-mobile-view {
   display: none;
 }
 
 @media (max-width: 768px) {
-  .faturamento-card {
+  .revenue-card {
     padding: 0;
     background: transparent;
     box-shadow: none;
   }
 
-  .faturamento-desktop-view {
+  .revenue-desktop-view {
     display: none;
   }
 
-  .faturamento-mobile-view {
+  .revenue-mobile-view {
     display: block;
   }
 
-  .faturamento-metrics {
+  .revenue-metrics {
     display: flex;
     flex-direction: row;
     gap: 1rem;
@@ -277,26 +277,26 @@ const formatNumber = (value) => {
     padding-bottom: 0.5rem;
   }
 
-  .faturamento-metrics::-webkit-scrollbar {
+  .revenue-metrics::-webkit-scrollbar {
     height: 4px;
   }
 
-  .faturamento-metrics::-webkit-scrollbar-track {
+  .revenue-metrics::-webkit-scrollbar-track {
     background: transparent;
   }
 
-  .faturamento-metrics::-webkit-scrollbar-thumb {
+  .revenue-metrics::-webkit-scrollbar-thumb {
     background-color: #D1D5DB;
     border-radius: 2px;
   }
 
-  .faturamento-metrics :deep(.metric-item-base) {
+  .revenue-metrics :deep(.metric-item-base) {
     flex-shrink: 0;
     min-width: 220px;
     width: 220px;
   }
 
-  .faturamento-metrics-mobile {
+  .revenue-metrics-mobile {
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -309,20 +309,20 @@ const formatNumber = (value) => {
     padding: 10px 0;
   }
 
-  .faturamento-metrics-mobile::-webkit-scrollbar {
+  .revenue-metrics-mobile::-webkit-scrollbar {
     height: 4px;
   }
 
-  .faturamento-metrics-mobile::-webkit-scrollbar-track {
+  .revenue-metrics-mobile::-webkit-scrollbar-track {
     background: transparent;
   }
 
-  .faturamento-metrics-mobile::-webkit-scrollbar-thumb {
+  .revenue-metrics-mobile::-webkit-scrollbar-thumb {
     background-color: #D1D5DB;
     border-radius: 2px;
   }
 
-  .faturamento-metrics-mobile :deep(.metric-item-base) {
+  .revenue-metrics-mobile :deep(.metric-item-base) {
     flex-shrink: 0;
     min-width: 220px;
     width: 220px;

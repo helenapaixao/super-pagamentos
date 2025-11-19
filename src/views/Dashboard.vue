@@ -19,11 +19,11 @@
           @autorizar="handleAutorizarTransferencia"
         />
 
-        <div class="estatisticas-mobile-wrapper">
+        <div class="statistics-mobile-wrapper">
           <StatisticsMobileCard :items="estatisticasMobileItems" />
         </div>
 
-        <div class="estatisticas-grid">
+        <div class="statistics-grid">
           <StatisticsCard
             titulo="Reembolsos"
             :valor="estatisticas.reembolsos.valor"
@@ -280,14 +280,14 @@ onMounted(() => {
   z-index: 1;
 }
 
-.estatisticas-grid {
+.statistics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(305px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
 
-.estatisticas-mobile-wrapper {
+.statistics-mobile-wrapper {
   display: none;
   margin-bottom: 1.75rem;
 }
@@ -352,11 +352,11 @@ onMounted(() => {
     display: none;
   }
 
-  .estatisticas-grid {
+  .statistics-grid {
     display: none;
   }
 
-  .estatisticas-mobile-wrapper {
+  .statistics-mobile-wrapper {
     display: block;
     max-width: 392px;
     width: 100%;
